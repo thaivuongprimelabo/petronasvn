@@ -44,15 +44,31 @@ class HomeController extends AppController
      */
     public function index(Request $request)
     {
-        $banners = Banner::where('status', Status::ACTIVE)->orderBy('updated_at', 'DESC')->get();
+        $banners = Banner::active()->image()->orderBy('updated_at', 'DESC')->get();
         
         $categories = Category::select('id', 'name', 'name_url', 'parent_id')->active()->where('parent_id', 0)->orderBy('updated_at', 'DESC')->get();
         
         $posts = Post::where('status', PostStatus::PUBLISHED)->orderBy('updated_at', 'DESC')->get();
+
+        $newProducts = Product::active()->isNew()->orderBy('updated_at', 'DESC')->limit(3)->get();
+
+        $bestSellerProducts = Product::active()->isBestSelling()->orderBy('updated_at', 'DESC')->limit(3)->get();
         
+        $featureProducts = Product::active()->orderBy('updated_at', 'DESC')->limit(16)->get();
+        
+        $chunks = $featureProducts->chunk(8);
+
+        // echo '<pre>';
+        // print_r($chunks);
+        // exit;
+        
+
         $this->output['banners'] = $banners;
         $this->output['categories'] = $categories;
         $this->output['posts'] = $posts;
+        $this->output['newProducts'] = $newProducts;
+        $this->output['bestSellerProducts'] = $bestSellerProducts;
+        $this->output['featureProducts'] = $chunks;
         
         $this->setSEO([
             'title' => $this->output['config']['web_description'],
@@ -62,8 +78,8 @@ class HomeController extends AppController
             'type' => 'website',
             'image' => Utils::getImageLink($this->output['config']['web_banner'])
         ]);
-        
-        return view('shop.home', $this->output);
+
+        return view('petronasvn.home', $this->output);
     }
     
     public function vendor(Request $request) {

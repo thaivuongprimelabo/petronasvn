@@ -95,12 +95,19 @@ class Product extends Model
     
     public function getDiscount() {
         if($this->price > 0 && $this->discount > 0) {
-            return '<div class="sale-flash"><div class="before"></div>-' . $this->discount . '%</div>';
+            return $this->discount;
         }
-        return '';
+        return false;
     }
     
     public function getName() {
+        return $this->name;
+    }
+
+    public function getShortName() {
+        if(strlen($this->name) > 20) {
+            return substr($this->name, 0, 20) . '...';
+        }
         return $this->name;
     }
     

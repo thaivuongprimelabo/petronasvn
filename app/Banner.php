@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Constants\Common;
+use App\Constants\Status;
 use App\Helpers\Utils;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,6 +18,30 @@ class Banner extends Model
      * @var array
      */
     protected $table = Common::BANNERS;
+
+    public function getBanner() {
+        return url($this->banner);
+    }
+
+    public function getTitle() {
+        return isset($this->title) ? $this->title : 'Mac';
+    }
+
+    public function getDescription() {
+        return isset($this->description) ? $this->description : 'Macs differ from Windows  PCs in that they run Apple’s  own operating system,  OS X.';
+    }
+
+    public function scopeActive($query) {
+        return $query->where('status', Status::ACTIVE);
+    }
+
+    public function scopeImage($query) {
+        return $query->where('select_type', 'use_image');
+    }
+
+    public function scopeYoutube($query) {
+        return $query->where('select_type', 'use_youtube');
+    }
     
     // Attribute
     public function getBannerAttribute($value) {
@@ -30,4 +55,5 @@ class Banner extends Model
         
         return Utils::getImageLink(Common::NO_IMAGE_FOUND);
     }
+    
 }

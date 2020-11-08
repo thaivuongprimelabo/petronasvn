@@ -131,24 +131,24 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     
 });
 
-Route::group(['prefix' => 'backend', 'namespace' => 'Auth'], function () {
-    Route::get('/{a?}/{b?}', function () {
-        return File::get(public_path('dist/backend.html'));
-    });
-});
+// Route::group(['prefix' => 'backend', 'namespace' => 'Auth'], function () {
+//     Route::get('/{a?}/{b?}', function () {
+//         return File::get(public_path('dist/backend.html'));
+//     });
+// });
 
 Route::group(['prefix' => ''], function () {
     
     $config = Config::first();
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/gioi-thieu' . $config['url_ext'], 'HomeController@about')->name('about');
-    Route::get('/dat-lich-hen' . $config['url_ext'], 'HomeController@booking')->name('booking');
-    Route::get('/nhom-trao-doi' . $config['url_ext'], 'HomeController@forum')->name('forum');
+    // Route::get('/dat-lich-hen' . $config['url_ext'], 'HomeController@booking')->name('booking');
+    // Route::get('/nhom-trao-doi' . $config['url_ext'], 'HomeController@forum')->name('forum');
     Route::get('/san-pham' . $config['url_ext'], 'HomeController@products')->name('products');
-    Route::get('/huong-dan-mua-hang' . $config['url_ext'], 'HomeController@orderIntroduction')->name('order_introduction');
-    Route::get('/kiem-tra-don-hang' . $config['url_ext'], 'HomeController@orderChecking')->name('order_checking');
-    Route::get('/chinh-sach-bao-hanh' . $config['url_ext'], 'HomeController@guaranteePolicy')->name('guarantee_policy');
-    Route::get('/chinh-sach-van-chuyen' . $config['url_ext'], 'HomeController@shipmentPolicy')->name('shipment_policy');
+    // Route::get('/huong-dan-mua-hang' . $config['url_ext'], 'HomeController@orderIntroduction')->name('order_introduction');
+    // Route::get('/kiem-tra-don-hang' . $config['url_ext'], 'HomeController@orderChecking')->name('order_checking');
+    // Route::get('/chinh-sach-bao-hanh' . $config['url_ext'], 'HomeController@guaranteePolicy')->name('guarantee_policy');
+    // Route::get('/chinh-sach-van-chuyen' . $config['url_ext'], 'HomeController@shipmentPolicy')->name('shipment_policy');
     
     Route::match(['get', 'post'], '/lien-he' . $config['url_ext'], 'HomeController@contact')->name('contact');
     Route::get('/search' . $config['url_ext'], 'HomeController@search')->name('search');
