@@ -143,7 +143,7 @@
           </div>
         </nav>
   	</header>
-  	@include('auth.common.sidebar')
+  	@include('auth.petronasvn.sidebar')
 
    	<div class="content-wrapper">
 	@yield('content')
@@ -240,13 +240,13 @@
 	});
 
 	$(document).on('click', '.edit', function(e) {
-			var url = $(this).attr('data-url');
+			var url = window.location.href + $(this).attr('data-url');
 			window.location = url;
 	});
 
 	$(document).on('click', '.remove-row', function(e) {
 		if(confirmDelete('{{ trans('messages.CONFIRM_DELETE') }}')) {
-			var url = $(this).attr('data-url');
+			var url = window.location.href + $(this).attr('data-url');
 			var id = $(this).attr('data-id');
 			var ids = [id];
 			deleteManyRow(url, ids);

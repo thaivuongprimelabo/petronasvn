@@ -98,11 +98,12 @@ class AppController extends Controller
         $this->output['rules'] = $this->rules;
     }
     
-    public function doSearch($request, $model = null, $type = '', $view = 'auth.ajax_list') {
+    public function doSearch($request, $model = null, $type = '', $view = '') {
         
         $wheres = [];
         $route = Route::currentRouteName();
         $name = str_replace('auth_', '', str_replace('_search', '', Route::currentRouteName()));
+        $view = 'auth.petronasvn.' . $name . '.index';
         
         if(is_null($model)) {
             return compact('name', 'view');
@@ -144,12 +145,6 @@ class AppController extends Controller
             if($type == 'members') {
                 $wheres[] = ['role_id', '=', UserRole::MEMBERS];
             }
-        }
-        
-        if($model instanceof Category) {
-        }
-        
-        if($model instanceof Product) {
         }
         
         $data_obj = $model::where($wheres)->orderBy('created_at', 'DESC');

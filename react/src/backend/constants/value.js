@@ -1,1 +1,0 @@
-export const STORAGE_USER_INFO_KEY = 'user_info';
