@@ -25,10 +25,6 @@ class ContactsController extends AppController
         $this->middleware('auth');
     }
     
-    public function index(Request $request) {
-        return view('auth.index', $this->search($request));
-    }
-    
     /**
      * search
      * @param Request $request

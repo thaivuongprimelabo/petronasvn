@@ -97,6 +97,10 @@ class AppController extends Controller
         $this->output['name'] =  $this->name;
         $this->output['rules'] = $this->rules;
     }
+
+    public function index(Request $request) {
+        return view('auth.petronasvn.index', $this->search($request));
+    }
     
     public function doSearch($request, $model = null, $type = '', $view = '') {
         

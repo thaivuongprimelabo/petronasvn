@@ -26,10 +26,6 @@ class PagesController extends AppController
         $this->rules = [];
     }
     
-    public function index(Request $request) {
-        return view('auth.index', $this->search($request));
-    }
-    
     /**
      * search
      * @param Request $request
