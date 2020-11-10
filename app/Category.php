@@ -78,6 +78,10 @@ class Category extends Model
     public function scopeActive($query) {
         return $query->where('status', Status::ACTIVE);
     }
+
+    public function scopeRootParent($query) {
+        return $query->where('parent_id', 0);
+    }
     
     public function getParentNameAttribute() {
         $category = Category::select('name')->where('id', $this->parent_id)->first();

@@ -10,14 +10,12 @@
 			<col width="10%">
 			<col width="10%">
 			<col width="15%">
-			<col width="5%">
-			<col width="5%">
+			<col width="2%">
+			<col width="2%">
 		</colgroup>
 		<thead>
 			<tr>
-				<th>
-					<div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" id="select_all" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-				</th>
+				@include('auth.petronasvn.common.row_checkbox')
 				<th>ID</th>
 				<th>Tựa đề</th>
 				<th>E-mail</th>
@@ -29,9 +27,26 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr align="center">
-				<td colspan="8">(Chưa có dữ liệu)</td>
-			</tr>
+			@foreach($data_list as $item)
+            <tr>
+                @include('auth.petronasvn.common.row_checkbox', ['id' => $item->id ])
+                <td>{{ $item->id }}</td>
+                <td>{{ $item->name }}</td>
+				<td>{{ $item->email }}</td>
+				<td>{{ $item->phone }}</td>
+                <td>
+					@if($item->status === 0)
+					<span class="label label-primary">{{ ContactStatus::getData($item->status) }}</span>
+					@endif
+
+					@if($item->status === 1)
+					<span class="label label-success">{{ ContactStatus::getData($item->status) }}</span>
+					@endif
+				</td>
+                @include('auth.petronasvn.common.row_date', ['created_at' => $item->created_at])
+                @include('auth.petronasvn.common.row_button', ['id' => $item->id ])
+            </tr>
+            @endforeach
 		</tbody>
 	</table>
 </div>

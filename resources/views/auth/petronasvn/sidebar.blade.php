@@ -31,7 +31,7 @@
   <ul class="sidebar-menu tree" data-widget="tree">
     @foreach($sidebar as $route=>$value)
     <li class="@if($name == $route) active @endif">
-      <a href="{{ $route }}">
+      <a href="{{ route('auth_' . $route) }}">
         <i class="{{ $value['icon'] }}"></i><span>{{ $value['name'] }}</span>
       </a>
     </li>

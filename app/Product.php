@@ -60,6 +60,7 @@ class Product extends Model
     
     public function getCategoryName() {
         $category = Category::select('name')->where('id', $this->category_id)->first();
+        \Log::info($this->category_id);
         return $category ? $category->name : '';
     }
     
@@ -227,14 +228,5 @@ class Product extends Model
         }
         
         return Utils::getImageLink(Common::NO_IMAGE_FOUND);
-    }
-    
-    public function getPriceAttribute($value) {
-        return Utils::formatCurrency($value);
-    }
-    
-    public function getCategoryIdAttribute($value) {
-        $category = Category::select('name')->where('id', $value)->first();
-        return $category ? $category->name : '';
     }
 }

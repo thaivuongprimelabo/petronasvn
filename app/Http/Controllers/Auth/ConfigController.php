@@ -165,7 +165,7 @@ class ConfigController extends AppController
         }
         
         $this->output['data'] = $data;
-        return view('auth.form', $this->output);
+        return view('auth.petronasvn.settings.form', $this->output);
     }
     
     /**

@@ -75,7 +75,7 @@ class PostsController extends AppController
             }
         }
         
-        return view('auth.form', $this->output);
+        return view('auth.petronasvn.posts.form', $this->output);
     }
     
     /**
@@ -112,12 +112,12 @@ class PostsController extends AppController
                 $data->description          = Utils::cnvNull($request->description, 0);
                 $data->content              = Utils::cnvNull($request->content, '');
                 $data->photo                = $filename;
-                $data->published_at         = $published_at;
-                $data->published_time_at    = $published_time_at;
+                $data->published_at         = Utils::cnvNull($request->published_at, '');
+                $data->published_time_at    = Utils::cnvNull($request->published_time_at, '');
                 $data->status               = Utils::cnvNull($request->status, 0);
-                $data->post_group_id      = Utils::cnvNull($request->post_group_id, 0);
-                $data->seo_keywords      = Utils::cnvNull($request->seo_keywords, '');
-                $data->seo_description   = Utils::cnvNull($request->seo_description, $request->description);
+                $data->post_group_id        = Utils::cnvNull($request->post_group_id, 0);
+                $data->seo_keywords         = Utils::cnvNull($request->seo_keywords, '');
+                $data->seo_description      = Utils::cnvNull($request->seo_description, $request->description);
                 $data->updated_at           = date('Y-m-d H:i:s');
                 
                 if($data->save()) {
@@ -130,7 +130,7 @@ class PostsController extends AppController
         }
         
         $this->output['data'] = $data;
-        return view('auth.form', $this->output);
+        return view('auth.petronasvn.posts.form', $this->output);
     }
     
     public function remove(Request $request) {

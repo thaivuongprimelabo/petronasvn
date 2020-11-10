@@ -1332,7 +1332,6 @@ $auth = [
             'email' => 'required|email|max:' . \App\Constants\Common::EMAIL_MAXLENGTH,
             'password' => 'required|max:' . \App\Constants\Common::PASSWORD_MAXLENGTH . '|min:' . \App\Constants\Common::PASSWORD_MINLENGTH,
             'conf_password' => 'required|max:' . \App\Constants\Common::PASSWORD_MAXLENGTH . '|min:' . \App\Constants\Common::PASSWORD_MINLENGTH . '|same:password',
-            'role_id' => 'required'
         ]
     ],
     /*------------ Profile page ------------------- */

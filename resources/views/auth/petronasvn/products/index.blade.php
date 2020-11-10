@@ -17,9 +17,7 @@
 		</colgroup>
 		<thead>
 			<tr>
-				<th>
-					<div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" id="select_all" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-				</th>
+				@include('auth.petronasvn.common.row_checkbox')
 				<th>ID</th>
 				<th>Tên sản phẩm</th>
 				<th>Hình ảnh</th>
@@ -35,9 +33,7 @@
 		<tbody>
             @foreach($data_list as $item)
 			<tr>
-				<td>
-					<div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" class="row-delete" value="95" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-				</td>
+				@include('auth.petronasvn.common.row_checkbox', ['id' => $item->id])
 				<td>{{ $item->id }}</td>
 				<td>{{ $item->name }}</td>
 				<td>
@@ -51,8 +47,8 @@
 				<td>
                     @if($item->status === ProductStatus::AVAILABLE)
                     <span class="label label-success">{{ trans('auth.status.available') }}</span>
-                    @else if($item->status === ProductStatus::OUT_OF_STOCK)
-                    <span class="label label-error">{{ trans('auth.status.out_of_stock') }}</span>
+                    @elseif($item->status === ProductStatus::OUT_OF_STOCK)
+                    <span class="label label-danger">{{ trans('auth.status.out_of_stock') }}</span>
                     @endif
                 </td>
 				@include('auth.petronasvn.common.row_date', ['created_at' => $item->created_at])

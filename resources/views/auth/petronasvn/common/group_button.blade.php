@@ -1,0 +1,2 @@
+<button type="button" class="btn btn-default mr-1" onclick="window.location='{{ route('auth_' . $name) }}'"><i class="fa fa-arrow-left" aria-hidden="true"></i> Quay về</button>
+<button type="button" id="save" class="btn btn-primary" data-id="" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Lưu"><i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu</button>

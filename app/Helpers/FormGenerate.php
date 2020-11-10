@@ -552,7 +552,7 @@ class FormGenerate {
         return $element;
     }
     
-    public function makeValidation($name, $input_rules = [], $data = []) {
+    public static function makeValidation($name, $input_rules = [], $data = []) {
         $result = [
             'rules' => [],
             'messages' => []

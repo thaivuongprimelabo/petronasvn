@@ -36,6 +36,8 @@ class SendMail implements ShouldQueue
      */
     public function handle() {
         $config_email = $this->config;
+
+        \Log::info('================ sendMail:handle ====================');
         
         try {
             $from = isset($config_email['from'])?$config_email['from']: Common::FROM_MAIL;

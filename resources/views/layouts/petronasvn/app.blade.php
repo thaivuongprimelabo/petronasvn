@@ -240,13 +240,13 @@
 	});
 
 	$(document).on('click', '.edit', function(e) {
-			var url = window.location.href + $(this).attr('data-url');
+			var url = $(this).attr('data-url');
 			window.location = url;
 	});
 
 	$(document).on('click', '.remove-row', function(e) {
 		if(confirmDelete('{{ trans('messages.CONFIRM_DELETE') }}')) {
-			var url = window.location.href + $(this).attr('data-url');
+			var url = $(this).attr('data-url');
 			var id = $(this).attr('data-id');
 			var ids = [id];
 			deleteManyRow(url, ids);
@@ -294,24 +294,26 @@
         $(this).button('loading');
     	if($("#submit_form").valid()) {
 
-        	var col = 'name';
-        	if($(this).attr('id') === 'save_user') {
-				col = 'email';
-        	}
+			$("#submit_form").submit();
 
-        	if($('#' + col).length > 0) {
-            	var input = {
-            	   	value: $('#' + col).val().trim(),
-        			col : col,
-        			itemName : $('#' + col).attr('placeholder'),
-        			url: '{{ route('check_exists') }}',
-        			id_check: $(this).attr('data-id'),
-        			table: '{{ isset($name) ? $name : '' }}',
-        		};
-            	checkExist(input);
-        	} else {
-        		$("#submit_form").submit();
-        	}
+        	// var col = 'name';
+        	// if($(this).attr('id') === 'save_user') {
+			// 	col = 'email';
+        	// }
+
+        	// if($('#' + col).length > 0) {
+            // 	var input = {
+            // 	   	value: $('#' + col).val().trim(),
+        	// 		col : col,
+        	// 		itemName : $('#' + col).attr('placeholder'),
+        	// 		url: '{{ route('check_exists') }}',
+        	// 		id_check: $(this).attr('data-id'),
+        	// 		table: '{{ isset($name) ? $name : '' }}',
+        	// 	};
+            // 	// checkExist(input);
+        	// } else {
+        	// 	$("#submit_form").submit();
+        	// }
     	} else {
     		$('html, body').animate({scrollTop: ($('#submit_form').offset().top - 200)}, '2000');
     		$(this).button('reset');

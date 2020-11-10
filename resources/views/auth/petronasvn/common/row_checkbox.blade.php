@@ -1,3 +1,9 @@
+@if(isset($id))
 <td>
-    <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" class="row-delete" value="{{ $id }}" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+    <input type="checkbox" class="row-delete" value="{{ $id }}" />
 </td>
+@else
+<th>
+    <input type="checkbox" id="select_all" />
+</th>
+@endif

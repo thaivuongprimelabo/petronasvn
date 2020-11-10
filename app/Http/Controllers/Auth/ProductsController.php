@@ -6,6 +6,7 @@ use App\Color;
 use App\Product;
 use App\ServiceGroups;
 use App\Size;
+use App\Category;
 use App\Constants\Common;
 use App\Constants\Status;
 use App\Helpers\Utils;
@@ -93,7 +94,7 @@ class productsController extends AppController
                             DB::table(Common::IMAGES_PRODUCT)->insert($arrFilenames);
                         }
                         
-                        $this->addService($data->id, $request);
+                        // $this->addService($data->id, $request);
                         
                         DB::commit();
                         
@@ -109,7 +110,9 @@ class productsController extends AppController
             }
         }
         
-        return view('auth.form', $this->output);
+        $this->getRootCategory();
+
+        return view('auth.petronasvn.products.form', $this->output);
     }
     
     /**
@@ -176,9 +179,9 @@ class productsController extends AppController
                 return redirect(route('auth_products_edit', ['id' => $request->id]))->with('error', trans('messages.ERROR'));
             }
         }
-        
+        $this->getRootCategory();
         $this->output['data'] = $data;
-        return view('auth.form', $this->output);
+        return view('auth.petronasvn.products.form', $this->output);
     }
     
     public function remove(Request $request) {
@@ -196,6 +199,11 @@ class productsController extends AppController
             $result['code'] = 200;
             return response()->json($result);
         }
+    }
+
+    public function getRootCategory() {
+        $categories = Category::active()->rootParent()->get()->pluck('name', 'id')->toArray();
+        $this->output['root_categories'] = $categories;
     }
     
     private function addService($productId, $request) {
