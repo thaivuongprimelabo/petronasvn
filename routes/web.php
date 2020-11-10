@@ -91,6 +91,9 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     
     // Config
     Route::match(['get', 'post'], '/config', 'ConfigController@index')->name('auth_config');
+
+    // Setting
+    Route::match(['get', 'post'], '/setting', 'SettingController@index')->name('auth_setting');
     
     // Profile
     Route::match(['get', 'post'], '/profile', 'UsersController@profile')->name('auth_profile');

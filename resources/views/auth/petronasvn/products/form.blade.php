@@ -6,7 +6,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<form role="form" id="submit_form" action="?" method="post" enctype="multipart/form-data" novalidate="novalidate">
-				<input type="hidden" name="_token" value="bOWrKQlSchMhjx11u9qFm1oa4ptA7n7sjGKvKSXI">
+				{{ csrf_field() }}
 				<div class="nav-tabs-custom">
 					<ul class="nav nav-tabs">
 						<li class="active" data-tab="tab_form_1"><a href="#tab_form_1" data-toggle="tab" aria-expanded="true"> Thông tin sản phẩm</a></li>
@@ -66,9 +66,9 @@
 								<span class="help-block"></span>
 							</div> -->
 							<div class="form-group">
-								<label>Hình sản phẩm (Tập tin *.jpg, *.jpeg, *.gif, *.png.Tối đa 1.0 MB. Kích thước :size)</label>
+								<label>Hình sản phẩm (Tập tin *.jpg, *.jpeg, *.gif, *.png. Tối đa {{ Utils::formatMemory($config['upload_image_maximum_upload']) }})</label>
 								<div>
-									<button type="button" id="upload_button" data-name="upload_image[]" data-preview-control="preview_list" data-limit-upload="1048576" class="btn btn-primary">
+									<button type="button" id="upload_button" data-name="upload_image[]" data-preview-control="preview_list" data-limit-upload="$config['upload_image_maximum_upload']" class="btn btn-primary">
 									<i class="fa fa-image"></i> Tải hình sản phẩm
 									</button>
 									<div id="preview_list" class="preview_area">

@@ -6,7 +6,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<form role="form" id="submit_form" action="?" method="post" enctype="multipart/form-data" novalidate="novalidate">
-				<input type="hidden" name="_token" value="bOWrKQlSchMhjx11u9qFm1oa4ptA7n7sjGKvKSXI">
+				{{ csrf_field() }}
 				<div class="nav-tabs-custom">
 					<ul class="nav nav-tabs">
 						<li class="active" data-tab="tab_form_1"><a href="#tab_form_1" data-toggle="tab" aria-expanded="true"> Thông tin bài viết</a></li>
@@ -23,7 +23,7 @@
 								<span class="help-block"></span>
 							</div>
 							<div class="form-group">
-								<label>Hình ảnh (Tập tin *.jpg, *.jpeg, *.gif, *.png.Tối đa 300 KB. Kích thước :size)</label>
+								<label>Hình ảnh (Tập tin *.jpg, *.jpeg, *.gif, *.png.Tối đa {{ Utils::formatMemory($config['upload_photo_maximum_upload']) }})</label>
 								<div>
                                     @php
                                         $image = Utils::getImageLink(Common::NO_IMAGE_FOUND);
@@ -31,7 +31,7 @@
                                             $image = $data->photo;
                                         }
                                     @endphp
-									<input type="file" class="form-control upload-simple" name="upload_photo" data-preview-control="preview_upload_photo" data-limit-upload="307200">
+									<input type="file" class="form-control upload-simple" name="upload_photo" data-preview-control="preview_upload_photo" data-limit-upload="{{ $config['upload_photo_maximum_upload'] }}">
 									<div class="preview_area" style="width:358px;position:relative">
 										<span class="spinner_preview" style="display:none"><i class="fa fa-circle-o-notch fa-spin"></i>Uploading...</span>
 										<img id="preview_upload_photo" src="{{ $image }}" class="img-thumbnail" style="margin-top:10px;width:358px;height:201px">

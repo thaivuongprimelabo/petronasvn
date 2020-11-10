@@ -6,14 +6,14 @@
 	<div class="row">
 		<div class="col-md-12">
 			<form role="form" id="submit_form" action="?" method="post" enctype="multipart/form-data" novalidate="novalidate">
-				<input type="hidden" name="_token" value="bOWrKQlSchMhjx11u9qFm1oa4ptA7n7sjGKvKSXI">
+                {{ csrf_field() }}
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">Đăng ký banner</h3>
                     </div>
                     <div class="box-body">
                         <div class="form-group">
-                            <label>Banner (Tập tin *.jpg, *.jpeg, *.gif, *.png. Tối đa 1.0 MB)</label>
+                            <label>Banner (Tập tin *.jpg, *.jpeg, *.gif, *.png. Tối đa {{ Utils::formatMemory($config['upload_banner_maximum_upload']) }})</label>
                             <div>
                                 @php
                                     $banner = Utils::getImageLink(Common::NO_IMAGE_FOUND);
@@ -21,7 +21,7 @@
                                         $banner = $data->banner;
                                     }
                                 @endphp
-                                <input type="file" class="form-control upload-simple" name="upload_banner" data-preview-control="preview_upload_banner" data-limit-upload="1048576">
+                                <input type="file" class="form-control upload-simple" name="upload_banner" data-preview-control="preview_upload_banner" data-limit-upload="{{ $config['upload_banner_maximum_upload'] }}">
                                 <div class="preview_area" style="width:450px;position:relative">
                                     <span class="spinner_preview" style="display:none"><i class="fa fa-circle-o-notch fa-spin"></i>Uploading...</span>
                                     <img id="preview_upload_banner" src="{{ $banner }}" class="img-thumbnail" style="margin-top:10px;max-width:450px;">

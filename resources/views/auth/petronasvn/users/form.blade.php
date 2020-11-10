@@ -21,7 +21,7 @@
 							<span class="help-block"></span>
 						</div>
 						<div class="form-group">
-							<label>Ảnh đại diện (Tập tin *.jpg, *.jpeg, *.gif, *.png.Tối đa 100 KB. Kích thước :size)</label>
+							<label>Ảnh đại diện (Tập tin *.jpg, *.jpeg, *.gif, *.png.Tối đa {{ Utils::formatMemory($config['upload_avatar_maximum_upload']) }})</label>
 							<div>
                                 @php
                                     $avatar = Utils::getImageLink(Common::NO_IMAGE_FOUND);
@@ -29,7 +29,7 @@
                                         $avatar = $data->avatar;
                                     }
                                 @endphp
-								<input type="file" class="form-control upload-simple" name="upload_avatar" data-preview-control="preview_upload_avatar" data-limit-upload="102400">
+								<input type="file" class="form-control upload-simple" name="upload_avatar" data-preview-control="preview_upload_avatar" data-limit-upload="{{ $config['upload_avatar_maximum_upload'] }}">
 								<div class="preview_area" style="width:80px;position:relative">
 									<span class="spinner_preview" style="display:none"><i class="fa fa-circle-o-notch fa-spin"></i>Uploading...</span>
 									<img id="preview_upload_avatar" src="{{ $avatar }}" class="img-thumbnail" style="margin-top:10px;min-width: 120px; ">
