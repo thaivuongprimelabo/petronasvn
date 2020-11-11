@@ -1,4 +1,21 @@
 <header>
+    <!-- SECTION HEADER TOP -->
+    <section class="container header_top">
+        <!-- USER MENU -->
+        <ul class="header_user">
+            <li><a href="account/login.html"><span class="icon material-icons-account_balance_wallet"></span>Hướng dẫn mua hàng</a></li>
+            <li><a href="account/register.html"><span class="icon material-icons-local_shipping"></span>Chính sách giao hàng</a></li>
+            <li class="checkout"><a href="cart.html"><span class="icon material-icons-account_balance_wallet"></span>Thanh toán</a></li>
+        </ul>
+
+        <!-- CUSTOM HEADER -->
+        <div class="custom_header">
+            <span class="icon material-icons-local_phone"></span>
+            <h4>{{ $config['web_hotline'] }}</h4>
+            <span>{{ $config['web_working_time'] }}</span>
+        </div>
+    </section>
+
     <!-- SECTION HEADER MAIN -->
     <section class="container header_main">
         <!-- LOGO -->

@@ -6,7 +6,7 @@
             @php
                 $bannerCnt = 1;
             @endphp
-            @foreach($banners as $banner)
+            @foreach($centerBanners as $banner)
             <div class="swiper-slide swiper-slide_1">
                 <a href="{{ $banner->link }}" target="_blank">
                     <img src="{{ $banner->getBanner() }}" alt="" />
@@ -73,44 +73,25 @@
     <div id="showcase">
         <div class="row">
             <div class="col-sm-4 custom_showcase custom_showcase__1">
-            <a class="inside" href="collections/accessories.html">
-                <img src="{{ url('petronasvn/s/files/1/1265/3751/t/2/assets/custom_showcase1_img140c.jpg?v=820591689889303691') }}" alt="" />
-                <div class="showcase_text">
-                    <h2>Mac</h2>
-                    <h3>Book</h3>
-                    <h6>Light.</h6>
-                    <h6>Years ahead.</h6>
-                    <span class="btn">
-                    Shop now!
-                    </span>
-                </div>
-            </a>
+                <a class="inside" href="{{ $leftBanners->link }}" target="_blank">
+                    <img src="{{ $leftBanners->banner }}" alt="" />
+                </a>
             </div>
             <div class="col-sm-8 custom_showcase custom_showcase__2">
-            <a class="inside" href="collections/pc-sale.html">
-                <img src="{{ url('petronasvn/s/files/1/1265/3751/t/2/assets/custom_showcase2_img93b5.jpg?v=7589780684013026972') }}" alt="" />
-                <div class="showcase_text">
-                    <h2>-20% off</h2>
-                    <h6>Smart Keyboard for 9.7-inch</h6>
-                    <h6>iPad Pro</h6>
-                    <span class="btn">
-                    Shop now!
-                    </span>
-                </div>
-            </a>
+                <a class="inside" href="{{ $rightUpBanners->link }}" target="_blank">
+                    <img src="{{ $rightUpBanners->banner }}" alt="" />
+                </a>
             </div>
             <div class="col-sm-8 custom_showcase custom_showcase__3">
-            <a class="inside" href="collections/windows-10-pcs.html">
-                <div class="showcase_badge">-20%</div>
-                <img src="{{ url('petronasvn/s/files/1/1265/3751/t/2/assets/custom_showcase3_img44ea.jpg?v=498362435097630316') }}" alt="" />
-                <div class="showcase_text">
-                    <h2>Accessories</h2>
-                    <h6>for Mac</h6>
-                    <span class="link">
-                    Shop now!
-                    </span>
-                </div>
-            </a>
+                <a class="inside" href="{{ $rightDownBanners->link }}" target="_blank">
+                    <img src="{{ $rightDownBanners->banner }}" alt="" />
+                </a>
+            </div>
+
+            <div class="col-sm-8 custom_showcase custom_showcase__3">
+                <a class="inside" href="{{ $rightDownBanners->link }}" target="_blank">
+                    <img src="{{ $rightDownBanners->banner }}" alt="" />
+                </a>
             </div>
         </div>
     </div>

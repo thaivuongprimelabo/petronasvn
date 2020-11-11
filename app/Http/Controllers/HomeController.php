@@ -44,12 +44,16 @@ class HomeController extends AppController
      */
     public function index(Request $request)
     {
-        $banners = Banner::active()->image()->orderBy('updated_at', 'DESC')->get();
+        $centerBanners = Banner::active()->image()->where('pos', 'center')->orderBy('updated_at', 'DESC')->get();
+
+        $leftBanners = Banner::active()->image()->where('pos', 'left')->orderBy('updated_at', 'DESC')->first();
+
+        $rightUpBanners = Banner::active()->image()->where('pos', 'right_up')->orderBy('updated_at', 'DESC')->first();
+
+        $rightDownBanners = Banner::active()->image()->where('pos', 'right_down')->orderBy('updated_at', 'DESC')->first();
         
         $categories = Category::select('id', 'name', 'name_url', 'parent_id')->active()->where('parent_id', 0)->orderBy('updated_at', 'DESC')->get();
         
-        $posts = Post::where('status', PostStatus::PUBLISHED)->orderBy('updated_at', 'DESC')->get();
-
         $newProducts = Product::active()->isNew()->orderBy('updated_at', 'DESC')->limit(3)->get();
 
         $bestSellerProducts = Product::active()->isBestSelling()->orderBy('updated_at', 'DESC')->limit(3)->get();
@@ -63,9 +67,11 @@ class HomeController extends AppController
         // exit;
         
 
-        $this->output['banners'] = $banners;
+        $this->output['centerBanners'] = $centerBanners;
+        $this->output['leftBanners'] = $leftBanners;
+        $this->output['rightUpBanners'] = $rightUpBanners;
+        $this->output['rightDownBanners'] = $rightDownBanners;
         $this->output['categories'] = $categories;
-        $this->output['posts'] = $posts;
         $this->output['newProducts'] = $newProducts;
         $this->output['bestSellerProducts'] = $bestSellerProducts;
         $this->output['featureProducts'] = $chunks;
@@ -104,7 +110,13 @@ class HomeController extends AppController
     
     public function category(Request $request) {
         $category = Category::select('id', 'name')->active()->where('name_url', $request->slug)->first();
+
+        $categories = Category::select('id', 'name', 'name_url', 'parent_id')->active()->where('parent_id', 0)->orderBy('updated_at', 'DESC')->get();
         
+        $newProducts = Product::active()->isNew()->orderBy('updated_at', 'DESC')->limit(3)->get();
+
+        $bestSellerProducts = Product::active()->isBestSelling()->orderBy('updated_at', 'DESC')->limit(3)->get();
+
         if(!$category) {
             return redirect('/');
         }
@@ -115,10 +127,13 @@ class HomeController extends AppController
         $this->output['data'] = $category;
         $this->output['view_type'] = 'grid';
         $this->output['page_name'] = 'category-page';
+        $this->output['categories'] = $categories;
+        $this->output['newProducts'] = $newProducts;
+        $this->output['bestSellerProducts'] = $bestSellerProducts;
         
         $this->setSEO(['title' => $category->getName(), 'link' => $category->getLink()]);
         
-        return view('shop.product_list', $this->output);
+        return view('petronasvn.category', $this->output);
     }
     
     public function productDetails(Request $request) {
@@ -132,6 +147,7 @@ class HomeController extends AppController
                         'products.description',
                         'products.summary',
                         'products.category_id',
+                        'products.vendor_id',
                         'products.is_new',
                         'products.is_best_selling',
                         'products.is_popular',
@@ -162,7 +178,7 @@ class HomeController extends AppController
             ['link' => '#', 'text' => $product->getName()]
         ];
         $this->output['data'] = $product;
-        return view('shop.product_detail', $this->output);
+        return view('petronasvn.product_detail', $this->output);
         
     }
     
@@ -465,8 +481,40 @@ class HomeController extends AppController
         
         return view('shop.booking', $this->output);
     }
-    
+
     public function loadData(Request $request) {
+        $result = [];
+        
+        if($request->ajax()) {
+            $id = $request->id;
+            $lastId = $request->lastId;
+            $limit = $request->limit;
+            $page = $request->page_name;
+            
+            switch($page) {
+                case 'category-page':
+                    $data = Product::active()->where('category_id', $id)->where('id', '>', $lastId)->limit($limit)->get();
+                    break;
+            }
+
+            \Log::info($data);
+
+            $view = 'petronasvn.common.product_list';
+            $html = '';
+            foreach($data as $product) {
+                $html .= view($view, ['product' => $product])->render();
+            }
+            
+            
+            // $result['#ajax_list'] = view($view, compact('data', 'view_type'))->render();
+            // $result['#ajax_paging'] =  $data->links('shop.common.paging', compact('paging'))->toHtml();
+            
+            return response()->json($html);
+            
+        }
+    }
+    
+    public function loadData1(Request $request) {
         
         $result = [];
         
