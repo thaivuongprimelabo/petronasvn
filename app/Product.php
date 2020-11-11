@@ -60,7 +60,6 @@ class Product extends Model
     
     public function getCategoryName() {
         $category = Category::select('name')->where('id', $this->category_id)->first();
-        \Log::info($this->category_id);
         return $category ? $category->name : '';
     }
     
@@ -70,8 +69,19 @@ class Product extends Model
     }
     
     public function getVendorName() {
+        \Log::info($this);
         $vendor = Vendor::select('name')->where('id', $this->vendor_id)->first();
         return $vendor ? $vendor->name : '';
+    }
+
+    public function getCategory() {
+        $category = Category::select('name')->where('id', $this->category_id)->first();
+        return $category;
+    }
+
+    public function getVendor() {
+        $vendor = Vendor::select('name')->where('id', $this->vendor_id)->first();
+        return $vendor;
     }
     
     

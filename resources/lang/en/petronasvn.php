@@ -163,5 +163,9 @@ return [
         'reset_password' => 'Mật khẩu mới',
         'order_success' => 'Xác nhận đơn hàng #:order_id',
         'contact' => 'Có liên hệ mới từ :email'
+    ],
+    'product_status' => [
+        'available' => 'Còn hàng',
+        'out_of_stock' => 'Hết hàng'
     ]
 ];

@@ -1,13 +1,18 @@
 @php
+    $route = Route::currentRouteName();
 	$mainNav = trans('petronasvn.main_menu');
+    $menuCss = 'sf-menu megamenu_desktop visible-md visible-lg  col-sm-9 col-sm-push-3 sidebar_left';
+    if($route !== 'home' && $route !== 'category') {
+        $menuCss = 'sf-menu megamenu_desktop visible-md visible-lg  col-sm-12  sidebar_left sf-js-enabled sf-arrows';
+    }
 @endphp
 <div id="megamenu">
     <div class="container">
         <div class="row">
-            <ul class="sf-menu megamenu_desktop visible-md visible-lg  col-sm-9 col-sm-push-3  sidebar_left">
-                @foreach($mainNav as $route=>$nav)
+            <ul class="{{ $menuCss }}">
+                @foreach($mainNav as $link=>$nav)
                     <li class="megamenu_item_1">
-                        <a href="{{ route($route) }}">{{ $nav['text'] }}</a>
+                        <a href="{{ route($link) }}">{{ $nav['text'] }}</a>
                     </li>
                 @endforeach
                 <!-- <li class="megamenu_item_1">
@@ -248,9 +253,9 @@
             <div class="megamenu_mobile visible-xs visible-sm  col-sm-9 col-sm-push-3  sidebar_left">
                 <h2>Computers<i></i></h2>
                 <ul class="level_1">
-                    @foreach($mainNav as $route=>$nav)
+                    @foreach($mainNav as $link=>$nav)
                         <li>
-                            <a href="{{ route($route) }}">{{ $nav['text'] }}</a>
+                            <a href="{{ route($link) }}">{{ $nav['text'] }}</a>
                         </li>
                     @endforeach
                     <!-- <li>
@@ -315,9 +320,11 @@
                     </li> -->
                 </ul>
             </div>
+            @if($route == 'home' ||  $route == 'category')
             <div class="widget_header_wr  col-sm-3 sidebar_left col-sm-pull-9">
                 <h3 class="widget_header">{{ trans('petronasvn.category_txt') }}</h3>
             </div>
+            @endif
         </div>
     </div>
     </div>

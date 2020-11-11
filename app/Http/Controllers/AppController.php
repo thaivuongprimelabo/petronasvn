@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use View;
 use Artesaos\SEOTools\Facades\TwitterCard;
 use App\IpAddress;
+use App\Page;
+use App\Category;
 class AppController extends Controller
 {
     public $output = [];
@@ -39,6 +41,10 @@ class AppController extends Controller
             
             $banners_image_size = Utils::cnvNull($config->upload_banner_image_size, '100x100');
             $banners_demension = explode('x', $banners_image_size);
+
+            $pages = Page::whereIn('type', ['mua_hang', 'bao_hanh', 'van_chuyen'])->get();
+
+            $categories = Category::active()->where('parent_id', 0)->orderBy('updated_at', 'DESC')->limit(4)->get();
             
             $this->output = [
                 'config' => [
@@ -88,6 +94,8 @@ class AppController extends Controller
                     'limit_product_show_tab' => Utils::cnvNull($config->limit_product_show_tab, 10),
                     'limit_post_show' => Utils::cnvNull($config->limit_post_show, 12),
                     'url_ext' => Utils::cnvNull($config->url_ext, '.html'),
+                    'footer_pages' => $pages,
+                    'categories' => $categories
                 ],
             ];
             
