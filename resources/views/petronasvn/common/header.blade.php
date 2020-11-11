@@ -21,7 +21,7 @@
         <!-- LOGO -->
         <div id="logo" class="logo_main">
             <a href="index.html">
-                <img src="{{ url('petronasvn/s/files/1/1265/3751/t/2/assets/logo8009.png?v=3086023828804869937') }}" alt="Computers" />
+                <img src="{{ $config['web_logo'] }}" style="max-width: 270px" alt="{{ $config['web_name'] }}" />
             </a>
         </div>
         <!-- HEADER CART -->

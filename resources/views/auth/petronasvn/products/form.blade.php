@@ -100,14 +100,14 @@
 							<div class="form-group">
 								<label>Mô tả<small> (Tối đã 300 ký tự)</small></label>
 								<div>
-									<textarea name="summary" id="summary" class="fckeditor" data-height="200" data-editor="small" placeholder="Mô tả">{{ $data['description'] }}</textarea>
+									<textarea name="description" id="description" class="fckeditor" data-height="200" data-editor="small" placeholder="Mô tả">{{ $data['description'] }}</textarea>
 								</div>
 								<span class="help-block"></span>
 							</div>
 							<div class="form-group">
 								<label>Thông tin chi tiết</label>
 								<div>
-									<textarea name="description" id="description" class="fckeditor" data-height="400" data-editor="full" placeholder="Thông tin chi tiết">{{ $data['summary'] }}</textarea>
+									<textarea name="summary" id="summary" class="fckeditor" data-height="400" data-editor="full" placeholder="Thông tin chi tiết">{{ $data['summary'] }}</textarea>
 								</div>
 								<span class="help-block"></span>
 							</div>

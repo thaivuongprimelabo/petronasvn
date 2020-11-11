@@ -72,16 +72,23 @@
     <!-- SHOWCASE CUSTOM BLOCKS -->
     <div id="showcase">
         <div class="row">
+            @if($leftBanners)
             <div class="col-sm-4 custom_showcase custom_showcase__1">
                 <a class="inside" href="{{ $leftBanners->link }}" target="_blank">
                     <img src="{{ $leftBanners->banner }}" alt="" />
                 </a>
             </div>
+            @endif
+
+            @if($rightUpBanners)
             <div class="col-sm-8 custom_showcase custom_showcase__2">
                 <a class="inside" href="{{ $rightUpBanners->link }}" target="_blank">
                     <img src="{{ $rightUpBanners->banner }}" alt="" />
                 </a>
             </div>
+            @endif
+
+            @if($rightDownBanners)
             <div class="col-sm-8 custom_showcase custom_showcase__3">
                 <a class="inside" href="{{ $rightDownBanners->link }}" target="_blank">
                     <img src="{{ $rightDownBanners->banner }}" alt="" />
@@ -93,6 +100,9 @@
                     <img src="{{ $rightDownBanners->banner }}" alt="" />
                 </a>
             </div>
+            @endif
+
+            
         </div>
     </div>
 </section>

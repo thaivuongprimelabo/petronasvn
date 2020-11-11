@@ -65,7 +65,6 @@ class HomeController extends AppController
         // echo '<pre>';
         // print_r($chunks);
         // exit;
-        
 
         $this->output['centerBanners'] = $centerBanners;
         $this->output['leftBanners'] = $leftBanners;

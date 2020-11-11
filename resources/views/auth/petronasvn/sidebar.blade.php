@@ -17,6 +17,7 @@
     $route = Route::currentRouteName();
     $name = str_replace('auth_', '', str_replace('_search', '', Route::currentRouteName()));
     $sidebar = [
+      'preview' => ['name' => 'Xem trang', 'icon' => 'fa fa-dashboard'],
       'products' => ['name' => 'Sản phẩm', 'icon' => 'fa fa-archive'],
       'categories' => ['name' => 'Loại Sản phẩm', 'icon' => 'fa fa-list'],
       'orders' => ['name' => 'Đơn hàng', 'icon' => 'fa fa-cart-plus'],
@@ -31,7 +32,11 @@
   <ul class="sidebar-menu tree" data-widget="tree">
     @foreach($sidebar as $route=>$value)
     <li class="@if($name == $route) active @endif">
+      @if($route == 'preview')
+      <a href="/" target="_blank">
+      @else
       <a href="{{ route('auth_' . $route) }}">
+      @endif
         <i class="{{ $value['icon'] }}"></i><span>{{ $value['name'] }}</span>
       </a>
     </li>

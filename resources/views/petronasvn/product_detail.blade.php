@@ -2,7 +2,6 @@
 @section('content')
 @php
    $imagesDetail = $data->getImageDetails();
-   \Log::info($imagesDetail);
 @endphp
 <div id="main" role="main">
    <div class="container">
@@ -29,7 +28,7 @@
                         <div id="elevatezoom_gallery" class="swiper-container">
                         <div class="swiper-wrapper">
                            @foreach($imagesDetail as $img)
-                           <a class="swiper-slide" href="#">
+                           <a class="swiper-slide" href="#" data-image="{{ $img->getImageLink('medium') }}" data-zoom-image="{{ $imagesDetail->first()->getImageLink() }}">
                               <img src="{{ $img->getImageLink('small') }}" alt="{{ $data->getName() }}" />
                            </a>
                            @endforeach
@@ -72,10 +71,16 @@
                                  </div> -->
                                  <div class="product_details">
                                     <p class="product_details__item product_weight"><b>Khối lượng:</b> <span id="product_weight">2.65 lb</span></p>
+                                    @if($data->getCategory() !== null)
                                     <p class="product_details__item product_collections"><b>Danh mục:</b> <a href="{{ $data->getCategory()->getLink() }}">{{ $data->getCategory()->name }}</a></p>
+                                    @endif
+
+                                    @if($data->getVendor() !== null)
                                     <p class="product_details__item product_vendor"><b>Nhà cung cấp:</b> <a href="{{ $data->getVendor()->getLink() }}" title="Computers">{{ $data->getVendor()->name }}</a></p>
+                                    @endif
                                  </div>
                                  <div class="product_details">
+                                    {!! $data->getDescription() !!}
                                  </div>
                               </div>
                               <div class="product_info__right">

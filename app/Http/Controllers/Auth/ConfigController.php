@@ -31,12 +31,13 @@ class ConfigController extends AppController
         if($request->isMethod('post')) {
 
             $web_logo = $data->web_logo;
-            $web_icon = $data->web_ico;
+            $web_ico = $data->web_ico;
             $web_banner = $data->web_banner;
             
             $key = 'upload_web_logo';
             $demension = $data[$key . '_image_size'];
-            Utils::resizeImage($key, $request->$key, $demension, $web_logo);
+            // Utils::resizeImage($key, $request->$key, $demension, $web_logo);
+            Utils::doUploadSimple($request, $key, $web_logo);
             
             $key = 'upload_web_ico';
             $demension = $data[$key . '_image_size'];
@@ -98,26 +99,27 @@ class ConfigController extends AppController
             
             // $data->mail_from = Utils::cnvNull($request->mail_from, '');
             // $data->mail_name = Utils::cnvNull($request->mail_name, '');
-            // if(Auth::user()->role_id == Common::SUPER_ADMIN) {
-            //     $data->upload_banner_maximum_upload = Utils::cnvNull($request->upload_banner_maximum_upload, '');
-            //     $data->upload_logo_maximum_upload = Utils::cnvNull($request->upload_logo_maximum_upload, '');
-            //     $data->upload_image_maximum_upload = Utils::cnvNull($request->upload_image_maximum_upload, '');
-            //     $data->upload_photo_maximum_upload    = Utils::cnvNull($request->upload_photo_maximum_upload, '');
-            //     $data->upload_web_logo_maximum_upload    = Utils::cnvNull($request->upload_web_logo_maximum_upload, '');
-            //     $data->upload_web_ico_maximum_upload    = Utils::cnvNull($request->upload_web_ico_maximum_upload, '');
-            //     $data->upload_avatar_maximum_upload = Utils::cnvNull($request->upload_avatar_maximum_upload, '');
-            //     $data->upload_banner_image_size = Utils::cnvNull($request->upload_banner_image_size, '');
-            //     $data->upload_logo_image_size = Utils::cnvNull($request->upload_logo_image_size, '');
-            //     $data->upload_image_image_size = Utils::cnvNull($request->upload_image_image_size, '');
-            //     $data->upload_photo_image_size = Utils::cnvNull($request->upload_photo_image_size, '');
-            //     $data->upload_web_logo_image_size = Utils::cnvNull($request->upload_web_logo_image_size, '');
-            //     $data->upload_web_ico_image_size = Utils::cnvNull($request->upload_web_ico_image_size, '');
-            //     $data->upload_avatar_image_size = Utils::cnvNull($request->upload_avatar_image_size, '');
-            //     $data->upload_web_banner_maximum_upload = Utils::cnvNull($request->upload_web_banner_maximum_upload, '');
-            //     $data->upload_web_banner_image_size = Utils::cnvNull($request->upload_web_banner_image_size, '');
-            // }
+            if(Auth::user()->role_id == Common::SUPER_ADMIN) {
+                $data->upload_banner_maximum_upload = Utils::cnvNull($request->upload_banner_maximum_upload, '');
+                $data->upload_logo_maximum_upload = Utils::cnvNull($request->upload_logo_maximum_upload, '');
+                $data->upload_image_maximum_upload = Utils::cnvNull($request->upload_image_maximum_upload, '');
+                $data->upload_photo_maximum_upload    = Utils::cnvNull($request->upload_photo_maximum_upload, '');
+                $data->upload_web_logo_maximum_upload    = Utils::cnvNull($request->upload_web_logo_maximum_upload, '');
+                $data->upload_web_ico_maximum_upload    = Utils::cnvNull($request->upload_web_ico_maximum_upload, '');
+                $data->upload_web_banner_maximum_upload = Utils::cnvNull($request->upload_web_banner_maximum_upload, '');
+                $data->upload_avatar_maximum_upload = Utils::cnvNull($request->upload_avatar_maximum_upload, '');
+
+                // $data->upload_banner_image_size = Utils::cnvNull($request->upload_banner_image_size, '');
+                // $data->upload_logo_image_size = Utils::cnvNull($request->upload_logo_image_size, '');
+                // $data->upload_image_image_size = Utils::cnvNull($request->upload_image_image_size, '');
+                // $data->upload_photo_image_size = Utils::cnvNull($request->upload_photo_image_size, '');
+                // $data->upload_web_logo_image_size = Utils::cnvNull($request->upload_web_logo_image_size, '');
+                // $data->upload_web_ico_image_size = Utils::cnvNull($request->upload_web_ico_image_size, '');
+                // $data->upload_avatar_image_size = Utils::cnvNull($request->upload_avatar_image_size, '');
+                // $data->upload_web_banner_image_size = Utils::cnvNull($request->upload_web_banner_image_size, '');
+            }
             $data->off = Utils::cnvNull($request->off, 0);
-            // $data->bank_info = Utils::cnvNull($request->bank_info, '');
+            $data->bank_info = Utils::cnvNull($request->bank_info, '');
             // $data->cash_info = Utils::cnvNull($request->cash_info, '');
             if($data->save()) {
                 return redirect(route('auth_config'))->with('success', trans('messages.UPDATE_SUCCESS'));
