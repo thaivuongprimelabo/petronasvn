@@ -22,21 +22,23 @@
                   <div class="row">
                      <div class="col-sm-5 col-md-4 product_images product_left">
                         <div class="elevatezoom_big_wrapper">
-                           <img id="elevatezoom_big" src="{{ $imagesDetail->first()->getImageLink('medium') }}" alt="{{ $data->getName() }}" data-zoom-image="{{ $imagesDetail->first()->getImageLink() }}" />
-                           <div class="elevatezoom_big_clicker"></div>
+                           @if($imagesDetail->first() !== null)
+                              <img id="elevatezoom_big" src="{{ $imagesDetail->first()->getImageLink('medium') }}" alt="{{ $data->getName() }}" data-zoom-image="{{ $imagesDetail->first()->getImageLink() }}" />
+                              <div class="elevatezoom_big_clicker"></div>
+                           @endif
                         </div>
                         <div id="elevatezoom_gallery" class="swiper-container">
-                        <div class="swiper-wrapper">
-                           @foreach($imagesDetail as $img)
-                           <a class="swiper-slide" href="#" data-image="{{ $img->getImageLink('medium') }}" data-zoom-image="{{ $imagesDetail->first()->getImageLink() }}">
-                              <img src="{{ $img->getImageLink('small') }}" alt="{{ $data->getName() }}" />
-                           </a>
-                           @endforeach
-                        
+                           <div class="swiper-wrapper">
+                              @foreach($imagesDetail as $img)
+                              <a class="swiper-slide" href="#" data-image="{{ $img->getImageLink('medium') }}" data-zoom-image="{{ $imagesDetail->first()->getImageLink() }}">
+                                 <img src="{{ $img->getImageLink('small') }}" alt="{{ $data->getName() }}" />
+                              </a>
+                              @endforeach
+                           
+                           </div>
+                           <div id="elevatezoom_gallery__prev" class="swiper_btn btn_prev"></div>
+                           <div id="elevatezoom_gallery__next" class="swiper_btn btn_next"></div>
                         </div>
-                        <div id="elevatezoom_gallery__prev" class="swiper_btn btn_prev"></div>
-                        <div id="elevatezoom_gallery__next" class="swiper_btn btn_next"></div>
-                     </div>
                      </div>
                      <div class="col-sm-7 col-md-8">
                         <form action="/cart/add" method="post" enctype="multipart/form-data" id="product-actions">
@@ -80,7 +82,7 @@
                                     @endif
                                  </div>
                                  <div class="product_details">
-                                    {!! $data->getDescription() !!}
+                                    
                                  </div>
                               </div>
                               <div class="product_info__right">

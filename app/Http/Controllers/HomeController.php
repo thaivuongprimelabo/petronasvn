@@ -216,16 +216,20 @@ class HomeController extends AppController
     }
     
     public function products(Request $request) {
-        $this->output['breadcrumbs'] = [
-            ['link' => '#', 'text' => trans('shop.products_txt')]
-        ];
+
+        $categories = Category::select('id', 'name', 'name_url', 'parent_id')->active()->where('parent_id', 0)->orderBy('updated_at', 'DESC')->get();
         
-        $this->output['view_type'] = 'grid';
-        $this->output['page_name'] = 'all-products-page';
+        $newProducts = Product::active()->isNew()->orderBy('updated_at', 'DESC')->limit(3)->get();
+
+        $bestSellerProducts = Product::active()->isBestSelling()->orderBy('updated_at', 'DESC')->limit(3)->get();
         
         $this->setSEO(['title' => trans('shop.main_nav.products.text'), 'link' => route('products')]);
+
+        $this->output['categories'] = $categories;
+        $this->output['newProducts'] = $newProducts;
+        $this->output['bestSellerProducts'] = $bestSellerProducts;
         
-        return view('shop.product_list', $this->output);
+        return view('petronasvn.products', $this->output);
     }
     
     public function about(Request $request) {
@@ -488,27 +492,50 @@ class HomeController extends AppController
             $id = $request->id;
             $lastId = $request->lastId;
             $limit = $request->limit;
+            $sort = $request->sort;
             $page = $request->page_name;
+
+            $query = Product::active();
             
             switch($page) {
-                case 'category-page':
-                    $data = Product::active()->where('category_id', $id)->where('id', '>', $lastId)->limit($limit)->get();
+                case 'category':
+                    $query = $query->where('category_id', $id);
+
+                    if($sort == 'is_new') {
+                        $query = $query->where('is_new', Status::IS_NEW);
+                    }
+
+                    if($sort == 'is_best_selling') {
+                        $query = $query->where('is_best_selling', Status::IS_BEST_SELLING);
+                    }
+
+                    if($sort == 'is_discount') {
+                        $query = $query->where('discount', '>', 0);
+                    }
+
+                    if($sort == 'price_ascending') {
+                        $query = $query->orderByRaw('CAST(price AS UNSIGNED) asc');
+                    }
+
+                    if($sort == 'price_descending') {
+                        $query = $query->orderByRaw('CAST(price AS UNSIGNED) desc');
+                    }
+                    
                     break;
             }
 
-            \Log::info($data);
+            $total = $query->count();
+
+            if($lastId > 0) {
+                $query = $query->where('id', '>', $lastId);
+            }
+
+            $data = $query->limit($limit)->get();
 
             $view = 'petronasvn.common.product_list';
-            $html = '';
-            foreach($data as $product) {
-                $html .= view($view, ['product' => $product])->render();
-            }
-            
-            
-            // $result['#ajax_list'] = view($view, compact('data', 'view_type'))->render();
-            // $result['#ajax_paging'] =  $data->links('shop.common.paging', compact('paging'))->toHtml();
-            
-            return response()->json($html);
+            $html = view($view, ['products' => $data, 'route' => $page])->render();
+            $lastId = count($data) ? $data[count($data) - 1]->id : 0;
+            return response()->json(['html' => $html, 'last_id' => $lastId, 'total' => $total]);
             
         }
     }

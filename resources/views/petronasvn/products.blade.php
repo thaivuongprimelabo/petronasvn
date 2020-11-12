@@ -1,12 +1,5 @@
 @extends('layouts.petronasvn')
 @section('content')
-@php
-    //$lastId = 0;
-    //$products = $data->getProductInCategory('', true, 6);
-    //if(count($products)) {
-    //    $lastId = $products[(count($products) - 1)]->id;
-    //}
-@endphp
 <div id="main" role="main">
     <div class="container">
         <div class="row">
@@ -15,7 +8,7 @@
             <div class="breadcrumb_wrap">
                 <ul class="breadcrumb">
                     <li><a href="/" class="homepage-link" title="Back to the frontpage">Trang chủ</a></li>
-                    <li><span class="page-title">{{ $data->name }}</span></li>
+                    <li><span class="page-title">Sản phẩm</span></li>
                 </ul>
             </div>
             <!-- products sorting -->
@@ -41,7 +34,7 @@
                         <option value="15">15</option>
                         <option value="50">50</option>
                         <option value="50">100</option>
-                        <option value="all">All</option>
+                        <option value="50">1000</option>
                     </select>
                 </div>
             </div>
@@ -82,11 +75,11 @@
                 type: 'post',
                 async : true,
                 data: {
-                    id: '{{ $data->id }}',
+                    id: 0,
                     lastId: lastId,
                     limit: limit,
                     sort: sort,
-                    page_name: 'category'
+                    page_name: 'products'
                 },
                 beforeSend: function() {
                 },

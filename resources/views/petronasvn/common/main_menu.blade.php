@@ -1,9 +1,9 @@
 @php
     $route = Route::currentRouteName();
 	$mainNav = trans('petronasvn.main_menu');
-    $menuCss = 'sf-menu megamenu_desktop visible-md visible-lg  col-sm-9 col-sm-push-3 sidebar_left';
-    if($route !== 'home' && $route !== 'category') {
-        $menuCss = 'sf-menu megamenu_desktop visible-md visible-lg  col-sm-12  sidebar_left sf-js-enabled sf-arrows';
+    $menuCss = 'sf-menu megamenu_desktop visible-md visible-lg  col-sm-12  sidebar_left sf-js-enabled sf-arrows';
+    if($route == 'home' ||  $route == 'category' || $route == 'products') {
+        $menuCss = 'sf-menu megamenu_desktop visible-md visible-lg  col-sm-9 col-sm-push-3 sidebar_left';
     }
 @endphp
 <div id="megamenu">
@@ -12,7 +12,7 @@
             <ul class="{{ $menuCss }}">
                 @foreach($mainNav as $link=>$nav)
                     <li class="megamenu_item_1">
-                        <a href="{{ route($link) }}">{{ $nav['text'] }}</a>
+                        <a href="{{ route($link) }}" class="{{ $route == $link ? 'active' : '' }}">{{ $nav['text'] }}</a>
                     </li>
                 @endforeach
                 <!-- <li class="megamenu_item_1">
@@ -320,7 +320,7 @@
                     </li> -->
                 </ul>
             </div>
-            @if($route == 'home' ||  $route == 'category')
+            @if($route == 'home' ||  $route == 'category' || $route == 'products')
             <div class="widget_header_wr  col-sm-3 sidebar_left col-sm-pull-9">
                 <h3 class="widget_header">{{ trans('petronasvn.category_txt') }}</h3>
             </div>
