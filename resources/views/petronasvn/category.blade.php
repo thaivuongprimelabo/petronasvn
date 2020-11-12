@@ -1,12 +1,5 @@
 @extends('layouts.petronasvn')
 @section('content')
-@php
-    //$lastId = 0;
-    //$products = $data->getProductInCategory('', true, 6);
-    //if(count($products)) {
-    //    $lastId = $products[(count($products) - 1)]->id;
-    //}
-@endphp
 <div id="main" role="main">
     <div class="container">
         <div class="row">
@@ -65,8 +58,6 @@
     </div>
 </div>
 <script type="text/javascript">
-    
-
     jQuery(function($) {
 
         $.fn.loadData = function () {

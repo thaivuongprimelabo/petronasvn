@@ -74,7 +74,6 @@ class Product extends Model
     }
 
     public function getCategory() {
-        \Log::info('category_id:' . $this->category_id);
         $category = Category::select('id', 'name', 'name_url')->where('id', $this->category_id)->first();
         return $category;
     }

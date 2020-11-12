@@ -4,7 +4,7 @@
         <!-- USER MENU -->
         <ul class="header_user">
             <li><a href="/huong-dan-mua-hang.html"><span class="icon material-icons-account_balance_wallet"></span>Hướng dẫn mua hàng</a></li>
-            <li><a href="/chinh-sach-giao-hang.html"><span class="icon material-icons-local_shipping"></span>Chính sách giao hàng</a></li>
+            <li><a href="/chinh-sach-van-chuyen.html"><span class="icon material-icons-local_shipping"></span>Chính sách giao hàng</a></li>
             <li class="checkout"><a href="cart.html"><span class="icon material-icons-account_balance_wallet"></span>Thanh toán</a></li>
         </ul>
 

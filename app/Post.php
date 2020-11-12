@@ -33,6 +33,10 @@ class Post extends Model
     public function getSummary() {
         return $this->description;
     }
+
+    public function getShortSummary($length = 20) {
+        return substr($this->description, 0, $length) . '...';
+    }
     
     public function getSEOKeywords() {
         return !Utils::blank($this->seo_keywords) ? $this->seo_keywords : $this->name;
@@ -62,7 +66,7 @@ class Post extends Model
     }
     
     public function getLink() {
-        return route('postDetails', ['slug1' => $this->name_url]);
+        return route('posts.detail', ['slug1' => $this->name_url]);
     }
     
     public function scopeActive($query) {

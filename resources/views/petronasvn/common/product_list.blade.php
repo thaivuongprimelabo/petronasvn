@@ -10,7 +10,7 @@
 
     
 @endphp
-@foreach($products as $product)
+@foreach($data as $product)
     @if($route == 'home')
     <div class="product product_homepage swiper-slide">
     @endif

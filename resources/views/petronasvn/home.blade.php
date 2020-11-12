@@ -15,7 +15,7 @@
                         @foreach($featureProducts as $chunk)
                         <div id="homepage_carousel__{{ $count }}" class="swiper-container product_listing_main product_listing_main_1">
                             <div class="swiper-wrapper">
-                                @include('petronasvn.common.product_list', ['products' => $chunk])
+                                @include('petronasvn.common.product_list', ['data' => $chunk])
                             </div>
                         </div>
                         @php

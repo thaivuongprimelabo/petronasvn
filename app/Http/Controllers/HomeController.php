@@ -42,8 +42,8 @@ class HomeController extends AppController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
+        
         $centerBanners = Banner::active()->image()->where('pos', 'center')->orderBy('updated_at', 'DESC')->get();
 
         $leftBanners = Banner::active()->image()->where('pos', 'left')->orderBy('updated_at', 'DESC')->first();
@@ -181,40 +181,6 @@ class HomeController extends AppController
         
     }
     
-    public function newProducts(Request $request) {
-        $this->output['breadcrumbs'] = [
-            ['link' => '#', 'text' => trans('shop.new_product_txt')]
-        ];
-        
-        $this->output['view_type'] = 'grid';
-        $this->output['page_name'] = 'new-products-page';
-        $this->setSEO(['title' => trans('shop.new_product_txt')]);
-        return view('shop.product_list', $this->output);
-    }
-    
-    public function popularProducts(Request $request) {
-        $this->output['breadcrumbs'] = [
-            ['link' => '#', 'text' => trans('shop.popular_txt')]
-        ];
-        
-        $this->output['view_type'] = 'grid';
-        $this->output['page_name'] = 'popular-products-page';
-        $this->setSEO(['title' => trans('shop.popular_txt')]);
-        return view('shop.product_list', $this->output);
-    }
-    
-    public function bestSellProducts(Request $request) {
-        $this->output['breadcrumbs'] = [
-            ['link' => '#', 'text' => trans('shop.best_selling_txt')]
-        ];
-        
-        $this->output['view_type'] = 'grid';
-        $this->output['page_name'] = 'best-selling-products-page';
-        $this->setSEO(['title' => trans('shop.best_selling_txt')]);
-        return view('shop.product_list', $this->output);
-        
-    }
-    
     public function products(Request $request) {
 
         $categories = Category::select('id', 'name', 'name_url', 'parent_id')->active()->where('parent_id', 0)->orderBy('updated_at', 'DESC')->get();
@@ -234,70 +200,46 @@ class HomeController extends AppController
     
     public function about(Request $request) {
         
-        $page = Page::find(1);
-        $this->output['breadcrumbs'] = [
-            ['link' => '#', 'text' => trans('shop.main_nav.about.text')]
-        ];
-        $this->output['title'] = trans('shop.main_nav.about.text');
-        $this->output['page'] = $page;
+        $about = Page::where('type', 'gioi_thieu')->first();
+
+        $this->output['page'] = $about;
         
-        $this->setSEO(['title' => trans('shop.main_nav.about.text'), 'link' => route('about')]);
+        $this->setSEO(['title' => trans('petronasvn.main_nav.about.text'), 'link' => route('about')]);
         
-        return view('shop.page', $this->output);
+        return view('petronasvn.page', $this->output);
     }
     
     public function orderIntroduction(Request $request) {
         
-        $page = Page::find(2);
-        $this->output['breadcrumbs'] = [
-            ['link' => '#', 'text' => trans('shop.main_nav.order_introduction.text')]
-        ];
-        $this->output['title'] = trans('shop.main_nav.order_introduction.text');
-        $this->output['page'] = $page;
+        $about = Page::where('type', 'mua_hang')->first();
+
+        $this->output['page'] = $about;
         
-        $this->setSEO(['title' => trans('shop.main_nav.order_introduction.text'), 'link' => route('order_introduction')]);
+        $this->setSEO(['title' => trans('petronasvn.main_nav.order_introduction.text'), 'link' => route('order_introduction')]);
         
-        return view('shop.page', $this->output);
+        return view('petronasvn.page', $this->output);
     }
     
     public function guaranteePolicy(Request $request) {
         
-        $page = Page::find(3);
-        $this->output['breadcrumbs'] = [
-            ['link' => '#', 'text' => trans('shop.policy.guarantee_txt')]
-        ];
-        $this->output['title'] = trans('shop.policy.guarantee_txt');
-        $this->output['page'] = $page;
+        $about = Page::where('type', 'bao_hanh')->first();
+
+        $this->output['page'] = $about;
         
-        $this->setSEO(['title' => trans('shop.policy.guarantee_txt'), 'link' => route('guarantee_policy')]);
+        $this->setSEO(['title' => trans('petronasvn.policy.guarantee_txt'), 'link' => route('guarantee_policy')]);
         
-        return view('shop.page', $this->output);
+        return view('petronasvn.page', $this->output);
     }
     
     public function shipmentPolicy(Request $request) {
         
-        $page = Page::find(4);
-        $this->output['breadcrumbs'] = [
-            ['link' => '#', 'text' => trans('shop.policy.shipment_txt')]
-        ];
-        $this->output['title'] = trans('shop.policy.shipment_txt');
-        $this->output['page'] = $page;
+        $about = Page::where('type', 'van_chuyen')->first();
+
+        $this->output['page'] = $about;
         
         $this->setSEO(['title' => trans('shop.policy.shipment_txt'), 'link' => route('shipment_policy')]);
         
-        return view('shop.page', $this->output);
-    }
-    
-    public function orderChecking(Request $request) {
-        
-        $page = Page::find(2);
-        $this->output['breadcrumbs'] = [
-            ['link' => '#', 'text' => trans('shop.main_nav.order_checking.text')]
-        ];
-        
-        $this->setSEO(['title' => trans('shop.main_nav.order_checking.text'), 'link' => route('order_checking')]);
-        
-        return view('shop.order_checking', $this->output);
+        return view('petronasvn.page', $this->output);
     }
     
     public function contact(Request $request) {
@@ -411,16 +353,12 @@ class HomeController extends AppController
     }
     
     public function posts(Request $request) {
-        $this->output['breadcrumbs'] = [
-            ['link' => '#', 'text' => trans('shop.main_nav.posts.text')]
-        ];
+
+        $posts = Post::active()->orderBy('created_at', 'desc');
         
-        $this->output['title'] = trans('shop.main_nav.posts.text');
-        $this->output['page_name'] = 'posts-page';
+        $this->setSEO(['title' => trans('petronasvn.main_nav.posts.text'), 'link' => route('posts.list')]);
         
-        $this->setSEO(['title' => trans('shop.main_nav.posts.text'), 'link' => route('posts')]);
-        
-        return view('shop.posts', $this->output);
+        return view('petronasvn.posts', $this->output);
     }
     
     public function postDetails(Request $request) {
@@ -433,12 +371,6 @@ class HomeController extends AppController
             return redirect('/');
         }
         
-        $this->output['breadcrumbs'] = [
-            ['link' => route('posts'), 'text' => trans('shop.main_nav.posts.text')],
-            ['link' => '#', 'text' => $post->getTitle()],
-        ];
-        
-        $this->output['page_name'] = 'post-details-page';
         $this->output['data'] = $post;
         
         $this->setSEO([
@@ -450,7 +382,7 @@ class HomeController extends AppController
             'image' => $post->getImage()
         ]);
             
-        return view('shop.post_details', $this->output);
+        return view('petronasvn.post_details', $this->output);
     }
     
     public function postGroup(Request $request) {
@@ -476,15 +408,6 @@ class HomeController extends AppController
         return view('shop.posts', $this->output);
     }
     
-    public function booking(Request $request) {
-        
-        $this->output['breadcrumbs'] = [
-            ['link' => '#', 'text' => trans('shop.main_nav.booking.text')]
-        ];
-        
-        return view('shop.booking', $this->output);
-    }
-
     public function loadData(Request $request) {
         $result = [];
         
@@ -495,33 +418,62 @@ class HomeController extends AppController
             $sort = $request->sort;
             $page = $request->page_name;
 
-            $query = Product::active();
+            $query = null;
             
             switch($page) {
                 case 'category':
+
+                    $query = Product::active();
+
                     $query = $query->where('category_id', $id);
 
-                    if($sort == 'is_new') {
-                        $query = $query->where('is_new', Status::IS_NEW);
-                    }
+                    $view = 'petronasvn.common.product_list';
 
-                    if($sort == 'is_best_selling') {
-                        $query = $query->where('is_best_selling', Status::IS_BEST_SELLING);
-                    }
-
-                    if($sort == 'is_discount') {
-                        $query = $query->where('discount', '>', 0);
-                    }
-
-                    if($sort == 'price_ascending') {
-                        $query = $query->orderByRaw('CAST(price AS UNSIGNED) asc');
-                    }
-
-                    if($sort == 'price_descending') {
-                        $query = $query->orderByRaw('CAST(price AS UNSIGNED) desc');
-                    }
-                    
                     break;
+
+                case 'products':
+                    
+                    $query = Product::active();
+
+                    $view = 'petronasvn.common.product_list';
+
+                    break;
+
+                case 'posts':
+
+                    $query = Post::active()->orderBy('updated_at', 'desc');
+
+                    $view = 'petronasvn.common.post_list';
+
+                    break;
+
+                case 'recent_articles':
+
+                    $query = Post::active()->orderBy('created_at', 'desc');
+
+                    $view = 'petronasvn.common.recent_articles';
+
+                    break;
+            }
+
+            if($sort == 'is_new') {
+                $query = $query->where('is_new', Status::IS_NEW);
+            }
+
+            if($sort == 'is_best_selling') {
+                $query = $query->where('is_best_selling', Status::IS_BEST_SELLING);
+            }
+
+            if($sort == 'is_discount') {
+                $query = $query->where('discount', '>', 0);
+            }
+
+            if($sort == 'price_ascending') {
+                $query = $query->orderByRaw('CAST(price AS UNSIGNED) asc');
+            }
+
+            if($sort == 'price_descending') {
+                $query = $query->orderByRaw('CAST(price AS UNSIGNED) desc');
             }
 
             $total = $query->count();
@@ -532,102 +484,11 @@ class HomeController extends AppController
 
             $data = $query->limit($limit)->get();
 
-            $view = 'petronasvn.common.product_list';
-            $html = view($view, ['products' => $data, 'route' => $page])->render();
+            
+            $html = view($view, ['data' => $data, 'route' => $page])->render();
             $lastId = count($data) ? $data[count($data) - 1]->id : 0;
             return response()->json(['html' => $html, 'last_id' => $lastId, 'total' => $total]);
             
         }
     }
-    
-    public function loadData1(Request $request) {
-        
-        $result = [];
-        
-        if($request->ajax()) {
-            $id = $request->id;
-            $view_type = $request->view_type;
-            $page = $request->page_name;
-            $sort_by = $request->sort_by;
-            $price_search = $request->price_search;
-            $orderBy = 'products.updated_at DESC';
-            $keyword = $request->keyword;
-            $limit_product = $request->limit_product ? $request->limit_product : Common::LIMIT_PRODUCT_SHOW;
-            
-            if(!Utils::blank($sort_by)) {
-                $sort = explode(',', $sort_by);
-                $orderBy = $sort[0] . ' ' . $sort[1];
-                if($sort[0] == 'price') {
-                    $orderBy = 'CAST(' . $sort[0] . ' AS UNSIGNED) ' . $sort[1];
-                }
-            }
-            
-            $wherePriceSearch = '1 = 1';
-            if(!Utils::blank($price_search)) {
-                $wherePriceSearch .= ' AND (' . $price_search . ')';
-            }
-            
-            $view = 'shop.common.product_ajax';
-            $count = 0;
-            switch($page) {
-                    
-                case 'category-page':
-//                     $whereIn = 'category_id = ' . $id;
-                    $whereIn = 'category_id IN (SELECT id FROM categories c1 WHERE c1.parent_parent_id = ' . $id . ') OR category_id = ' . $id;
-                    $data = Product::active()->whereRaw($whereIn)->whereRaw($wherePriceSearch)->orderByRaw($orderBy)->paginate($limit_product);
-                    break;
-                    
-                case 'new-products-page':
-                    $data = Product::active()->isNew()->whereRaw($wherePriceSearch)->orderByRaw($orderBy)->paginate($limit_product);
-                    break;
-                    
-                case 'popular-products-page':
-                    $data = Product::active()->isPopular()->whereRaw($wherePriceSearch)->orderByRaw($orderBy)->paginate($limit_product);
-                    break;
-                    
-                case 'best-selling-products-page':
-                    $data = Product::active()->isBestSelling()->whereRaw($wherePriceSearch)->orderByRaw($orderBy)->paginate($limit_product);
-                    break;
-                    
-                case 'all-products-page':
-                    $data = Product::active()->orderByRaw($orderBy)->whereRaw($wherePriceSearch)->orderByRaw($orderBy)->paginate($limit_product);
-                    break;
-                
-                case 'vendor-page':
-                    $data = Product::active()->where('vendor_id', $id)->whereRaw($wherePriceSearch)->orderByRaw($orderBy)->paginate($limit_product);
-                    break;
-                
-                case 'posts-page':
-                    $data = Post::active()->orderBy('created_at', 'desc')->paginate($limit_product);
-                    $view = 'shop.common.post_ajax';
-                    break;
-                    
-                case 'posts-group-page':
-                    $data = Post::active()->where('post_group_id', $id)->orderBy('created_at', 'desc')->paginate($limit_product);
-                    $view = 'shop.common.post_ajax';
-                    break;
-                    
-                case 'search-suggestion-page':
-                    $keyword = str_replace('+', ' ', $keyword);
-                    $data = Product::active()->where('name', 'LIKE', '%' . $keyword . '%')->paginate($limit_product);
-                    $view = 'shop.common.search_suggestion';
-                    $result['#product_results'] = view($view, compact('data'))->render();
-                    return response()->json($result);
-                case 'search-page':
-                    $keyword = str_replace('+', ' ', $keyword);
-                    $obj = Product::active()->where('name', 'LIKE', '%' . $keyword . '%');
-                    $count = $obj->count();
-                    $data = $obj->paginate($limit_product);
-                    $result['#result_count'] = $count;
-                    break;
-            }
-        }
-        
-        $paging = $data->toArray();
-        $result['#ajax_list'] = view($view, compact('data', 'view_type'))->render();
-        $result['#ajax_paging'] =  $data->links('shop.common.paging', compact('paging'))->toHtml();
-        
-        return response()->json($result);
-    }
-    
 }

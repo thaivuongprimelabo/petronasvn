@@ -1,33 +1,6 @@
 <!-- FOOTER -->
 <footer>
     <div class="container">
-        <section class="footer_top">
-            <div class="row">
-                @foreach($config['footer_pages'] as $page)
-                @php
-                    $icon = '';
-                    if($page->type === 'mua_hang') {
-                        $icon = 'account_balance_wallet';
-                    }
-
-                    if($page->type === 'bao_hanh') {
-                        $icon = 'headset_mic';
-                    }
-
-                    if($page->type === 'van_chuyen') {
-                        $icon = 'local_shipping';
-                    }
-                @endphp
-                <div class="footer_top_item col-sm-4">
-                    <div class="footer_top_item_header">
-                        <span class=" icon material-icons-{{ $icon }}"></span>
-                        <h2>{{ $page->name }}</h2>
-                    </div>
-                    <p>{{ $page->description }}</p>
-                </div>
-                @endforeach
-            </div>
-        </section>
         <section class="row">
             <div class="col-md-2 col-sm-3 footer_block footer_block__1">
             <h6>Navigation</h6>

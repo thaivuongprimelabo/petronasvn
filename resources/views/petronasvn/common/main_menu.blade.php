@@ -1,8 +1,19 @@
 @php
+    $array = [
+        'home',
+        'category',
+        'products',
+        'about',
+        'posts'
+    ];
+    
     $route = Route::currentRouteName();
+    $routeSplit = explode('.', $route);
+    $routeGroup = $routeSplit[0];
+
 	$mainNav = trans('petronasvn.main_menu');
     $menuCss = 'sf-menu megamenu_desktop visible-md visible-lg  col-sm-12  sidebar_left sf-js-enabled sf-arrows';
-    if($route == 'home' ||  $route == 'category' || $route == 'products') {
+    if(in_array($route, $array) || in_array($routeGroup, $array)) {
         $menuCss = 'sf-menu megamenu_desktop visible-md visible-lg  col-sm-9 col-sm-push-3 sidebar_left';
     }
 @endphp
@@ -12,7 +23,7 @@
             <ul class="{{ $menuCss }}">
                 @foreach($mainNav as $link=>$nav)
                     <li class="megamenu_item_1">
-                        <a href="{{ route($link) }}" class="{{ $route == $link ? 'active' : '' }}">{{ $nav['text'] }}</a>
+                        <a href="{{ route($link) }}" class="{{ ($route == $link || strpos($link, $routeGroup) !== false) ? 'active' : '' }}">{{ $nav['text'] }}</a>
                     </li>
                 @endforeach
                 <!-- <li class="megamenu_item_1">

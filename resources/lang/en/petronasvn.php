@@ -52,7 +52,7 @@ return [
         'home' => ['text' => 'Trang chủ'],
         'about' => ['text' => 'Giới thiệu'],
         'products' => ['text' => 'Sản phẩm'],
-        'posts' => ['text' => 'Tin tức'],
+        'posts.list' => ['text' => 'Tin tức'],
         'contact' => ['text' => 'Liên hệ']
     ],
     'policy' => [
