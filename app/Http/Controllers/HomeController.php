@@ -34,7 +34,7 @@ class HomeController extends AppController
     {
         parent::__construct();
         
-        $this->breadcrumb = [route('home') => trans('shop.home')];
+        $this->breadcrumb = [route('home') => trans('petronasvn.home')];
     }
 
     /**
@@ -104,7 +104,7 @@ class HomeController extends AppController
         
         $this->setSEO(['title' => $vendor->getName(), 'link' => $vendor->getLink()]);
         
-        return view('shop.product_list', $this->output);
+        return view('petronasvn.product_list', $this->output);
     }
     
     public function category(Request $request) {
@@ -189,7 +189,7 @@ class HomeController extends AppController
 
         $bestSellerProducts = Product::active()->isBestSelling()->orderBy('updated_at', 'DESC')->limit(3)->get();
         
-        $this->setSEO(['title' => trans('shop.main_nav.products.text'), 'link' => route('products')]);
+        $this->setSEO(['title' => trans('petronasvn.main_nav.products.text'), 'link' => route('products')]);
 
         $this->output['categories'] = $categories;
         $this->output['newProducts'] = $newProducts;
@@ -237,7 +237,7 @@ class HomeController extends AppController
 
         $this->output['page'] = $about;
         
-        $this->setSEO(['title' => trans('shop.policy.shipment_txt'), 'link' => route('shipment_policy')]);
+        $this->setSEO(['title' => trans('petronasvn.policy.shipment_txt'), 'link' => route('shipment_policy')]);
         
         return view('petronasvn.page', $this->output);
     }
@@ -255,9 +255,9 @@ class HomeController extends AppController
                 'subject' => 'required',
             ];
             
-            if($request->getSession()->has('captcha')) {
-                $rules['captcha'] = 'required|captcha';
-            }
+            // if($request->getSession()->has('captcha')) {
+            //     $rules['captcha'] = 'required|captcha';
+            // }
             
             $messages = [
                 'name.required' => trans('validation.required', ['attribute' => 'Họ tên']),
@@ -292,7 +292,7 @@ class HomeController extends AppController
                 $contact->updated_at    = date('Y-m-d H:i:s');
                 
                 // Config mail
-                $subject = trans('auth.subject_mail', ['web_name' => $this->output['config']['web_name'], 'title' => trans('shop.mail_subject.contact', ['email' => $request->email])]);
+                $subject = trans('auth.subject_mail', ['web_name' => $this->output['config']['web_name'], 'title' => trans('petronasvn.mail_subject.contact', ['email' => $request->email])]);
                 $config = [
                     'from' => $this->output['config']['mail_from'],
                     'from_name' => $this->output['config']['mail_name'],
@@ -306,50 +306,68 @@ class HomeController extends AppController
                         'contact_created_at' => Utils::formatDate($contact->created_at)
                     ],
                     'to'       => $this->output['config']['web_email'],
-                    'template' => 'shop.emails.contact_alert'
+                    'template' => 'petronasvn.emails.contact_alert'
                 ];
                 
-                $message = Utils::sendMail($config);
-                if(!Utils::blank($message)) {
-                    \Log::error($message);
-                }
+                // $message = Utils::sendMail($config);
+                // if(!Utils::blank($message)) {
+                //     \Log::error($message);
+                // }
                 
                 if($contact->save()) {
-                    $result['#contact_success'] = trans('messages.SEND_CONTACT_SUCCESS');
-                    $result['#captcha_img'] = captcha_img('flat');
+                    $result = true;
                 } else {
-                    $result['#contact_error'] = trans('messages.ERROR');
+                    $result = false;
                 }
                 
                 DB::commit();
                 
             }  catch(\Exception $e) {
-                $result['#contact_error'] = trans('messages.ERROR');
+                $result = false;
                 DB::rollBack();
             }
             
             return response()->json($result);
+        } else {
+            $categories = Category::select('id', 'name', 'name_url', 'parent_id')->active()->where('parent_id', 0)->orderBy('updated_at', 'DESC')->get();
+        
+            $newProducts = Product::active()->isNew()->orderBy('updated_at', 'DESC')->limit(3)->get();
+
+            $bestSellerProducts = Product::active()->isBestSelling()->orderBy('updated_at', 'DESC')->limit(3)->get();
+
+            $this->output['categories'] = $categories;
+            $this->output['newProducts'] = $newProducts;
+            $this->output['bestSellerProducts'] = $bestSellerProducts;
         }
         
-        $this->output['breadcrumbs'] = [
-            ['link' => '#', 'text' => trans('shop.main_nav.contact.text')]
-        ];
+        $this->setSEO(['title' => trans('petronasvn.main_nav.contact.text'), 'link' => route('contact')]);
         
-        $this->setSEO(['title' => trans('shop.main_nav.contact.text'), 'link' => route('contact')]);
-        
-        return view('shop.contact', $this->output);
+        return view('petronasvn.contact', $this->output);
     }
     
     public function search(Request $request) {
         
         $keyword = $request->q;
-        $this->output['breadcrumbs'] = [
-            ['link' => '#', 'text' => trans('shop.search_results', compact('keyword'))]
-        ];
+
+        $categories = Category::select('id', 'name', 'name_url', 'parent_id')->active()->where('parent_id', 0)->orderBy('updated_at', 'DESC')->get();
         
-        $this->setSEO(['title' => trans('shop.search_results')]);
+        $newProducts = Product::active()->isNew()->orderBy('updated_at', 'DESC')->limit(3)->get();
+
+        $bestSellerProducts = Product::active()->isBestSelling()->orderBy('updated_at', 'DESC')->limit(3)->get();
+
+        if($keyword) {
+            $products = Product::active()->where('name', 'LIKE', '%' . $keyword . '%')->get();
+        }
+
+        $this->output['categories'] = $categories;
+        $this->output['newProducts'] = $newProducts;
+        $this->output['bestSellerProducts'] = $bestSellerProducts;
+        $this->output['products'] = $products;
+        $this->output['keyword'] = $keyword;
         
-        return view('shop.search', $this->output);
+        $this->setSEO(['title' => trans('petronasvn.search_results')]);
+        
+        return view('petronasvn.search', $this->output);
     }
     
     public function posts(Request $request) {
@@ -383,29 +401,6 @@ class HomeController extends AppController
         ]);
             
         return view('petronasvn.post_details', $this->output);
-    }
-    
-    public function postGroup(Request $request) {
-        
-        $slug = $request->slug;
-        $postGroup = PostGroups::select('id', 'name')->active()->where('name_url', $slug)->first();
-        
-        if(!$postGroup) {
-            return redirect('/');
-        }
-        
-        $this->output['breadcrumbs'] = [
-            ['link' => route('posts'), 'text' => trans('shop.main_nav.posts.text')],
-            ['link' => '#', 'text' => $postGroup->getName()],
-        ];
-        
-        $this->output['title'] = $postGroup->getName();
-        $this->output['data'] = $postGroup;
-        $this->output['page_name'] = 'posts-group-page';
-        
-        $this->setSEO(['title' => $postGroup->getName(), 'link' => $postGroup->getLink()]);
-        
-        return view('shop.posts', $this->output);
     }
     
     public function loadData(Request $request) {

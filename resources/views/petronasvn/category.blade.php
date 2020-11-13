@@ -80,6 +80,7 @@
                     page_name: 'category'
                 },
                 beforeSend: function() {
+                    $('#product_listing_preloader').removeClass('loader_off');
                 },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -89,6 +90,7 @@
                     $('#last_id').val(res.last_id);
                     $('#before_limit').val(current_limit);
                     $('#products_count').html((res.total ? 1 : 0) + ' - ' + ((current_limit > res.total) ? res.total : current_limit) + ' products of ' + res.total);
+                    $('#product_listing_preloader').addClass('loader_off');
                 }
             })
         };

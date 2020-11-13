@@ -164,12 +164,17 @@ Route::group(['prefix' => ''], function () {
     
     Route::post('/load-data', 'HomeController@loadData')->name('loadData');
     
-    Route::get('/cart', 'CartController@index')->name('cart');
-    Route::post('/cart/add-to-cart', 'CartController@addToCart')->name('addToCart');
-    Route::post('/cart/update-cart', 'CartController@updateCart')->name('updateCart');
-    Route::post('/cart/update-cart-detail', 'CartController@updateCartDetail')->name('updateCartDetail');
-    Route::post('/cart/remove-item', 'CartController@removeItem')->name('removeItem');
-    Route::post('/cart/remove-detail-item', 'CartController@removeDetailItem')->name('removeDetailItem');
+    Route::group(['prefix' => 'gio-hang', 'as' => 'cart.'], function () {
+        Route::get('', 'CartController@index')->name('list');
+        Route::get('/thanh-toan', 'CartController@checkout')->name('checkout');
+    });
+
+    // Route::get('/cart', 'CartController@index')->name('cart');
+    // Route::post('/cart/add-to-cart', 'CartController@addToCart')->name('addToCart');
+    // Route::post('/cart/update-cart', 'CartController@updateCart')->name('updateCart');
+    // Route::post('/cart/update-cart-detail', 'CartController@updateCartDetail')->name('updateCartDetail');
+    // Route::post('/cart/remove-item', 'CartController@removeItem')->name('removeItem');
+    // Route::post('/cart/remove-detail-item', 'CartController@removeDetailItem')->name('removeDetailItem');
     Route::match(['get', 'post'], '/cart/checkout', 'CartController@checkout')->name('checkout');
     Route::get('/cart/checkout/success', 'CartController@checkoutSuccess')->name('checkoutSuccess');
 

@@ -153,7 +153,9 @@ return [
         'clear' => 'Hủy',
         'order_checking' => 'Kiểm tra',
         'remove' => 'Xóa',
-        'search' => 'Tìm kiếm'
+        'search' => 'Tìm kiếm',
+        'clear_cart' => 'Hủy giỏ hàng',
+        'update_cart' => 'Cập nhật'
     ],
     'mail' => [
         'from_name' => 'Hệ thống'

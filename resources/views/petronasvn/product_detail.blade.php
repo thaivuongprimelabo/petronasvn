@@ -16,8 +16,10 @@
                </ul>
             </div>
             <div itemscope="" itemtype="http://schema.org/Product" class="product-scope">
-               <meta itemprop="url" content="https://theme247-computers.myshopify.com/products/arctic-freezer-7-pro-rev-2-150-watt-multicompatible-low-noise-cpu-cooler-for-amd-and-intel-sockets">
-               <meta itemprop="image" content="//cdn.shopify.com/s/files/1/1265/3751/products/arctic_freezer_7_pro_rev_2_150_watt_multicompatible_low_noise_cpu_cooler_for_amd_and_intel_sockets_01_grande.png?v=1461669652">
+               <meta itemprop="url" content="{{ $data->getLink() }}">
+               @if($imagesDetail->first() !== null)
+               <meta itemprop="image" content="{{ $imagesDetail->first()->getImageLink() }}ss">
+               @endif
                <div class="product_wrap">
                   <div class="row">
                      <div class="col-sm-5 col-md-4 product_images product_left">
@@ -106,7 +108,7 @@
                                        <span class="quantity_modifier quantity_down"><i class="fa fa-minus"></i></span>
                                        <span class="quantity_modifier quantity_up"><i class="fa fa-plus"></i></span>
                                     </div>
-                                    <button class="btn btn-cart" type="submit" id="add-to-cart">Thêm vào giỏ hàng</button>
+                                    <button class="btn btn-cart add_to_cart" type="button" data-pid="{{ $data->id }}">Thêm vào giỏ hàng</button>
                                  </div>
                                  <div class="addthis_sharing_toolbox" data-url="https://theme247-computers.myshopify.com/products/arctic-freezer-7-pro-rev-2-150-watt-multicompatible-low-noise-cpu-cooler-for-amd-and-intel-sockets" data-title="ARCTIC Freezer 7 Pro Rev 2 - 150 Watt Multicompatible Low Noise CPU Co | Computers" style="clear: both;">
                                     <div id="atstbx" class="at-share-tbx-element addthis-smartlayers addthis-animated at4-show" aria-labelledby="at-0f453c64-3d96-4ff4-9a56-87053f6cc7fa" role="region">

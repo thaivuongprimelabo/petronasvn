@@ -160,8 +160,8 @@ class Product extends Model
         return $this->summary;
     }
     
-    public function getDescription() {
-        return $this->description;
+    public function getDescription($length = 0) {
+        return $length > 0 ? substr($this->description, 0, $length) : $this->description;
     }
     
     public function getLink() {

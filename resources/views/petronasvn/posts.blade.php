@@ -6,7 +6,10 @@
 			<section class="main_content  col-sm-8 col-sm-push-4">
 				<!-- BREADCRUMBS -->
 				@include('petronasvn.common.breadcrumb', ['page2' => ['name' => 'Bài viết'] ])
-				<h2 class="page_heading"><a href="/blogs/news">Blog</a> <a href="/blogs/news.atom" target="_blank"></a></h2>
+                <h2 class="page_heading"><a href="/blogs/news">Blog</a> <a href="/blogs/news.atom" target="_blank"></a></h2>
+                <div id="product_listing_preloader" class="loader_off">
+                    <div class="global_loader"></div>
+                </div>
 				<div id="post_list"></div>
 			</section>
 			<aside class="sidebar col-sm-4 sidebar_left col-sm-pull-8">
@@ -43,12 +46,14 @@
                     page_name: pageName
                 },
                 beforeSend: function() {
+                    $('#product_listing_preloader').removeClass('loader_off');
                 },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function (res) {
                     _this.append(res.html);
+                    $('#product_listing_preloader').addClass('loader_off');
                 }
             })
         };

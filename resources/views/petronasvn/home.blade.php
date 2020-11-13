@@ -534,4 +534,82 @@
         </div>
     </div>
 </div>
+<script>
+    jQuery(document).ready(function($) {
+        var mySwiper = new Swiper('#swiper', {
+            effect: 'fade',
+            
+            autoplay: 30000,
+            
+            loop: true,
+            speed: 500,
+            autoplayDisableOnInteraction: false,
+            
+            
+            prevButton: '#swiper_btn_prev',
+            nextButton: '#swiper_btn_next',
+            
+        });
+
+        var homepage_carousel__1 = new Swiper('#homepage_carousel__1', {
+            loop: true,
+            speed: 400,
+            slidesPerView: 4,
+            spaceBetween: 0,
+            prevButton: '#carousel_1__prev',
+            nextButton: '#carousel_1__next',
+            breakpoints: {
+            991: {
+                slidesPerView: 3
+            },
+            767: {
+                slidesPerView: 2,
+                spaceBetween: 15
+            },
+            640: {
+                slidesPerView: 1,
+                spaceBetween: 0
+            }
+            }
+        });
+
+        var homepage_carousel__2 = new Swiper('#homepage_carousel__2', {
+            loop: true,
+            speed: 400,
+            slidesPerView: 4,
+            spaceBetween: 0,
+            prevButton: '#carousel_2__prev',
+            nextButton: '#carousel_2__next',
+            breakpoints: {
+            991: {
+                slidesPerView: 3
+            },
+            767: {
+                slidesPerView: 2,
+                spaceBetween: 15
+            },
+            640: {
+                slidesPerView: 1,
+                spaceBetween: 0
+            }
+            }
+        });
+
+        homepage_carousel__2.prevButton.hide();
+        homepage_carousel__2.nextButton.hide();
+
+        
+        $('#carousel_prev').on('click', function() {
+            homepage_carousel__1.slidePrev();
+            homepage_carousel__2.slidePrev();
+            homepage_carousel__2.prevButton.trigger('click');
+        });
+
+        $('#carousel_next').on('click', function() {
+            homepage_carousel__1.slideNext();
+            homepage_carousel__2.slideNext();
+            homepage_carousel__2.nextButton.trigger('click');
+        });
+    });
+</script>
 @endsection

@@ -4,7 +4,8 @@
         'category',
         'products',
         'about',
-        'posts'
+        'posts',
+        'contact'
     ];
     
     $route = Route::currentRouteName();
@@ -331,7 +332,7 @@
                     </li> -->
                 </ul>
             </div>
-            @if($route == 'home' ||  $route == 'category' || $route == 'products')
+            @if($route == 'home' ||  $route == 'category' || $route == 'products' || $route == 'contact')
             <div class="widget_header_wr  col-sm-3 sidebar_left col-sm-pull-9">
                 <h3 class="widget_header">{{ trans('petronasvn.category_txt') }}</h3>
             </div>

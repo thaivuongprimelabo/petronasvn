@@ -3,53 +3,48 @@
 <div id="main" role="main">
     <div class="container">
         <div class="row">
-        <section class="main_content  col-sm-9 col-sm-push-3">
-            <!-- BREADCRUMBS -->
-            <div class="breadcrumb_wrap">
-                <ul class="breadcrumb">
-                    <li><a href="/" class="homepage-link" title="Back to the frontpage">Trang chủ</a></li>
-                    <li><span class="page-title">Sản phẩm</span></li>
-                </ul>
-            </div>
-            <!-- products sorting -->
-            <div class="product_listing_controls">
-                <ul class="product_listing_toggle">
-                    <li id="toggle_grid" class="active"><i class="fa fa-th"></i></li>
-                </ul>
-                <div class="sort_by">
-                    <label>Sort by</label>
-                    <select id="sort_by_select" class="form-control">
-                        <option value="is_new" selected="selected">Sản phẩm mới</option>
-                        <option value="is_best_selling">Bán chạy nhất</option>
-                        <option value="is_discount">Đang giảm giá</option>
-                        <option value="price_ascending">Giá từ thấp -> cao</option>
-                        <option value="price_descending">Giá từ cao -> thấp</option>
-                    </select>
-                </div>
-                <div class="show_products">
-                    <label>Show</label>
-                    <select id="show_products_select" class="form-control">
-                        <option value="6" selected="selected">6</option>
-                        <option value="9">9</option>
-                        <option value="15">15</option>
-                        <option value="50">50</option>
-                        <option value="50">100</option>
-                        <option value="50">1000</option>
-                    </select>
-                </div>
-            </div>
-            <div id="product_listing_preloader" class="loader_off">
-                <div class="global_loader"></div>
-            </div>
-            <div id="collection_sorted" style="opacity: 1;">
-                <div class="product_listing_main row">
-                </div>
+            <section class="main_content  col-sm-9 col-sm-push-3">
+                <!-- BREADCRUMBS -->
+                @include('petronasvn.common.breadcrumb', ['page2' => ['name' => 'Sản phẩm'] ])
+                <!-- products sorting -->
                 <div class="product_listing_controls">
-                    <p id="products_count" class="products_count">
-                        
-                    </p>
+                    <ul class="product_listing_toggle">
+                        <li id="toggle_grid" class="active"><i class="fa fa-th"></i></li>
+                    </ul>
+                    <div class="sort_by">
+                        <label>Sort by</label>
+                        <select id="sort_by_select" class="form-control">
+                            <option value="is_new" selected="selected">Sản phẩm mới</option>
+                            <option value="is_best_selling">Bán chạy nhất</option>
+                            <option value="is_discount">Đang giảm giá</option>
+                            <option value="price_ascending">Giá từ thấp -> cao</option>
+                            <option value="price_descending">Giá từ cao -> thấp</option>
+                        </select>
+                    </div>
+                    <div class="show_products">
+                        <label>Show</label>
+                        <select id="show_products_select" class="form-control">
+                            <option value="6" selected="selected">6</option>
+                            <option value="9">9</option>
+                            <option value="15">15</option>
+                            <option value="50">50</option>
+                            <option value="50">100</option>
+                            <option value="50">1000</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
+                <div id="product_listing_preloader" class="loader_off">
+                    <div class="global_loader"></div>
+                </div>
+                <div id="collection_sorted" style="opacity: 1;">
+                    <div class="product_listing_main row">
+                    </div>
+                    <div class="product_listing_controls">
+                        <p id="products_count" class="products_count">
+                            
+                        </p>
+                    </div>
+                </div>
             </section>
             @include('petronasvn.common.sidebar')
         </div>
@@ -82,6 +77,7 @@
                     page_name: 'products'
                 },
                 beforeSend: function() {
+                    $('#product_listing_preloader').removeClass('loader_off');
                 },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -91,6 +87,7 @@
                     $('#last_id').val(res.last_id);
                     $('#before_limit').val(current_limit);
                     $('#products_count').html((res.total ? 1 : 0) + ' - ' + ((current_limit > res.total) ? res.total : current_limit) + ' products of ' + res.total);
+                    $('#product_listing_preloader').addClass('loader_off');
                 }
             })
         };
