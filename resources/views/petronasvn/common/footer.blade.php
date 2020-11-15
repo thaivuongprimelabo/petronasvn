@@ -5,17 +5,17 @@
             <div class="col-md-2 col-sm-3 footer_block footer_block__1">
             <h6>Navigation</h6>
             <ul class="footer_links">
-                <li class="active"><a href="index.html" title="">Trang chủ</a></li>
-                <li ><a href="collections/all.html" title="">Giới thiệu</a></li>
-                <li ><a href="search.html" title="">Sản phẩm</a></li>
-                <li ><a href="blogs/news.html" title="">Liên hệ</a></li>
+                <li class="active"><a href="/" title="">Trang chủ</a></li>
+                <li ><a href="{{ route('about') }}" title="">Giới thiệu</a></li>
+                <li ><a href="{{ route('products') }}" title="">Sản phẩm</a></li>
+                <li ><a href="{{ route('posts.list') }}" title="">Tin tức</a></li>
             </ul>
             </div>
             <div class="col-md-2 col-sm-3 footer_block footer_block__2">
             <h6>Khách hàng</h6>
             <ul class="footer_links">
-                <li ><a href="pages/contact-us.html" title="">Liên hệ</a></li>
-                <li ><a href="pages/sitemap.html" title="">Sơ đồ trang web</a></li>
+                <li ><a href="{{ route('contact') }}" title="">Liên hệ</a></li>
+                <li ><a href="{{ route('cart.checkout') }}" title="">Thanh toán</a></li>
             </ul>
             </div>
             <div class="col-md-2 col-sm-3 footer_block footer_block__3">
@@ -41,7 +41,7 @@
                     @foreach($config['footer_pages'] as $page)
                     <li ><a href="{{ $page->getLink() }}" title="">{{ $page->name }}</a></li>
                     @endforeach
-                    <li ><a href="cart.html" title="">Giỏ hàng</a></li>
+                    <li ><a href="{{ route('cart.list') }}" title="">Giỏ hàng</a></li>
                 </ul>
             </div>
             <div class="col-md-4 col-sm-12 footer_block footer_block__5">

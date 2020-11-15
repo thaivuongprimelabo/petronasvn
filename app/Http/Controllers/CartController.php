@@ -122,9 +122,8 @@ class CartController extends AppController
             
             $cart = Cart::getInstance($request->getSession());
             $cart->removeItem($id);
-            
-            $this->loadCart($cart, $result);
-            return response()->json($result);
+
+            return response()->json(true);
         }
     }
     
@@ -254,7 +253,7 @@ class CartController extends AppController
             return response()->json($result);
         }
         
-        return view('shop.checkout', $this->output);
+        return view('petronasvn.checkout', $this->output);
     }
     
     public function checkoutSuccess(Request $request) {

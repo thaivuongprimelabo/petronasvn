@@ -24,10 +24,6 @@ class VendorsController extends AppController
         $this->middleware('auth');
     }
     
-    public function index(Request $request) {
-        return view('auth.index', $this->search($request));
-    }
-    
     /**
      * search
      * @param Request $request
@@ -74,7 +70,7 @@ class VendorsController extends AppController
             }
         }
         
-        return view('auth.form', $this->output);
+        return view('auth.petronasvn.vendors.form', $this->output);
     }
     
     /**
@@ -124,7 +120,7 @@ class VendorsController extends AppController
         }
         
         $this->output['data'] = $data;
-        return view('auth.form', $this->output);
+        return view('auth.petronasvn.vendors.form', $this->output);
     }
     
     public function remove(Request $request) {

@@ -26,8 +26,8 @@ class Post extends Model
         return Utils::getImageLink(Common::NO_IMAGE_FOUND);
     }
     
-    public function getTitle() {
-        return $this->name;
+    public function getTitle($length = 0) {
+        return $length > 0 ? substr($this->name, 0, $length) . '...' : $this->name;
     }
     
     public function getSummary() {

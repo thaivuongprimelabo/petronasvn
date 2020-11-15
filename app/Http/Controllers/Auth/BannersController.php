@@ -152,7 +152,7 @@ class BannersController extends AppController
                 Utils::doUploadSimple($request, 'upload_banner', $filename);
                 $data->link           = Utils::cnvNull($request->link, '');
                 $data->banner         = $filename;
-                
+                $data->pos            = Utils::cnvNull($request->pos, 'center');
                 $data->description    = Utils::cnvNull($request->description, '');
                 $data->status         = Utils::cnvNull($request->status, 0);
                 $data->select_type    = Utils::cnvNull($request->select_type, 'use_image');

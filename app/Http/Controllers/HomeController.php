@@ -94,35 +94,38 @@ class HomeController extends AppController
         if(!$vendor) {
             return redirect('/');
         }
-        
-        $this->output['breadcrumbs'] = [
-            ['link' => '#', 'text' => $vendor->getName()]
-        ];
-        $this->output['data'] = $vendor;
-        $this->output['view_type'] = 'grid';
-        $this->output['page_name'] = 'vendor-page';
-        
-        $this->setSEO(['title' => $vendor->getName(), 'link' => $vendor->getLink()]);
-        
-        return view('petronasvn.product_list', $this->output);
-    }
-    
-    public function category(Request $request) {
-        $category = Category::select('id', 'name')->active()->where('name_url', $request->slug)->first();
 
         $categories = Category::select('id', 'name', 'name_url', 'parent_id')->active()->where('parent_id', 0)->orderBy('updated_at', 'DESC')->get();
         
         $newProducts = Product::active()->isNew()->orderBy('updated_at', 'DESC')->limit(3)->get();
 
         $bestSellerProducts = Product::active()->isBestSelling()->orderBy('updated_at', 'DESC')->limit(3)->get();
+        
+        $this->output['data'] = $vendor;
+        $this->output['view_type'] = 'grid';
+        $this->output['page_name'] = 'vendor-page';
+        $this->output['categories'] = $categories;
+        $this->output['newProducts'] = $newProducts;
+        $this->output['bestSellerProducts'] = $bestSellerProducts;
+        
+        $this->setSEO(['title' => $vendor->getName(), 'link' => $vendor->getLink()]);
+        
+        return view('petronasvn.vendor', $this->output);
+    }
+    
+    public function category(Request $request) {
+        $category = Category::select('id', 'name')->active()->where('name_url', $request->slug)->first();
 
         if(!$category) {
             return redirect('/');
         }
+
+        $categories = Category::select('id', 'name', 'name_url', 'parent_id')->active()->where('parent_id', 0)->orderBy('updated_at', 'DESC')->get();
         
-        $this->output['breadcrumbs'] = [
-            ['link' => '#', 'text' => $category->getName()]
-        ];
+        $newProducts = Product::active()->isNew()->orderBy('updated_at', 'DESC')->limit(3)->get();
+
+        $bestSellerProducts = Product::active()->isBestSelling()->orderBy('updated_at', 'DESC')->limit(3)->get();
+        
         $this->output['data'] = $category;
         $this->output['view_type'] = 'grid';
         $this->output['page_name'] = 'category-page';
@@ -351,7 +354,7 @@ class HomeController extends AppController
 
         $categories = Category::select('id', 'name', 'name_url', 'parent_id')->active()->where('parent_id', 0)->orderBy('updated_at', 'DESC')->get();
         
-        $newProducts = Product::active()->isNew()->orderBy('updated_at', 'DESC')->limit(3)->get();
+        $newProducts = Product::active()->isNew()->orderBy('created_at', 'DESC')->limit(3)->get();
 
         $bestSellerProducts = Product::active()->isBestSelling()->orderBy('updated_at', 'DESC')->limit(3)->get();
 
@@ -425,6 +428,16 @@ class HomeController extends AppController
                     $view = 'petronasvn.common.product_list';
 
                     break;
+
+                case 'vendor':
+
+                        $query = Product::active();
+    
+                        $query = $query->where('vendor_id', $id);
+    
+                        $view = 'petronasvn.common.product_list';
+    
+                        break;
 
                 case 'products':
                     

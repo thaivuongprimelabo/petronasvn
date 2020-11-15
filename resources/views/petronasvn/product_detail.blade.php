@@ -74,7 +74,6 @@
                                     </div>
                                  </div> -->
                                  <div class="product_details">
-                                    <p class="product_details__item product_weight"><b>Khối lượng:</b> <span id="product_weight">2.65 lb</span></p>
                                     @if($data->getCategory() !== null)
                                     <p class="product_details__item product_collections"><b>Danh mục:</b> <a href="{{ $data->getCategory()->getLink() }}">{{ $data->getCategory()->name }}</a></p>
                                     @endif

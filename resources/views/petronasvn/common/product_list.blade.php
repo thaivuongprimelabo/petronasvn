@@ -46,7 +46,7 @@
                 @endif
                 <div class="product_links">
                     <form method="post" action="#">
-                        <a class="btn btn_options add_to_cart" data-pid="{{ $product->id }}" href="javascript:void(0)" title="Add to cart">{{ trans('petronasvn.cart.add_to_cart_txt') }}</a>
+                        <a class="btn btn_options add_to_cart" data-image="{{ $product->getFirstImage() }}" data-pid="{{ $product->id }}" href="javascript:void(0)" title="Add to cart">{{ trans('petronasvn.cart.add_to_cart_txt') }}</a>
                     </form>
                     <a class="btn_icon btn_icon material-icons-info_outline" href="{{ $product->getLink() }}"></a>
                     <a class="btn_icon quick_view_btn material-icons-remove_red_eye" href="{{ $product->getLink() }}"></a>

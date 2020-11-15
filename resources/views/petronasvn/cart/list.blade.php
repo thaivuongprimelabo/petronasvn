@@ -26,19 +26,19 @@
         </td>
         <td class="cell_3">
             <div class="quantity_box">
-                <input class="quantity_input" id="updates_19414843779" name="updates[]" value="1" type="text">
-                <span class="quantity_modifier quantity_down"><i class="fa fa-minus"></i></span>
-                <span class="quantity_modifier quantity_up"><i class="fa fa-plus"></i></span>
+                <input class="quantity_input" id="updates_{{ $cartItem->getId() }}" value="{{ $cartItem->getQty() }}" type="text">
+                <span class="quantity_modifier quantity_down"  data-pid="{{ $cartItem->getId() }}"><i class="fa fa-minus"></i></span>
+                <span class="quantity_modifier quantity_up"  data-pid="{{ $cartItem->getId() }}"><i class="fa fa-plus"></i></span>
             </div>
             <div>
-                <button type="button" class="btn cart_update">Update</button>
+                <button type="button" class="btn cart_update" data-pid="{{ $cartItem->getId() }}">Update</button>
             </div>
         </td>
         <td class="cell_4 cart_price">
             <span class="money" data-currency-usd="$119.00">{{ $cartItem->getCostFormat() }}</span>
         </td>
         <td class="cell_5">
-            <a class="cart_item__remove" title="1" href="#"><i class="fa fa-trash"></i></a>
+            <a class="cart_item__remove" data-pid="{{ $cartItem->getId() }}" href="javascript:void(0)"><i class="fa fa-trash"></i></a>
         </td>
     </tr>
     @endforeach

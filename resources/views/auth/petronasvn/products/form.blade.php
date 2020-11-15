@@ -51,24 +51,22 @@
 								</div>
 								<span class="help-block"></span>
 							</div>
-							<!-- <div class="form-group">
+							<div class="form-group">
 								<label>Nhà cung cấp</label>
 								<div>
 									<select class="form-control" name="vendor_id" id="vendor_id">
 										<option value="">---</option>
-										<option value="6">LED TUN</option>
-										<option value="7">LUBE 71</option>
-										<option value="9">CREE LED LIGHTING</option>
-										<option value="10">Acer 1111</option>
-										<option value="11">XXXXXXXXXXXXXXX</option>
+										@foreach($vendors as $id=>$vendor_name)
+                                        <option value="{{ $id }}" @if($data['vendor_id'] == $id) selected @endif>{{ $vendor_name }}</option>
+                                        @endforeach
 									</select>
 								</div>
 								<span class="help-block"></span>
-							</div> -->
+							</div>
 							<div class="form-group">
 								<label>Hình sản phẩm (Tập tin *.jpg, *.jpeg, *.gif, *.png. Tối đa {{ Utils::formatMemory($config['upload_image_maximum_upload']) }})</label>
 								<div>
-									<button type="button" id="upload_button" data-name="upload_image[]" data-preview-control="preview_list" data-limit-upload="$config['upload_image_maximum_upload']" class="btn btn-primary">
+									<button type="button" id="upload_button" data-name="upload_image[]" data-preview-control="preview_list" data-limit-upload="{{ $config['upload_image_maximum_upload'] }}" class="btn btn-primary">
 									<i class="fa fa-image"></i> Tải hình sản phẩm
 									</button>
 									<div id="preview_list" class="preview_area">

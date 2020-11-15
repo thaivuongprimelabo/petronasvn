@@ -30,7 +30,6 @@
                            <tr class="cart_buttons">
                               <td colspan="5">
                                  <a class="btn btn-alt cart_continue" href="{{ route('products') }}">{{ trans('petronasvn.button.back_to_shopping') }}</a>
-                                 <button  type="button" id="cart_update" class="btn cart_update">{{ trans('petronasvn.button.update_cart') }}</button>
                                  <button  type="button" id="cart_clear" class="btn">{{ trans('petronasvn.button.clear_cart') }}</button>
                               </td>
                            </tr>
@@ -38,7 +37,7 @@
                                 <td colspan="5">
                                     <p class="cart_summary__row">Thành tiền <span id="total_price" class="money"></span></p>
                                     <div class="cart_summary__checkout">
-                                        <button type="button" id="checkout" name="checkout" class="btn">Thanh toán</button>
+                                        <button type="button" id="checkout" name="checkout" class="btn" onclick="window.location='{{ route('cart.checkout') }}'">Thanh toán</button>
                                     </div>
                                 </td>
                            </tr>
@@ -52,20 +51,42 @@
    </div>
 </div>
 <script>
-    jQuery(function($) {
-        let _this = $(this);
-        _this.loadCart();
-        $('#cart_clear').click(function() {
-            _this.removeCart();
-        });
+      jQuery(function($) {
+         let _this = $(this);
+         _this.loadCart();
 
-        $('#cart_content').on('click', '.cart_update', function(e) {
-           alert($(this).index());
-            // _this.updateCart({
-            //    pid: Number($(this).attr('data-id')),
-            //    qty: 1
-            // });
-        })
+         $('#cart_clear').click(function() {
+               _this.removeCart();
+         });
+
+         $('#cart_content').on('click', '.cart_update', function(e) {
+               let pid = $(this).attr('data-pid');
+               _this.updateCart({
+                  pid: Number(pid),
+                  qty: $('#updates_' + pid).val()
+               });
+         })
+
+         $('#cart_content').on('click', '.quantity_down', function(e) {
+               let pid = $(this).attr('data-pid');
+               let qty = Number($('#updates_' + pid).val());
+               if(qty === 1) return false;
+               qty -= 1;
+               $('#updates_' + pid).val(qty);
+         })
+
+         $('#cart_content').on('click', '.quantity_up', function(e) {
+               let pid = $(this).attr('data-pid');
+               let qty = Number($('#updates_' + pid).val());
+               if(qty === 99) e.preventDefault();
+               qty += 1;
+               $('#updates_' + pid).val(qty);
+         })
+
+         $('#cart_content').on('click', '.cart_item__remove', function(e) {
+               let pid = $(this).attr('data-pid');
+               _this.removeItem(pid);
+         })
     });
 </script>
 @endsection

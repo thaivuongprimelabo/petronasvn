@@ -13,6 +13,9 @@ use Artesaos\SEOTools\Facades\TwitterCard;
 use App\IpAddress;
 use App\Page;
 use App\Category;
+use App\Post;
+use App\Product;
+use App\Banner;
 class AppController extends Controller
 {
     public $output = [];
@@ -40,12 +43,21 @@ class AppController extends Controller
             $web_ico = Utils::getImageLink($config->web_ico);
             
             $banners_image_size = Utils::cnvNull($config->upload_banner_image_size, '100x100');
+
             $banners_demension = explode('x', $banners_image_size);
 
             $pages = Page::whereIn('type', ['mua_hang', 'bao_hanh', 'van_chuyen'])->get();
 
             $categories = Category::active()->where('parent_id', 0)->orderBy('updated_at', 'DESC')->limit(4)->get();
             
+            $posts = Post::active()->orderBy('updated_at', 'DESC')->limit(3)->get();
+
+            $discountProducts = Product::active()->discount()->orderBy('updated_at', 'DESC')->limit(3)->get();
+
+            $bannerRightUp = Banner::active()->rightUp()->first();
+
+            $bannerRightDown = Banner::active()->rightDown()->first();
+
             $this->output = [
                 'config' => [
                     'web_name' => Utils::cnvNull($config->web_title, 'E-shop'),
@@ -95,7 +107,11 @@ class AppController extends Controller
                     'limit_post_show' => Utils::cnvNull($config->limit_post_show, 12),
                     'url_ext' => Utils::cnvNull($config->url_ext, '.html'),
                     'footer_pages' => $pages,
-                    'categories' => $categories
+                    'categories' => $categories,
+                    'posts' => $posts,
+                    'discountProducts' => $discountProducts,
+                    'bannerRightUp' => $bannerRightUp,
+                    'bannerRightDown' => $bannerRightDown
                 ],
             ];
             

@@ -499,7 +499,7 @@ class Utils {
         }
         $kq = str_replace("'", "''", $str);
         
-        return self::url_title(strtolower($kq));
+        return self::url_title(strtolower($kq)) . '.' . time();
     }
     
     private static function url_title($str, $separator = '-', $lowercase = FALSE)

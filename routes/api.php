@@ -46,5 +46,6 @@ Route::group(['prefix' => 'cart', 'as' => 'api.cart.'], function () {
     Route::post('/addToCart', 'CartController@addToCart')->name('addToCart');
     Route::post('/updateCart', 'CartController@updateCart')->name('updateCart');
     Route::post('/removeCart', 'CartController@removeCart')->name('removeCart');
+    Route::post('/removeItem', 'CartController@removeItem')->name('removeItem');
 });
 

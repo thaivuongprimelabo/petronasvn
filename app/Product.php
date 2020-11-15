@@ -203,6 +203,10 @@ class Product extends Model
     public function scopeIsBestSelling($query) {
         return $query->where('is_best_selling', ProductType::IS_BEST_SELLING);
     }
+
+    public function scopeDiscount($query) {
+        return $query->where('discount', '>', 0);
+    }
     
     public function getProductDetails() {
         $productDetails = ProductDetails::select(

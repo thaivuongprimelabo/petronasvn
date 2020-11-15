@@ -7,6 +7,7 @@ use App\Product;
 use App\ServiceGroups;
 use App\Size;
 use App\Category;
+use App\Vendor;
 use App\Constants\Common;
 use App\Constants\Status;
 use App\Helpers\Utils;
@@ -68,7 +69,7 @@ class productsController extends AppController
                 try {
                     $data = new Product();
                     $data->name          = Utils::cnvNull($request->name, '');
-                    $data->name_url      = Utils::createNameUrl(Utils::cnvNull($request->name, ''));
+                    $data->name_url      = Utils::createNameUrl(Utils::cnvNull($request->name, '')) . '.' . time();
                     $data->price         = Utils::cnvNull($request->price, trans('auth.price_empty_text'));
                     $data->category_id   = Utils::cnvNull($request->category_id, '0');
                     $data->vendor_id     = Utils::cnvNull($request->vendor_id, '0');
@@ -108,9 +109,11 @@ class productsController extends AppController
             } else {
                 return redirect(route('auth_products_create'))->with('error', trans('messages.ERROR'));
             }
+
+        } else {
+            $this->getRootCategory();
+            $this->getVendors();
         }
-        
-        $this->getRootCategory();
 
         return view('auth.petronasvn.products.form', $this->output);
     }
@@ -178,8 +181,11 @@ class productsController extends AppController
             } else {
                 return redirect(route('auth_products_edit', ['id' => $request->id]))->with('error', trans('messages.ERROR'));
             }
+        } else {
+            $this->getRootCategory();
+            $this->getVendors();
         }
-        $this->getRootCategory();
+        
         $this->output['data'] = $data;
         return view('auth.petronasvn.products.form', $this->output);
     }
@@ -206,6 +212,11 @@ class productsController extends AppController
         $this->output['root_categories'] = $categories;
     }
     
+    public function getVendors() {
+        $vendors = Vendor::active()->get()->pluck('name', 'id')->toArray();
+        $this->output['vendors'] = $vendors;
+    }
+
     private function addService($productId, $request) {
         $services = $request->service;
         

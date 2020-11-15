@@ -20,6 +20,7 @@
       'preview' => ['name' => 'Xem trang', 'icon' => 'fa fa-dashboard'],
       'products' => ['name' => 'Sản phẩm', 'icon' => 'fa fa-archive'],
       'categories' => ['name' => 'Loại Sản phẩm', 'icon' => 'fa fa-list'],
+      'vendors' => ['name' => 'Nhà cung cấp', 'icon' => 'fa fa-list'],
       'orders' => ['name' => 'Đơn hàng', 'icon' => 'fa fa-cart-plus'],
       'banners' => ['name' => 'Banner', 'icon' => 'fa fa-file-image-o'],
       'posts' => ['name' => 'Bài viết', 'icon' => 'fa fa-book'],
