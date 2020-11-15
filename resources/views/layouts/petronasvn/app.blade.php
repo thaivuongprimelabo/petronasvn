@@ -154,7 +154,6 @@
         reserved.
     </footer>
     @include('auth.common.alert')
-    @include('auth.products.add_service_modal')
     @include('auth.common.select_post')
 </div>
 @endif

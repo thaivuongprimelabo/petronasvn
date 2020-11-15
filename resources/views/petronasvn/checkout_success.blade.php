@@ -10,9 +10,9 @@
     
     <title>{{ $config['web_name'] }} - Cảm ơn</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-	<link rel="stylesheet" href="{{ url('shop/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="{{ url('shop/maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css') }}">
-	<link rel="stylesheet" href="{{ url('shop/css/thankyou.css') }}" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="{{ url('petronasvn/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="{{ url('petronasvn/css/font-awesome.min.css') }}">
+	<link rel="stylesheet" href="{{ url('petronasvn/css/thankyou.css') }}" rel="stylesheet" type="text/css" />
 
 </head>
 

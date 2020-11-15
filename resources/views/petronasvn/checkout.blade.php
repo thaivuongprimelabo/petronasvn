@@ -257,10 +257,10 @@
          </div>
       </form>
    </body>
-   <script src="{{ url('shop/frontend/100/308/325/themes/665783/assets/jquery-2.2.3.min4d7c.js') }}" type="text/javascript"></script>
+   <script src="{{ url('petronasvn/js/jquery-2.2.3.min.js') }}" type="text/javascript"></script>
    <script src="{{ url('admin/js/jquery.validate.js') }}" type="text/javascript"></script>
    <script src="{{ url('js/custom.shop.js') }}" type="text/javascript"></script>
-   <script src="{{ url('shop/maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js') }}"></script>
+   <script src="{{ url('petronasvn/js/bootstrap.min.js') }}"></script>
    <script type="text/javascript">
    $(document).ready(function() {
 
