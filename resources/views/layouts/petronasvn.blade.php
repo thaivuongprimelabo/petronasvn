@@ -74,9 +74,11 @@
             _this.refreshCount();
 
             $('.add_to_cart').click(function() {
+                let qty = $(this).attr('data-qty');
+                qty = qty || 1;
                 let data = {
                     pid: Number($(this).attr('data-pid')),
-                    qty: 1,
+                    qty: qty,
                     image: $(this).attr('data-image')
                 }
                 _this.addToCart(data);

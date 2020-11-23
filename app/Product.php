@@ -24,7 +24,7 @@ class Product extends Model
     
     protected $appends = ["thumb_image"];
     
-    public function getFirstImage($thumb = '') {
+    public function getFirstImage($thumb = 'medium') {
         $image_product = ImageProduct::select('image','medium','small')->where('product_id', $this->id)->where('is_main', 1)->first();
         if($image_product) {
             if(!Utils::blank($thumb)) {

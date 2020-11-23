@@ -15,7 +15,7 @@
     <div class="product product_homepage swiper-slide">
     @endif
 
-    @if($route == 'category' || $route === 'products')
+    @if($route == 'category' || $route === 'products' || $route === 'discountProducts')
     <div class="product col-xs-6 col-sm-6 col-md-4 product_collection item3_{{ $count }} item2_1">
     @endif
         <div class="product_wrapper">

@@ -107,7 +107,7 @@
                                        <span class="quantity_modifier quantity_down"><i class="fa fa-minus"></i></span>
                                        <span class="quantity_modifier quantity_up"><i class="fa fa-plus"></i></span>
                                     </div>
-                                    <button class="btn btn-cart add_to_cart" type="button" data-pid="{{ $data->id }}">Thêm vào giỏ hàng</button>
+                                    <button class="btn btn-cart add_to_cart" type="button" data-pid="{{ $data->id }}" data-image="{{ $data->getFirstImage() }}" data-qty="1">Thêm vào giỏ hàng</button>
                                  </div>
                                  <div class="addthis_sharing_toolbox" data-url="https://theme247-computers.myshopify.com/products/arctic-freezer-7-pro-rev-2-150-watt-multicompatible-low-noise-cpu-cooler-for-amd-and-intel-sockets" data-title="ARCTIC Freezer 7 Pro Rev 2 - 150 Watt Multicompatible Low Noise CPU Co | Computers" style="clear: both;">
                                     <div id="atstbx" class="at-share-tbx-element addthis-smartlayers addthis-animated at4-show" aria-labelledby="at-0f453c64-3d96-4ff4-9a56-87053f6cc7fa" role="region">
@@ -191,6 +191,22 @@
                $.fancybox( $('#elevatezoom_big').data('elevateZoom').getGalleryList() );
                return false;
             });
+
+            $('.quantity_down').click(function(e) {
+                  let qty = Number($('.quantity_input').val());
+                  if(qty === 1) return false;
+                  qty -= 1;
+                  $('.quantity_input').val(qty);
+                  $('.add_to_cart').attr('data-qty', qty);
+            })
+
+            $('.quantity_up').click(function(e) {
+                  let qty = Number($('.quantity_input').val());
+                  if(qty === 99) e.preventDefault();
+                  qty += 1;
+                  $('.quantity_input').val(qty);
+                  $('.add_to_cart').attr('data-qty', qty);
+            })
          
       });
    });

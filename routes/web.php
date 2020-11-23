@@ -179,6 +179,7 @@ Route::group(['prefix' => ''], function () {
     Route::get('/cart/checkout/success', 'CartController@checkoutSuccess')->name('checkoutSuccess');
 
     Route::get('/nhan-hieu/{slug}', 'HomeController@vendor')->name('vendor');
+    Route::get('/khuyen-mai', 'HomeController@discountProducts')->name('discountProducts');
     Route::get('/san-pham-noi-bat', 'HomeController@popularProducts')->name('popularProducts');
     Route::get('/san-pham-moi', 'HomeController@newProducts')->name('newProducts');
     Route::get('/san-pham-ban-chay', 'HomeController@bestSellProducts')->name('bestSellProducts');

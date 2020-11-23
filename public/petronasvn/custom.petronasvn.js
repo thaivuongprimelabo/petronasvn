@@ -15,7 +15,7 @@ jQuery(function($) {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (res) {
-                $('body').append('<div id="cart_added"><h4>Đã thêm vào giỏ hàng</h4><div class="cart_added__row"><div class="cart_added__1" id="cart_added__img"><img src="' + data.image + '" alt="" /></div><div class="cart_added__2"><span id="cart_added__name" class="product_name"></span><p id="cart_added__quantity">Quantity: <span>1</span></p><a class="btn" href="/gio-hang">Go to cart</a><a class="btn btn-alt" id="cart_added__close" href="javascript:void(0)" onclick="$(\'.fancybox-close\').trigger(\'click\')">Continue shopping</a></div></div></div>');
+                $('body').append('<div id="cart_added"><h4>Đã thêm vào giỏ hàng</h4><div class="cart_added__row"><div class="cart_added__1" id="cart_added__img"><img src="' + data.image + '" alt="" /></div><div class="cart_added__2"><span id="cart_added__name" class="product_name"></span><p id="cart_added__quantity">Quantity: <span>' + data.qty + '</span></p><a class="btn" href="/gio-hang">Go to cart</a><a class="btn btn-alt" id="cart_added__close" href="javascript:void(0)" onclick="$(\'.fancybox-close\').trigger(\'click\')">Continue shopping</a></div></div></div>');
                 $.fancybox.open( $('#cart_added'),
                     {
                         'openSpeed': 500,

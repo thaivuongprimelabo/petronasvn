@@ -200,6 +200,23 @@ class HomeController extends AppController
         
         return view('petronasvn.products', $this->output);
     }
+
+    public function discountProducts(Request $request) {
+
+        $categories = Category::select('id', 'name', 'name_url', 'parent_id')->active()->where('parent_id', 0)->orderBy('updated_at', 'DESC')->get();
+        
+        $newProducts = Product::active()->isNew()->orderBy('updated_at', 'DESC')->limit(3)->get();
+
+        $bestSellerProducts = Product::active()->isBestSelling()->orderBy('updated_at', 'DESC')->limit(3)->get();
+        
+        $this->setSEO(['title' => trans('petronasvn.main_nav.products.text'), 'link' => route('products')]);
+
+        $this->output['categories'] = $categories;
+        $this->output['newProducts'] = $newProducts;
+        $this->output['bestSellerProducts'] = $bestSellerProducts;
+        
+        return view('petronasvn.discount', $this->output);
+    }
     
     public function about(Request $request) {
         
@@ -446,6 +463,14 @@ class HomeController extends AppController
                     $view = 'petronasvn.common.product_list';
 
                     break;
+
+                case 'discountProducts':
+                    
+                        $query = Product::active()->discount()->orderBy('updated_at', 'DESC');
+    
+                        $view = 'petronasvn.common.product_list';
+    
+                        break;
 
                 case 'posts':
 

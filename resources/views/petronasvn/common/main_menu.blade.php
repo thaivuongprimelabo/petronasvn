@@ -57,7 +57,7 @@
                     <a href="{{ route('products') }}">Sản phẩm <span class="menu_badge">hot deals</span></a>
                 </li>
                 <li class="megamenu_item_5">
-                    <a href="{{ route('products') }}" class="sf-with-ui">Khuyến mãi <span class="menu_badge">hot deals</span></a>
+                    <a href="{{ route('discountProducts') }}" class="sf-with-ui">Khuyến mãi <span class="menu_badge">hot deals</span></a>
                     <ul>
                         <li>
                             <div class="submenu submenu_5">

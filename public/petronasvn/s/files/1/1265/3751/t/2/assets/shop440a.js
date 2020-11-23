@@ -184,7 +184,16 @@ jQuery(function($){
 	// 1. PRODUCT PAGE
 	// 2. PRODUCT QUICK VIEW
 	// 3. CART PAGE
-	$(document).on("focusout",".quantity_input",function(){var t=$(this).val();$(this).val(isNaN(parseFloat(t))&&!isFinite(t)||0==parseInt(t)||""==t?1:parseInt(t)<0?parseInt(t)-2*parseInt(t):parseInt(t))}),$(document).on("click",".quantity_up",function(){var t=$(this).parent().find(".quantity_input");t.val(!isNaN(parseFloat(t.val()))&&isFinite(t.val())?parseInt(t.val())+1:1)}),$(document).on("click",".quantity_down",function(){var t=$(this).parent().find(".quantity_input");t.val(!isNaN(parseFloat(t.val()))&&isFinite(t.val())&&t.val()>1?parseInt(t.val())-1:1)});
+	// $(document).on("focusout", ".quantity_input", function() {
+	// 	var t = $(this).val();
+	// 	$(this).val(isNaN(parseFloat(t)) && !isFinite(t) || 0 == parseInt(t) || "" == t ? 1 : parseInt(t) < 0 ? parseInt(t) - 2 * parseInt(t) : parseInt(t))
+	// }), $(document).on("click", ".quantity_up", function() {
+	// 	var t = $(this).parent().find(".quantity_input");
+	// 	t.val(!isNaN(parseFloat(t.val())) && isFinite(t.val()) ? parseInt(t.val()) + 1 : 1)
+	// }), $(document).on("click", ".quantity_down", function() {
+	// 	var t = $(this).parent().find(".quantity_input");
+	// 	t.val(!isNaN(parseFloat(t.val())) && isFinite(t.val()) && t.val() > 1 ? parseInt(t.val()) - 1 : 1)
+	// });
 
 
 
