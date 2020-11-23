@@ -242,9 +242,9 @@ class HomeController extends AppController
     
     public function guaranteePolicy(Request $request) {
         
-        $about = Page::where('type', 'bao_hanh')->first();
+        $page = Page::where('type', 'bao_hanh')->first();
 
-        $this->output['page'] = $about;
+        $this->output['page'] = $page;
         
         $this->setSEO(['title' => trans('petronasvn.policy.guarantee_txt'), 'link' => route('guarantee_policy')]);
         
@@ -253,9 +253,11 @@ class HomeController extends AppController
     
     public function shipmentPolicy(Request $request) {
         
-        $about = Page::where('type', 'van_chuyen')->first();
+        $page = Page::where('type', 'van_chuyen')->first();
 
-        $this->output['page'] = $about;
+        \Log::info($page);
+
+        $this->output['page'] = $page;
         
         $this->setSEO(['title' => trans('petronasvn.policy.shipment_txt'), 'link' => route('shipment_policy')]);
         

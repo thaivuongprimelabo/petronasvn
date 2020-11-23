@@ -18,6 +18,6 @@ class Page extends Model
     protected $table = Common::PAGES;
 
     public function getLink($url_ext = 'html') {
-        return url($this->name_url . '.' . $url_ext);
+        return url($this->name_url);
     }
 }
