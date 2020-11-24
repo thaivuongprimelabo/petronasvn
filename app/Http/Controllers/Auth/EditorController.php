@@ -18,6 +18,6 @@ class EditorController extends AppController
     }
     
     public function index(Request $request) {
-        return view('auth.editor.index', $this->doSearch($request));
+        return view('auth.petronasvn.editor.index', $this->doSearch($request));
     }
 }

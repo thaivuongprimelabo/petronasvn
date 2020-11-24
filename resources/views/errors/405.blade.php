@@ -1,5 +1,4 @@
-@extends('layouts.error')
+@extends('layouts.petronasvn.app')
 @section('content')
-{!! \App\Page::find(5)->content !!}
+<h1>Error!!!</h1>
 @endsection
-

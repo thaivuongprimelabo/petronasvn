@@ -28,7 +28,11 @@
       'contacts' => ['name' => 'Liên hệ', 'icon' => 'fa fa-envelope-o'],
       'users' => ['name' => 'Tài khoản', 'icon' => 'fa fa-user-o'],
       'config' => ['name' => 'Cài đặt', 'icon' => 'fa fa-wrench']
-    ]
+    ];
+
+    $sidebarSuperAdmin = [
+      'editor' => ['name' => 'Chỉnh sửa code', 'icon' => 'fa fa-wrench']
+    ];
   @endphp
   <ul class="sidebar-menu tree" data-widget="tree">
     @foreach($sidebar as $route=>$value)
@@ -42,6 +46,15 @@
       </a>
     </li>
     @endforeach
+    @if(Auth::user()->role_id == Common::SUPER_ADMIN)
+    @foreach($sidebarSuperAdmin as $route=>$value)
+    <li class="@if($name == $route) active @endif">
+      <a href="{{ route('auth_' . $route) }}">
+        <i class="{{ $value['icon'] }}"></i><span>{{ $value['name'] }}</span>
+      </a>
+    </li>
+    @endforeach
+    @endif
     
 </ul>
 </section>
