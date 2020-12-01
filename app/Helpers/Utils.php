@@ -753,4 +753,7 @@ class Utils {
         return $result;
     }
     
+    public static function assets($path) {
+        return url($path) . '?t=' . time();
+    }
 }

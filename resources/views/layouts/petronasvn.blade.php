@@ -14,18 +14,18 @@
         <!-- GOOGLE FONTS -->
         <link href="http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,600,700,900" rel="stylesheet" type="text/css">
         <!-- CSS -->
-        <link href="{{ url('petronasvn/s/files/1/1265/3751/t/2/assets/assets7452.css') }}" rel="stylesheet" type="text/css" media="all" />
-        <link href="{{ url('petronasvn/s/files/1/1265/3751/t/2/assets/style.scss27ad.css') }}" rel="stylesheet" type="text/css" media="all" />
-        <link href="{{ url('petronasvn/s/files/1/1265/3751/t/2/assets/responsive.scsscce6.css') }}" rel="stylesheet" type="text/css" media="all" />
-        <link href="{{ url('petronasvn/css/custom.css') }}" rel="stylesheet" type="text/css" media="all" />
+        <link href="{{ Utils::assets('petronasvn/s/files/1/1265/3751/t/2/assets/assets7452.css') }}" rel="stylesheet" type="text/css" media="all" />
+        <link href="{{ Utils::assets('petronasvn/s/files/1/1265/3751/t/2/assets/style.scss27ad.css') }}" rel="stylesheet" type="text/css" media="all" />
+        <link href="{{ Utils::assets('petronasvn/s/files/1/1265/3751/t/2/assets/responsive.scsscce6.css') }}" rel="stylesheet" type="text/css" media="all" />
+        <link href="{{ Utils::assets('petronasvn/css/custom.css') }}" rel="stylesheet" type="text/css" media="all" />
 
         <!-- JS -->
-        <script src="{{ url('petronasvn/s/files/1/1265/3751/t/2/assets/jquery.1.8.3f196.js') }}" type="text/javascript"></script>
+        <script src="{{ Utils::assets('petronasvn/s/files/1/1265/3751/t/2/assets/jquery.1.8.3f196.js') }}" type="text/javascript"></script>
         <!-- SHOPIFY SERVICE SCRIPTS -->
-        <script src="{{ url('petronasvn/s/files/1/1265/3751/t/2/assets/jquery.swiper.min2de4.js') }}" type="text/javascript"></script>
-        <script src="{{ url('petronasvn/s/files/1/1265/3751/t/2/assets/jquery.fancybox.min4773.js') }}" type="text/javascript"></script>
-        <script src="{{ url('petronasvn/s/files/1/1265/3751/t/2/assets/shop440a.js') }}" type="text/javascript"></script>
-        <script src="{{ url('petronasvn/custom.petronasvn.js') }}" type="text/javascript"></script>
+        <script src="{{ Utils::assets('petronasvn/s/files/1/1265/3751/t/2/assets/jquery.swiper.min2de4.js') }}" type="text/javascript"></script>
+        <script src="{{ Utils::assets('petronasvn/s/files/1/1265/3751/t/2/assets/jquery.fancybox.min4773.js') }}" type="text/javascript"></script>
+        <script src="{{ Utils::assets('petronasvn/s/files/1/1265/3751/t/2/assets/shop440a.js') }}" type="text/javascript"></script>
+        <script src="{{ Utils::assets('petronasvn/custom.petronasvn.js') }}" type="text/javascript"></script>
     </head>
     <body  id="computers" class="template-index scheme_1">
         <div id="page_preloader" class="off fancybox-overlay fancybox-overlay-fixed" style="display:none"><div class="global_loader"></div></div>
