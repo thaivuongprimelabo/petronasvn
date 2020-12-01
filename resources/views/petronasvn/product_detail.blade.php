@@ -1,7 +1,6 @@
 @extends('layouts.petronasvn')
 @section('content')
 @php
-   $imagesDetail = $data->getImageDetails();
 @endphp
 <div id="main" role="main">
    <div class="container">
@@ -11,28 +10,28 @@
             <div class="breadcrumb_wrap">
                <ul class="breadcrumb">
                   <li><a href="/" class="homepage-link" title="Back to the frontpage">Trang chủ</a></li>
-                  <li><a href="{{ $data->getCategory()->getLink() }}" title="Accessories">{{ $data->getCategory()->name }}</a> </li>
-                  <li><span class="page-title">{{ $data->name }}</span></li>
+                  <li><a href="{{ $data->category->getLink() }}" title="Accessories">{{ $data->category->getName() }}</a> </li>
+                  <li><span class="page-title">{{ $data->getName() }}</span></li>
                </ul>
             </div>
             <div itemscope="" itemtype="http://schema.org/Product" class="product-scope">
                <meta itemprop="url" content="{{ $data->getLink() }}">
-               @if($imagesDetail->first() !== null)
-               <meta itemprop="image" content="{{ $imagesDetail->first()->getImageLink() }}ss">
+               @if($data->imageProducts->first() !== null)
+               <meta itemprop="image" content="{{ $data->imageProducts->first()->getImageLink() }}">
                @endif
                <div class="product_wrap">
                   <div class="row">
                      <div class="col-sm-5 col-md-4 product_images product_left">
                         <div class="elevatezoom_big_wrapper">
-                           @if($imagesDetail->first() !== null)
-                              <img id="elevatezoom_big" src="{{ $imagesDetail->first()->getImageLink('medium') }}" alt="{{ $data->getName() }}" data-zoom-image="{{ $imagesDetail->first()->getImageLink() }}" />
+                           @if($data->imageProducts->first() !== null)
+                              <img id="elevatezoom_big" src="{{ $data->imageProducts->first()->getImageLink('medium') }}" alt="{{ $data->getName() }}" data-zoom-image="{{ $data->imageProducts->first()->getImageLink() }}" />
                               <div class="elevatezoom_big_clicker"></div>
                            @endif
                         </div>
                         <div id="elevatezoom_gallery" class="swiper-container">
                            <div class="swiper-wrapper">
-                              @foreach($imagesDetail as $img)
-                              <a class="swiper-slide" href="#" data-image="{{ $img->getImageLink('medium') }}" data-zoom-image="{{ $imagesDetail->first()->getImageLink() }}">
+                              @foreach($data->imageProducts as $img)
+                              <a class="swiper-slide" href="#" data-image="{{ $img->getImageLink('medium') }}" data-zoom-image="{{ $img->getImageLink() }}">
                                  <img src="{{ $img->getImageLink('small') }}" alt="{{ $data->getName() }}" />
                               </a>
                               @endforeach
@@ -46,7 +45,7 @@
                         <form action="/cart/add" method="post" enctype="multipart/form-data" id="product-actions">
                            <div class="product_info__wrapper">
                               <div class="product_info__left">
-                                 <h1 class="product_name">{{ $data->name }}</h1>
+                                 <h1 class="product_name">{{ $data->getName() }}</h1>
                                  <!-- <div class="options clearfix">
                                     <div class="variants-wrapper ">
                                        <div class="selector-wrapper">
@@ -74,12 +73,12 @@
                                     </div>
                                  </div> -->
                                  <div class="product_details">
-                                    @if($data->getCategory() !== null)
-                                    <p class="product_details__item product_collections"><b>Danh mục:</b> <a href="{{ $data->getCategory()->getLink() }}">{{ $data->getCategory()->name }}</a></p>
+                                    @if($data->category !== null)
+                                    <p class="product_details__item product_collections"><b>Danh mục:</b> <a href="{{ $data->category->getLink() }}">{{ $data->category->getName() }}</a></p>
                                     @endif
 
-                                    @if($data->getVendor() !== null)
-                                    <p class="product_details__item product_vendor"><b>Nhà cung cấp:</b> <a href="{{ $data->getVendor()->getLink() }}" title="Computers">{{ $data->getVendor()->name }}</a></p>
+                                    @if($data->vendor !== null)
+                                    <p class="product_details__item product_vendor"><b>Nhà cung cấp:</b> <a href="{{ $data->vendor->getLink() }}" title="Computers">{{ $data->vendor->getName() }}</a></p>
                                     @endif
                                  </div>
                                  <div class="product_details">

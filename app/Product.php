@@ -23,6 +23,18 @@ class Product extends Model
     protected $table = Common::PRODUCTS;
     
     protected $appends = ["thumb_image"];
+
+    public function category() {
+        return $this->belongsTo('App\Category');
+    }
+
+    public function vendor() {
+        return $this->belongsTo('App\Vendor');
+    }
+
+    public function imageProducts() {
+        return $this->hasMany('App\ImageProduct');
+    }
     
     public function getFirstImage($thumb = 'medium') {
         $image_product = ImageProduct::select('image','medium','small')->where('product_id', $this->id)->where('is_main', 1)->first();

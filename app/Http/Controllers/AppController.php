@@ -34,7 +34,6 @@ class AppController extends Controller
             return $next($request);
         });
         
-        
         // Config
         $config = Utils::getConfig();
 

@@ -22,7 +22,7 @@
             <div class="product_img"  >
                 <a class="img_change" href="{{ $product->getLink() }}">
                     <span class="product_img_wr" style="min-height: {{ $minHeight }}px">
-                        <img src="{{ $product->getFirstImage() }}" alt="{{ $product->getName() }}" title="{{ $product->getName() }}" style="max-width: 100%; height:auto" />
+                        <img src="{{ $product->imageProducts->first()->getImageLink('medium') }}" alt="{{ $product->getName() }}" title="{{ $product->getName() }}" style="max-width: 100%; height:auto" />
                     </span>
                 <span class="product_badge new">New</span>
                 @if($product->getDiscount())

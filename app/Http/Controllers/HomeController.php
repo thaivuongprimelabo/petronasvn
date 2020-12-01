@@ -168,17 +168,13 @@ class HomeController extends AppController
         $this->setSEO([
             'title' => $product->name,
             'summary' => $product->getSEODescription(),
-            'section' => $product->getCategoryName(),
-            'keywords' => [$product->getSEOKeywords(), $product->getCategoryName(), $this->output['config']['web_name']],
+            'section' => $product->category->getName(),
+            'keywords' => [$product->getSEOKeywords(), $product->category->getName(), $this->output['config']['web_name']],
             'link' => $product->getLink(),
             'type' => 'product',
-            'image' => $product->getFirstImage()
+            'image' => $product->imageProducts->first()->getImageLink('medium')
         ]);
-        
-        $this->output['breadcrumbs'] = [
-            ['link' => $product->getCategoryLink(), 'text' => $product->getCategoryName()],
-            ['link' => '#', 'text' => $product->getName()]
-        ];
+
         $this->output['data'] = $product;
         return view('petronasvn.product_detail', $this->output);
         

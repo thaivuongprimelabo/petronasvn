@@ -69,7 +69,7 @@
                                                 <div class="product_wrapper">
                                                     <div class="product_img">  
                                                         <a href="{{ $product->getLink() }}">
-                                                            <img src="{{ $product->getFirstImage() }}" alt="{{ $product->getName() }}" />
+                                                            <img src="{{ $product->getFirstImage() }}" alt="{{ $product->getName() }}" style="max-width: 100%; height:auto" />
                                                         </a>
                                                     </div>
                                                     <div class="product_info clearfix">
