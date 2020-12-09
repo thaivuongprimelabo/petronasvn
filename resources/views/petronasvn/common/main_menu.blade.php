@@ -115,11 +115,11 @@
                     </ul>
                 </li>
                 <li class="megamenu_item_6">
-                    <a href="pages/contact-us.html">Liên hệ</a>
+                    <a href="{{ route('contact') }}">Liên hệ</a>
                 </li>
             </ul>
             <div class="megamenu_mobile visible-xs visible-sm  col-sm-9 col-sm-push-3  sidebar_left">
-                <h2>Computers<i></i></h2>
+                <h2>{{ $config['web_name'] }}<i></i></h2>
                 <ul class="level_1">
                     @foreach($mainNav as $link=>$nav)
                         <li>

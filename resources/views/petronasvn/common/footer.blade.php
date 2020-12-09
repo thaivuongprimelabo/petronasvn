@@ -36,7 +36,7 @@
                 </ul>
             </div>
             <div class="col-md-2 col-sm-3 footer_block footer_block__4">
-                <h6>Hướng dẫn</h6>
+                <h6>Thông tin</h6>
                 <ul class="footer_links">
                     @foreach($config['footer_pages'] as $page)
                     <li ><a href="{{ $page->getLink() }}" title="">{{ $page->name }}</a></li>
