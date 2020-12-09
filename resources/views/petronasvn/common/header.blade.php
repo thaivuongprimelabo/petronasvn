@@ -3,7 +3,7 @@
     <section class="container header_top">
         <!-- USER MENU -->
         <ul class="header_user">
-            <li><a href="/huong-dan-mua-hang"><span class="icon material-icons-account_balance_wallet"></span>Hướng dẫn mua hàng</a></li>
+            <li><a href="/huong-dan-mua-hang"><span class="icon material-icons-account_balance_wallet"></span>Hướng dẫn mua hànggggggggg</a></li>
             <li><a href="/chinh-sach-van-chuyen"><span class="icon material-icons-local_shipping"></span>Chính sách giao hàng</a></li>
             <li class="checkout"><a href="{{ route('cart.checkout') }}"><span class="icon material-icons-account_balance_wallet"></span>Thanh toán</a></li>
         </ul>
