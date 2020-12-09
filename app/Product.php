@@ -23,8 +23,20 @@ class Product extends Model
     protected $table = Common::PRODUCTS;
     
     protected $appends = ["thumb_image"];
+
+    public function category() {
+        return $this->belongsTo('App\Category');
+    }
+
+    public function vendor() {
+        return $this->belongsTo('App\Vendor');
+    }
+
+    public function imageProducts() {
+        return $this->hasMany('App\ImageProduct');
+    }
     
-    public function getFirstImage($thumb = '') {
+    public function getFirstImage($thumb = 'medium') {
         $image_product = ImageProduct::select('image','medium','small')->where('product_id', $this->id)->where('is_main', 1)->first();
         if($image_product) {
             if(!Utils::blank($thumb)) {
@@ -71,6 +83,16 @@ class Product extends Model
     public function getVendorName() {
         $vendor = Vendor::select('name')->where('id', $this->vendor_id)->first();
         return $vendor ? $vendor->name : '';
+    }
+
+    public function getCategory() {
+        $category = Category::select('id', 'name', 'name_url')->where('id', $this->category_id)->first();
+        return $category;
+    }
+
+    public function getVendor() {
+        $vendor = Vendor::select('id', 'name', 'name_url')->where('id', $this->vendor_id)->first();
+        return $vendor;
     }
     
     
@@ -150,8 +172,8 @@ class Product extends Model
         return $this->summary;
     }
     
-    public function getDescription() {
-        return $this->description;
+    public function getDescription($length = 0) {
+        return $length > 0 ? substr($this->description, 0, $length) : $this->description;
     }
     
     public function getLink() {
@@ -193,6 +215,10 @@ class Product extends Model
     public function scopeIsBestSelling($query) {
         return $query->where('is_best_selling', ProductType::IS_BEST_SELLING);
     }
+
+    public function scopeDiscount($query) {
+        return $query->where('discount', '>', 0);
+    }
     
     public function getProductDetails() {
         $productDetails = ProductDetails::select(
@@ -227,14 +253,5 @@ class Product extends Model
         }
         
         return Utils::getImageLink(Common::NO_IMAGE_FOUND);
-    }
-    
-    public function getPriceAttribute($value) {
-        return Utils::formatCurrency($value);
-    }
-    
-    public function getCategoryIdAttribute($value) {
-        $category = Category::select('name')->where('id', $value)->first();
-        return $category ? $category->name : '';
     }
 }

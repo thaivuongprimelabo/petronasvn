@@ -30,18 +30,14 @@ class CartController extends AppController
     {
         parent::__construct();
         
-        $this->breadcrumb = [route('home') => trans('shop.home')];
+        $this->breadcrumb = [route('home') => trans('petronasvn.home')];
     }
     
     public function index(Request $request) {
-
-        $this->output['breadcrumbs'] = [
-            ['link' => '#', 'text' => trans('shop.cart_txt')]
-        ];
         
-        $this->setSEO(['title' => trans('shop.cart_txt')]);
+        $this->setSEO(['title' => trans('petronasvn.cart_txt')]);
         
-        return view('shop.cart', $this->output);
+        return view('petronasvn.cart', $this->output);
     }
     
     public function addToCart(Request $request) {
@@ -52,7 +48,7 @@ class CartController extends AppController
             $qty = $request->qty;
             $items = $request->items;
             $cart = Cart::getInstance($request->getSession());
-            
+
             $product = Product::find($pid);
             if($product) {
                 $cartItem = new CartItem();
@@ -82,13 +78,13 @@ class CartController extends AppController
                 $cart->addItem($cartItem);
             }
             
-            $result['#cart_1'] = view('shop.common.cart_item', ['cart' => $cart])->render();
-            $result['.cartCount2'] = $cart->getCount();
-            $result['#top_cart'] = $cart->getTopCart();
-            return response()->json($result);
+            // $result['#cart_1'] = view('shop.common.cart_item', ['cart' => $cart])->render();
+            // $result['.cartCount2'] = $cart->getCount();
+            // $result['#top_cart'] = $cart->getTopCart();
+            return response()->json(true);
         }
         
-        return response()->json($result);
+        return response()->json(false);
     }
     
     public function updateCart(Request $request) {
@@ -99,9 +95,8 @@ class CartController extends AppController
             
             $cart = Cart::getInstance($request->getSession());
             $cart->updateCart($pid, $qty);
-            
-            $this->loadCart($cart, $result);
-            return response()->json($result);
+
+            return response()->json(true);
         }
     }
     
@@ -127,9 +122,8 @@ class CartController extends AppController
             
             $cart = Cart::getInstance($request->getSession());
             $cart->removeItem($id);
-            
-            $this->loadCart($cart, $result);
-            return response()->json($result);
+
+            return response()->json(true);
         }
     }
     
@@ -228,7 +222,7 @@ class CartController extends AppController
                 }
                 
                 // Config mail
-                $subject = trans('auth.subject_mail', ['web_name' => $this->output['config']['web_name'], 'title' => trans('shop.mail_subject.order_success', ['order_id' => $id])]);
+                $subject = trans('auth.subject_mail', ['web_name' => $this->output['config']['web_name'], 'title' => trans('petronasvn.mail_subject.order_success', ['order_id' => $id])]);
                 $config = [
                     'from' => $this->output['config']['mail_from'],
                     'from_name' => $this->output['config']['mail_name'],
@@ -239,7 +233,7 @@ class CartController extends AppController
                         'web_email' => $this->output['config']['web_email']
                     ],
                     'to'       => [$order['customer_email'], $this->output['config']['web_email']],
-                    'template' => 'shop.emails.order_success'
+                    'template' => 'petronasvn.emails.order_success'
                 ];
                 
                 $message = Utils::sendMail($config);
@@ -259,7 +253,7 @@ class CartController extends AppController
             return response()->json($result);
         }
         
-        return view('shop.checkout', $this->output);
+        return view('petronasvn.checkout', $this->output);
     }
     
     public function checkoutSuccess(Request $request) {
@@ -270,13 +264,21 @@ class CartController extends AppController
         
         $cart = Cart::getInstance($request->getSession());
         $cart->destroy();
-        return view('shop.checkout_success', $this->output);
+        return view('petronasvn.checkout_success', $this->output);
     }
     
-    private function loadCart($cart, &$result = []) {
-        $result['.cartCount2'] = $cart->getCount();
-        $result['#top_cart'] = $cart->getTopCart();
-        $result['#main_cart'] = $cart->getMainCart();
-        $result['#main_cart_mobile'] = $cart->getMainCartMobile();
+    public function loadCart(Request $request) {
+        $result = [];
+        $cart = Cart::getInstance($request->getSession());
+        $result['html'] = view('petronasvn.cart.list', ['cart' => $cart])->render();
+        $result['total'] = $cart->getCount();
+        $result['total_price'] = $cart->getSubTotalFormat();
+        return response()->json($result);
+    }
+
+    public function removeCart(Request $request) {
+        $cart = Cart::getInstance($request->getSession());
+        $cart->destroy();
+        return response()->json(true);
     }
 }

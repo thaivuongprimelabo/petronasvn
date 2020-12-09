@@ -26,12 +26,16 @@ class Post extends Model
         return Utils::getImageLink(Common::NO_IMAGE_FOUND);
     }
     
-    public function getTitle() {
-        return $this->name;
+    public function getTitle($length = 0) {
+        return $length > 0 ? substr($this->name, 0, $length) . '...' : $this->name;
     }
     
     public function getSummary() {
         return $this->description;
+    }
+
+    public function getShortSummary($length = 20) {
+        return substr($this->description, 0, $length) . '...';
     }
     
     public function getSEOKeywords() {
@@ -62,7 +66,7 @@ class Post extends Model
     }
     
     public function getLink() {
-        return route('postDetails', ['slug1' => $this->name_url]);
+        return route('posts.detail', ['slug1' => $this->name_url]);
     }
     
     public function scopeActive($query) {

@@ -6,6 +6,8 @@ use App\Color;
 use App\Product;
 use App\ServiceGroups;
 use App\Size;
+use App\Category;
+use App\Vendor;
 use App\Constants\Common;
 use App\Constants\Status;
 use App\Helpers\Utils;
@@ -35,10 +37,6 @@ class productsController extends AppController
         
         $this->middleware('auth');
         
-    }
-    
-    public function index(Request $request) {
-        return view('auth.index', $this->search($request));
     }
     
     /**
@@ -71,7 +69,7 @@ class productsController extends AppController
                 try {
                     $data = new Product();
                     $data->name          = Utils::cnvNull($request->name, '');
-                    $data->name_url      = Utils::createNameUrl(Utils::cnvNull($request->name, ''));
+                    $data->name_url      = Utils::createNameUrl(Utils::cnvNull($request->name, '')) . '.' . time();
                     $data->price         = Utils::cnvNull($request->price, trans('auth.price_empty_text'));
                     $data->category_id   = Utils::cnvNull($request->category_id, '0');
                     $data->vendor_id     = Utils::cnvNull($request->vendor_id, '0');
@@ -97,7 +95,7 @@ class productsController extends AppController
                             DB::table(Common::IMAGES_PRODUCT)->insert($arrFilenames);
                         }
                         
-                        $this->addService($data->id, $request);
+                        // $this->addService($data->id, $request);
                         
                         DB::commit();
                         
@@ -111,9 +109,13 @@ class productsController extends AppController
             } else {
                 return redirect(route('auth_products_create'))->with('error', trans('messages.ERROR'));
             }
+
+        } else {
+            $this->getRootCategory();
+            $this->getVendors();
         }
-        
-        return view('auth.form', $this->output);
+
+        return view('auth.petronasvn.products.form', $this->output);
     }
     
     /**
@@ -179,10 +181,13 @@ class productsController extends AppController
             } else {
                 return redirect(route('auth_products_edit', ['id' => $request->id]))->with('error', trans('messages.ERROR'));
             }
+        } else {
+            $this->getRootCategory();
+            $this->getVendors();
         }
         
         $this->output['data'] = $data;
-        return view('auth.form', $this->output);
+        return view('auth.petronasvn.products.form', $this->output);
     }
     
     public function remove(Request $request) {
@@ -201,7 +206,17 @@ class productsController extends AppController
             return response()->json($result);
         }
     }
+
+    public function getRootCategory() {
+        $categories = Category::active()->rootParent()->get()->pluck('name', 'id')->toArray();
+        $this->output['root_categories'] = $categories;
+    }
     
+    public function getVendors() {
+        $vendors = Vendor::active()->get()->pluck('name', 'id')->toArray();
+        $this->output['vendors'] = $vendors;
+    }
+
     private function addService($productId, $request) {
         $services = $request->service;
         

@@ -24,10 +24,6 @@ class BannersController extends AppController
         
     }
     
-    public function index(Request $request) {
-        return view('auth.index', $this->search($request));
-    }
-    
     /**
      * search
      * @param Request $request
@@ -67,19 +63,24 @@ class BannersController extends AppController
             if (!$validator->fails()) {
                 
                 $data = new Banner();
-                if($select_type == 'use_image') {
-                    $filename = '';
-                    $key = 'upload_banner';
-                    $demension = $this->config['config'][$key . '_image_size'];
-                    Utils::resizeImage($key, $request->$key, $demension, $filename);
-                    $data->link           = Utils::cnvNull($request->link, '');
-                    $data->banner         = $filename;
-                } else {
-                    $data->youtube_id    = Utils::cnvNull($request->youtube_embed_url, '');
-                }
+                // if($select_type == 'use_image') {
+                //     $filename = '';
+                //     $key = 'upload_banner';
+                //     $demension = $this->config['config'][$key . '_image_size'];
+                //     Utils::resizeImage($key, $request->$key, $demension, $filename);
+                //     $data->link           = Utils::cnvNull($request->link, '');
+                //     $data->banner         = $filename;
+                // } else {
+                //     $data->youtube_id    = Utils::cnvNull($request->youtube_embed_url, '');
+                // }
+                $filename = '';
+                Utils::doUploadSimple($request, 'upload_banner', $filename);
+                $data->link           = Utils::cnvNull($request->link, '');
+                $data->banner         = $filename;;
                 $data->description    = Utils::cnvNull($request->description, '');
                 $data->status         = Utils::cnvNull($request->status, 0);
                 $data->select_type    = Utils::cnvNull($request->select_type, 'use_image');
+                $data->pos            = Utils::cnvNull($request->pos, 'center');
                 $data->created_at     = date('Y-m-d H:i:s');
                 $data->updated_at     = date('Y-m-d H:i:s');
                 
@@ -91,7 +92,7 @@ class BannersController extends AppController
             }
         }
         
-        return view('auth.form', $this->output);
+        return view('auth.petronasvn.banners.form', $this->output);
     }
     
     /**
@@ -128,26 +129,30 @@ class BannersController extends AppController
             
             if (!$validator->fails()) {
                 
-                $select_type = Utils::cnvNull($request->select_type, 'use_image');
-                if($select_type == 'use_image') {
-                    $filename = $data->banner;
-                    $filename_hidden = $request->banner_hidden;
-                    if(Utils::blank($filename_hidden)) {
-                        $filename = null;
-                    }
+                // $select_type = Utils::cnvNull($request->select_type, 'use_image');
+                // if($select_type == 'use_image') {
+                //     $filename = $data->banner;
+                //     $filename_hidden = $request->banner_hidden;
+                //     if(Utils::blank($filename_hidden)) {
+                //         $filename = null;
+                //     }
                     
-                    $key = 'upload_banner';
-                    $demension = $this->config['config'][$key . '_image_size'];
-                    Utils::resizeImage($key, $request->$key, $demension, $filename);
-                    $data->link           = Utils::cnvNull($request->link, '');
-                    $data->banner         = $filename;
-                    $data->youtube_id    = '';
-                } else {
-                    $data->youtube_id    = Utils::cnvNull($request->youtube_embed_url, '');
-                    $data->link           = '';
-                    $data->banner         = '';
-                }
-                
+                //     $key = 'upload_banner';
+                //     $demension = $this->config['config'][$key . '_image_size'];
+                //     Utils::resizeImage($key, $request->$key, $demension, $filename);
+                //     $data->link           = Utils::cnvNull($request->link, '');
+                //     $data->banner         = $filename;
+                //     $data->youtube_id    = '';
+                // } else {
+                //     $data->youtube_id    = Utils::cnvNull($request->youtube_embed_url, '');
+                //     $data->link           = '';
+                //     $data->banner         = '';
+                // }
+                $filename = $data->banner;
+                Utils::doUploadSimple($request, 'upload_banner', $filename);
+                $data->link           = Utils::cnvNull($request->link, '');
+                $data->banner         = $filename;
+                $data->pos            = Utils::cnvNull($request->pos, 'center');
                 $data->description    = Utils::cnvNull($request->description, '');
                 $data->status         = Utils::cnvNull($request->status, 0);
                 $data->select_type    = Utils::cnvNull($request->select_type, 'use_image');
@@ -161,7 +166,7 @@ class BannersController extends AppController
             }
         }
         $this->output['data'] = $data;
-        return view('auth.form', $this->output);
+        return view('auth.petronasvn.banners.form', $this->output);
     }
     
     public function remove(Request $request) {

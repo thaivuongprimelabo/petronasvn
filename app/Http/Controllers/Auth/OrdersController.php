@@ -26,10 +26,6 @@ class OrdersController extends AppController
         $this->middleware('auth');
     }
     
-    public function index(Request $request) {
-        return view('auth.index', $this->search($request));
-    }
-    
     /**
      * search
      * @param Request $request
@@ -53,16 +49,6 @@ class OrdersController extends AppController
             return redirect(route('auth_orders'));
         }
         
-        $orderDetails = OrderDetails::select(
-                            'order_details.product_id',
-                            'order_details.qty',
-                            'order_details.price',
-                            'order_details.cost'
-                        )
-                        ->where('order_details.order_id', $request->id)
-                        ->where('order_details.product_detail_id', 0)
-                        ->get();
-        
         if($request->isMethod('post')) {
             
             $validator = Validator::make($request->all(), $this->rules);
@@ -81,7 +67,7 @@ class OrdersController extends AppController
         }
         
         $this->output['data'] = $data;
-        return view('auth.orders.form', $this->output);
+        return view('auth.petronasvn.orders.form', $this->output);
     }
     
     public function remove(Request $request) {

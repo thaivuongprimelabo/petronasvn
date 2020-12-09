@@ -61,7 +61,8 @@ class Category extends Model
                 break;
         }
         
-        $whereIn = 'category_id IN (SELECT id FROM categories c1 WHERE c1.parent_parent_id = ' . $this->id . ') OR category_id = ' . $this->id;
+        //$whereIn = 'category_id IN (SELECT id FROM categories c1 WHERE c1.parent_parent_id = ' . $this->id . ') OR category_id = ' . $this->id;
+        $whereIn = 'category_id = ' . $this->id;
         
         $products = Product::where($wheres)->whereRaw($whereIn)->orderBy('created_at', 'DESC')->limit($limit_product_show)->get();
         return $products;
@@ -77,6 +78,10 @@ class Category extends Model
     
     public function scopeActive($query) {
         return $query->where('status', Status::ACTIVE);
+    }
+
+    public function scopeRootParent($query) {
+        return $query->where('parent_id', 0);
     }
     
     public function getParentNameAttribute() {

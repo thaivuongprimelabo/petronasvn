@@ -48,11 +48,11 @@ return [
     'info_txt' => 'Thông tin',
     'comment_txt' => 'Bình luận',
     'all_txt' => 'Tất cả',
-    'main_menu' => [
+    'main_nav' => [
         'home' => ['text' => 'Trang chủ'],
         'about' => ['text' => 'Giới thiệu'],
         'products' => ['text' => 'Sản phẩm'],
-        'posts' => ['text' => 'Tin tức'],
+        'posts.list' => ['text' => 'Tin tức'],
         'contact' => ['text' => 'Liên hệ']
     ],
     'policy' => [
@@ -153,7 +153,9 @@ return [
         'clear' => 'Hủy',
         'order_checking' => 'Kiểm tra',
         'remove' => 'Xóa',
-        'search' => 'Tìm kiếm'
+        'search' => 'Tìm kiếm',
+        'clear_cart' => 'Hủy giỏ hàng',
+        'update_cart' => 'Cập nhật'
     ],
     'mail' => [
         'from_name' => 'Hệ thống'
@@ -163,5 +165,9 @@ return [
         'reset_password' => 'Mật khẩu mới',
         'order_success' => 'Xác nhận đơn hàng #:order_id',
         'contact' => 'Có liên hệ mới từ :email'
+    ],
+    'product_status' => [
+        'available' => 'Còn hàng',
+        'out_of_stock' => 'Hết hàng'
     ]
 ];

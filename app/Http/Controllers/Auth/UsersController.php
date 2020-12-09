@@ -29,10 +29,6 @@ class UsersController extends AppController
         
     }
     
-    public function index(Request $request) {
-        return view('auth.index', $this->search($request));
-    }
-    
     /**
      * search
      * @param Request $request
@@ -81,7 +77,7 @@ class UsersController extends AppController
             }
         }
         
-        return view('auth.form', $this->output)->withErrors($validator);
+        return view('auth.petronasvn.users.form', $this->output)->withErrors($validator);
     }
     
     /**
@@ -142,7 +138,7 @@ class UsersController extends AppController
         }
         
         $this->output['data'] = $data;
-        return view('auth.form', $this->output);
+        return view('auth.petronasvn.users.form', $this->output);
     }
     
     public function profile(Request $request) {
@@ -183,7 +179,7 @@ class UsersController extends AppController
         }
         
         $this->output['data'] = $data;
-        return view('auth.form', $this->output);
+        return view('auth.petronasvn.users.form', $this->output);
     }
     
     public function remove(Request $request) {

@@ -25,10 +25,6 @@ class ContactsController extends AppController
         $this->middleware('auth');
     }
     
-    public function index(Request $request) {
-        return view('auth.index', $this->search($request));
-    }
-    
     /**
      * search
      * @param Request $request
@@ -66,13 +62,13 @@ class ContactsController extends AppController
                 // Config mail
                 $subject = trans('auth.subject_mail', ['web_name' => $this->config['config']['web_name'], 'title' => 'Reply to: '.$data->email]);
                 $config = [
-                    'from' => $this->config['config']['mail_from'],
+                    'from'      => $this->config['config']['mail_from'],
                     'from_name' => $this->config['config']['mail_name'],
-                    'subject' => $subject,
+                    'subject'   => $subject,
                     'msg' => [
-                        'name' => $data->name,
-                        'content' => $data->reply_content,
-                        'config' => $this->config['config']
+                        'name'      => $data->name,
+                        'content'   => $data->reply_content,
+                        'config'    => $this->config['config']
                     ],
                     'to' => $data->email,
                     'template' => 'auth.emails.reply'

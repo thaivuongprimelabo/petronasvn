@@ -15,45 +15,7 @@
                         @foreach($featureProducts as $chunk)
                         <div id="homepage_carousel__{{ $count }}" class="swiper-container product_listing_main product_listing_main_1">
                             <div class="swiper-wrapper">
-                                @foreach($chunk as $product)
-                                <div class="product product_homepage swiper-slide">
-                                    <div class="product_wrapper">
-                                        <div class="product_img">
-                                            <a class="img_change" href="{{ $product->getLink() }}">
-                                            <span class="product_img_wr">
-                                                <img src="{{ $product->getFirstImage() }}" alt="{{ $product->getName() }}" title="{{ $product->getName() }}" />
-                                            </span>
-                                            <span class="product_badge new">New</span>
-                                            @if($product->getDiscount())
-                                            <span class="product_badge sale">–{{ $product->getDiscount() }}%</span>
-                                            @endif
-                                            </a>
-                                        </div>
-                                        <div class="product_info">
-                                            <div class="product_name">
-                                                <a href="{{ $product->getLink() }}" title="{{ $product->getName() }}">{{ $product->getShortName() }}</a>
-                                            </div>
-                                            @if($product->getDiscount())
-                                            <div class="product_price product_price_compare">
-                                                <span class="money">{{ $product->getPriceDiscount() }}</span>
-                                                <span class="money money_sale">{{ $product->getPrice() }}</span>
-                                            </div>
-                                            @else
-                                            <div class="product_price">
-                                                <span class="money">{{ $product->getPrice() }}</span>
-                                            </div>
-                                            @endif
-                                            <div class="product_links">
-                                                <form method="post" action="#">
-                                                    <a class="btn btn_options" href="javascript:void(0)" title="Add to cart">{{ trans('petronasvn.cart.add_to_cart_txt') }}</a>
-                                                </form>
-                                                <a class="btn_icon btn_icon material-icons-info_outline" href="{{ $product->getLink() }}"></a>
-                                                <a class="btn_icon quick_view_btn material-icons-remove_red_eye" href="{{ $product->getLink() }}"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endforeach
+                                @include('petronasvn.common.product_list', ['data' => $chunk])
                             </div>
                         </div>
                         @php
@@ -572,4 +534,82 @@
         </div>
     </div>
 </div>
+<script>
+    jQuery(document).ready(function($) {
+        var mySwiper = new Swiper('#swiper', {
+            effect: 'fade',
+            
+            autoplay: 30000,
+            
+            loop: true,
+            speed: 500,
+            autoplayDisableOnInteraction: false,
+            
+            
+            prevButton: '#swiper_btn_prev',
+            nextButton: '#swiper_btn_next',
+            
+        });
+
+        var homepage_carousel__1 = new Swiper('#homepage_carousel__1', {
+            loop: true,
+            speed: 400,
+            slidesPerView: 4,
+            spaceBetween: 0,
+            prevButton: '#carousel_1__prev',
+            nextButton: '#carousel_1__next',
+            breakpoints: {
+            991: {
+                slidesPerView: 3
+            },
+            767: {
+                slidesPerView: 2,
+                spaceBetween: 15
+            },
+            640: {
+                slidesPerView: 1,
+                spaceBetween: 0
+            }
+            }
+        });
+
+        var homepage_carousel__2 = new Swiper('#homepage_carousel__2', {
+            loop: true,
+            speed: 400,
+            slidesPerView: 4,
+            spaceBetween: 0,
+            prevButton: '#carousel_2__prev',
+            nextButton: '#carousel_2__next',
+            breakpoints: {
+            991: {
+                slidesPerView: 3
+            },
+            767: {
+                slidesPerView: 2,
+                spaceBetween: 15
+            },
+            640: {
+                slidesPerView: 1,
+                spaceBetween: 0
+            }
+            }
+        });
+
+        homepage_carousel__2.prevButton.hide();
+        homepage_carousel__2.nextButton.hide();
+
+        
+        $('#carousel_prev').on('click', function() {
+            homepage_carousel__1.slidePrev();
+            homepage_carousel__2.slidePrev();
+            homepage_carousel__2.prevButton.trigger('click');
+        });
+
+        $('#carousel_next').on('click', function() {
+            homepage_carousel__1.slideNext();
+            homepage_carousel__2.slideNext();
+            homepage_carousel__2.nextButton.trigger('click');
+        });
+    });
+</script>
 @endsection

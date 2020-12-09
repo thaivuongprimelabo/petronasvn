@@ -2,7 +2,7 @@
   <h1>
   	@php
   		$title = trans('auth.' . $name . '.create_title');
-  		if(isset($data) && $data->id) {
+  		if($data !==  null) {
   			$title =  trans('auth.' . $name . '.edit_title');
   		}
   	@endphp

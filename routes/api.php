@@ -41,3 +41,11 @@ Route::post('/order-checking', 'ApiController@orderChecking')->name('orderChecki
 Route::post('/backup', 'ApiController@backup')->name('api.backup');
 Route::post('/editor', 'ApiController@editor')->name('source.editor');
 
+Route::group(['prefix' => 'cart', 'as' => 'api.cart.'], function () {
+    Route::post('/loadCart', 'CartController@loadCart')->name('loadCart');
+    Route::post('/addToCart', 'CartController@addToCart')->name('addToCart');
+    Route::post('/updateCart', 'CartController@updateCart')->name('updateCart');
+    Route::post('/removeCart', 'CartController@removeCart')->name('removeCart');
+    Route::post('/removeItem', 'CartController@removeItem')->name('removeItem');
+});
+

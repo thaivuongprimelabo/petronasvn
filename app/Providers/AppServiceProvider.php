@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Providers;
-
+use DB;
+use Log;
 use App\Config;
 use App\Helpers\Utils;
 use Illuminate\Support\ServiceProvider;
@@ -19,6 +20,17 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191);
+        
+        $appEnv = config('app.env');
+        if($appEnv == 'local') {
+            DB::listen(function($query) {
+                Log::info(
+                    $query->sql,
+                    $query->bindings,
+                    $query->time
+                );
+            });
+        }
     }
 
     /**

@@ -26,10 +26,6 @@ class PagesController extends AppController
         $this->rules = [];
     }
     
-    public function index(Request $request) {
-        return view('auth.index', $this->search($request));
-    }
-    
     /**
      * search
      * @param Request $request
@@ -68,6 +64,6 @@ class PagesController extends AppController
         }
         
         $this->output['data'] = $data;
-        return view('auth.form', $this->output);
+        return view('auth.petronasvn.pages.form', $this->output);
     }
 }

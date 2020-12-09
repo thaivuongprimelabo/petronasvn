@@ -16,4 +16,8 @@ class Page extends Model
      * @var array
      */
     protected $table = Common::PAGES;
+
+    public function getLink($url_ext = 'html') {
+        return url($this->name_url);
+    }
 }

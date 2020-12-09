@@ -27,10 +27,6 @@ class CategoriesController extends AppController
         
     }
     
-    public function index(Request $request) {
-        return view('auth.index', $this->search($request));
-    }
-    
     /**
      * search
      * @param Request $request
@@ -73,8 +69,10 @@ class CategoriesController extends AppController
                 return redirect(route('auth_categories_create'))->with('error', trans('messages.ERROR'));
             }
         }
+
+        $this->getRootCategory();
         
-        return view('auth.form', $this->output);
+        return view('auth.petronasvn.categories.form', $this->output);
     }
     
     /**
@@ -92,15 +90,13 @@ class CategoriesController extends AppController
         if($request->isMethod('post')) {
             
             $validator = Validator::make($request->all(), $this->rules);
-            
             if (!$validator->fails()) {
-                $parentCate = Category::select(DB::raw('(CASE WHEN parent_id = 0 THEN id ELSE parent_id END) AS id'))->where('id', $request->parent_id)->first();
+                // $parentCate = Category::select(DB::raw('(CASE WHEN parent_id = 0 THEN id ELSE parent_id END) AS id'))->where('id', $request->parent_id)->first();
                 
-                $data = Category::find($request->id);
                 $data->name         = Utils::cnvNull($request->name, '');
                 $data->name_url     = Utils::createNameUrl(Utils::cnvNull($request->name, ''));
-                $data->parent_id    = Utils::cnvNull($request->parent_id, 0);
-                $data->parent_parent_id = $parentCate ? $parentCate->id : 0;
+                $data->parent_id    = 0;
+                $data->parent_parent_id = 0;
                 $data->status       = Utils::cnvNull($request->status, 0);
                 $data->updated_at   = date('Y-m-d H:i:s');
                 
@@ -113,8 +109,9 @@ class CategoriesController extends AppController
             
         }
         
+        $this->getRootCategory();
         $this->output['data'] = $data;
-        return view('auth.form', $this->output);
+        return view('auth.petronasvn.categories.form', $this->output);
     }
     
     public function remove(Request $request) {
@@ -124,5 +121,10 @@ class CategoriesController extends AppController
             $result['code'] = 200;
             return response()->json($result);
         }
+    }
+
+    public function getRootCategory() {
+        $categories = Category::active()->rootParent()->get()->pluck('name', 'id')->toArray();
+        $this->output['root_categories'] = $categories;
     }
 }
