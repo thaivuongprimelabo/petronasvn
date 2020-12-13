@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Validator;
 
 class BannersController extends AppController
 {
+
+    private $bannerDemensions = [
+        'center' => '870x460',
+        'left' => '268x582',
+        'right_up' => '568x275',
+        'right_down' => '568x275'
+    ];
     
     //
     /**
@@ -74,7 +81,9 @@ class BannersController extends AppController
                 //     $data->youtube_id    = Utils::cnvNull($request->youtube_embed_url, '');
                 // }
                 $filename = '';
-                Utils::doUploadSimple($request, 'upload_banner', $filename);
+                $pos = Utils::cnvNull($request->pos, 'center');
+                $demension = $this->bannerDemensions[$pos];
+                Utils::doUploadAndResize($request, 'upload_banner', $filename, $demension);
                 $data->link           = Utils::cnvNull($request->link, '');
                 $data->banner         = $filename;;
                 $data->description    = Utils::cnvNull($request->description, '');
@@ -149,7 +158,9 @@ class BannersController extends AppController
                 //     $data->banner         = '';
                 // }
                 $filename = $data->banner;
-                Utils::doUploadSimple($request, 'upload_banner', $filename);
+                $pos = Utils::cnvNull($request->pos, 'center');
+                $demension = $this->bannerDemensions[$pos];
+                Utils::doUploadAndResize($request, 'upload_banner', $filename, $demension);
                 $data->link           = Utils::cnvNull($request->link, '');
                 $data->banner         = $filename;
                 $data->pos            = Utils::cnvNull($request->pos, 'center');

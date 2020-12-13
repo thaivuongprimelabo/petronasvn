@@ -109,14 +109,14 @@ class ConfigController extends AppController
                 $data->upload_web_banner_maximum_upload = Utils::cnvNull($request->upload_web_banner_maximum_upload, '');
                 $data->upload_avatar_maximum_upload = Utils::cnvNull($request->upload_avatar_maximum_upload, '');
 
-                // $data->upload_banner_image_size = Utils::cnvNull($request->upload_banner_image_size, '');
-                // $data->upload_logo_image_size = Utils::cnvNull($request->upload_logo_image_size, '');
-                // $data->upload_image_image_size = Utils::cnvNull($request->upload_image_image_size, '');
-                // $data->upload_photo_image_size = Utils::cnvNull($request->upload_photo_image_size, '');
-                // $data->upload_web_logo_image_size = Utils::cnvNull($request->upload_web_logo_image_size, '');
-                // $data->upload_web_ico_image_size = Utils::cnvNull($request->upload_web_ico_image_size, '');
-                // $data->upload_avatar_image_size = Utils::cnvNull($request->upload_avatar_image_size, '');
-                // $data->upload_web_banner_image_size = Utils::cnvNull($request->upload_web_banner_image_size, '');
+                $data->upload_banner_image_size = Utils::cnvNull($request->upload_banner_image_size, '');
+                $data->upload_logo_image_size = Utils::cnvNull($request->upload_logo_image_size, '');
+                $data->upload_image_image_size = Utils::cnvNull($request->upload_image_image_size, '');
+                $data->upload_photo_image_size = Utils::cnvNull($request->upload_photo_image_size, '');
+                $data->upload_web_logo_image_size = Utils::cnvNull($request->upload_web_logo_image_size, '');
+                $data->upload_web_ico_image_size = Utils::cnvNull($request->upload_web_ico_image_size, '');
+                $data->upload_avatar_image_size = Utils::cnvNull($request->upload_avatar_image_size, '');
+                $data->upload_web_banner_image_size = Utils::cnvNull($request->upload_web_banner_image_size, '');
             }
             $data->off = Utils::cnvNull($request->off, 0);
             $data->bank_info = Utils::cnvNull($request->bank_info, '');

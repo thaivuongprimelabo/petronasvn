@@ -251,11 +251,11 @@
                         </div>
                         <span class="help-block"></span>
                      </div>
-                     <!-- <div class="form-group">
+                     <div class="form-group">
                         <label>Kích thước banner (dài x rộng)</label>
                         <div class="input-group">
                            <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
-                           <input type="text" class="form-control" name="upload_banner_image_size" id="upload_banner_image_size" value="847x292" placeholder="Kích thước banner (dài x rộng)">
+                           <input type="text" class="form-control" name="upload_banner_image_size" id="upload_banner_image_size" value="{{ $data['upload_banner_image_size'] }}" placeholder="Kích thước banner (dài x rộng)">
                         </div>
                         <span class="help-block"></span>
                      </div>
@@ -263,7 +263,7 @@
                         <label>Kích thước logo nhà cung cấp (dài x rộng)</label>
                         <div class="input-group">
                            <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
-                           <input type="text" class="form-control" name="upload_logo_image_size" id="upload_logo_image_size" value="165x80" placeholder="Kích thước logo nhà cung cấp (dài x rộng)">
+                           <input type="text" class="form-control" name="upload_logo_image_size" id="upload_logo_image_size" value="{{ $data['upload_logo_image_size'] }}" placeholder="Kích thước logo nhà cung cấp (dài x rộng)">
                         </div>
                         <span class="help-block"></span>
                      </div>
@@ -271,7 +271,7 @@
                         <label>Kích thước hình sản phẩm (dài x rộng)</label>
                         <div class="input-group">
                            <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
-                           <input type="text" class="form-control" name="upload_image_image_size" id="upload_image_image_size" value="220x180,55x55" placeholder="Kích thước hình sản phẩm (dài x rộng)">
+                           <input type="text" class="form-control" name="upload_image_image_size" id="upload_image_image_size" value="{{ $data['upload_image_image_size'] }}" placeholder="Kích thước hình sản phẩm (dài x rộng)">
                         </div>
                         <span class="help-block"></span>
                      </div>
@@ -279,7 +279,7 @@
                         <label>Kích thước hình bài viết (dài x rộng)</label>
                         <div class="input-group">
                            <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
-                           <input type="text" class="form-control" name="upload_photo_image_size" id="upload_photo_image_size" value="358x201" placeholder="Kích thước hình bài viết (dài x rộng)">
+                           <input type="text" class="form-control" name="upload_photo_image_size" id="upload_photo_image_size" value="{{ $data['upload_photo_image_size'] }}" placeholder="Kích thước hình bài viết (dài x rộng)">
                         </div>
                         <span class="help-block"></span>
                      </div>
@@ -287,7 +287,7 @@
                         <label>Kích thước web logo (dài x rộng)</label>
                         <div class="input-group">
                            <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
-                           <input type="text" class="form-control" name="upload_web_logo_image_size" id="upload_web_logo_image_size" value="150x150" placeholder="Kích thước web logo (dài x rộng)">
+                           <input type="text" class="form-control" name="upload_web_logo_image_size" id="upload_web_logo_image_size" value="{{ $data['upload_web_logo_image_size'] }}" placeholder="Kích thước web logo (dài x rộng)">
                         </div>
                         <span class="help-block"></span>
                      </div>
@@ -295,7 +295,7 @@
                         <label>Kích thước web icon (dài x rộng)</label>
                         <div class="input-group">
                            <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
-                           <input type="text" class="form-control" name="upload_web_ico_image_size" id="upload_web_ico_image_size" value="16x16" placeholder="Kích thước web icon (dài x rộng)">
+                           <input type="text" class="form-control" name="upload_web_ico_image_size" id="upload_web_ico_image_size" value="{{ $data['upload_web_ico_image_size'] }}" placeholder="Kích thước web icon (dài x rộng)">
                         </div>
                         <span class="help-block"></span>
                      </div>
@@ -303,7 +303,7 @@
                         <label>Kích thước ảnh đại diện (dài x rộng)</label>
                         <div class="input-group">
                            <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
-                           <input type="text" class="form-control" name="upload_avatar_image_size" id="upload_avatar_image_size" value="80x80" placeholder="Kích thước ảnh đại diện (dài x rộng)">
+                           <input type="text" class="form-control" name="upload_avatar_image_size" id="upload_avatar_image_size" value="{{ $data['upload_avatar_image_size'] }}" placeholder="Kích thước ảnh đại diện (dài x rộng)">
                         </div>
                         <span class="help-block"></span>
                      </div>
@@ -311,10 +311,10 @@
                         <label>Kích thước web banner (dài x rộng)</label>
                         <div class="input-group">
                            <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
-                           <input type="text" class="form-control" name="upload_web_banner_image_size" id="upload_web_banner_image_size" value="526x232" placeholder="Kích thước web banner (dài x rộng)">
+                           <input type="text" class="form-control" name="upload_web_banner_image_size" id="upload_web_banner_image_size" value="{{ $data['upload_web_banner_image_size'] }}" placeholder="Kích thước web banner (dài x rộng)">
                         </div>
                         <span class="help-block"></span>
-                     </div> -->
+                     </div>
                   </div>
                </div>
                <div class="box-footer">

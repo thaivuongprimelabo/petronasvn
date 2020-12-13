@@ -54,6 +54,77 @@ class Utils {
             return '';
         }
     }
+
+    public static function doUploadAndResize($request, $key, &$filename, $demension) {
+        
+        $file = null;
+        
+        if($request instanceof Request && $request->hasFile($key)) {
+            $file = $request->$key;
+        }
+        
+        if($request instanceof UploadedFile) {
+            $file = $request;
+        }
+        
+        if($file == null) {
+            return $filename;
+        }
+
+        $image_size = getimagesize($file->getRealPath());
+        $image_width = isset($image_size[0]) ? $image_size[0] : 0;
+        $image_height = isset($image_size[1]) ? $image_size[1] : 0;
+
+        $arrDemension = explode('x', $demension);
+
+        $resizeWidth = $arrDemension[0];
+        $resizeHeight = $arrDemension[1];
+
+        $uploadPath = UploadPath::getUploadPath($key);
+        $filePath = UploadPath::getFilePath($key, $filename);
+
+        if(!file_exists(public_path($uploadPath))) {
+            mkdir(public_path($uploadPath));
+        }
+
+        $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+        $filename = time() . '_' . str_random(10) . '.' . $ext;
+
+        if($image_width > $resizeWidth || $image_height > $resizeHeight) {
+
+            if($image_width > $image_height) {
+                $newHeight = floor(($image_height / $image_width) * $resizeWidth);
+                $newWidth = $resizeWidth;
+            } else if($image_height > $image_width) {
+
+                $newHeight = $resizeHeight;
+                $newWidth = floor(($image_width / $image_height) * $resizeHeight);;
+            }
+
+            $image_resize = Image::make($file->getRealPath());
+            $image_resize->resize($newWidth, $newHeight, function ($constraint) {
+                $constraint->aspectRatio();
+                // $constraint->upsize();
+            });
+            
+
+            \Log::info('uploadPath:' . $uploadPath);
+            \Log::info('filename:' . $filename);
+            
+            if($image_resize->save(public_path($uploadPath . '/' . $filename))) {
+                $filename = $filePath . $filename;
+            }
+            
+        } else {
+            
+            $uploadPath = UploadPath::getUploadPath($key);
+            $filePath = UploadPath::getFilePath($key, $filename);
+            
+            if($file->move(public_path($uploadPath), $filename)) {
+                $filename = $filePath . $filename;
+            }
+        }
+    }
     
     public static function doUploadSimple($request, $key, &$filename) {
         

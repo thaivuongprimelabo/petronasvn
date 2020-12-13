@@ -23,13 +23,13 @@ class AppServiceProvider extends ServiceProvider
         
         $appEnv = config('app.env');
         if($appEnv == 'local') {
-            DB::listen(function($query) {
-                Log::info(
-                    $query->sql,
-                    $query->bindings,
-                    $query->time
-                );
-            });
+            // DB::listen(function($query) {
+            //     Log::info(
+            //         $query->sql,
+            //         $query->bindings,
+            //         $query->time
+            //     );
+            // });
         }
     }
 
