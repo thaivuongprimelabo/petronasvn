@@ -14,15 +14,15 @@
                   @php
                   	$placeholder = isset($value['placeholder']) ? $value['placeholder'] : '';
                   	$table = isset($value['table']) ? $value['table'] : '';
+                    $data = isset($value['data']) ? $value['data'] : [];
                   	$emptyText = isset($value['empty_text']) ? $value['empty_text'] : trans('auth.select_empty_text');
                   @endphp
                   @if($value['type'] == 'text')
-                  	<div class="col-md-3">
+                  	  <div class="col-md-3">
                         <div class="form-group has-feedback">
                           <div class="input-group"><span class="input-group-addon"><i class="fa fa-search"></i></span>
                           <input type="text" class="form-control" name="{{ $key }}" id="{{ $key }}" placeholder="{{ $placeholder }}" />
                           </div>
-                          
                         </div>
                      </div>
                   @endif
@@ -54,11 +54,19 @@
                         <div class="form-group">
                           <select class="form-control" name="{{ $key }}" id="{{ $key }}">
                           	<option value="">{{ $emptyText }}</option>
+                            @if($table)
                           	{!! Utils::createSelectList($table) !!}
+                            @endif
+                            @if(count($data))
+                            @foreach($data as $id => $val)
+                            <option value="{{ $id }}">{{ $val }}</option>
+                            @endforeach
+                            @endif
                           </select>
                         </div>
                      </div>
                   @endif
+                  
                   @endforeach
                 </div>
                 

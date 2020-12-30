@@ -362,10 +362,15 @@ $auth = [
                 'type' => 'status_select',
                 'empty_text' => 'Lọc theo trạng thái'
             ],
-            'select_type' => [
+            'pos' => [
                 'type' => 'data_select',
-                'table' => 'BANNER_TYPE',
-                'empty_text' => 'Lọc theo loại'
+                'empty_text' => 'Lọc theo vị trí',
+                'data' => [
+                    'center' => 'Giữa',
+                    'left' => 'Trái',
+                    'right_down' => 'Phải - Dưới',
+                    'right_up' => 'Phải - Trên'
+                ]
             ]
         ],
         'status' => 'Tất cả trạng thái',
