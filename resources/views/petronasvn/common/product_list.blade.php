@@ -22,12 +22,14 @@
             <div class="product_img"  >
                 <a class="img_change" href="{{ $product->getLink() }}">
                     <span class="product_img_wr" style="min-height: {{ $minHeight }}px">
+                        @if($product->imageProducts->first())
                         <img src="{{ $product->imageProducts->first()->getImageLink('medium') }}" alt="{{ $product->getName() }}" title="{{ $product->getName() }}" style="max-width: 100%; height:auto" />
+                        @endif
                     </span>
-                <span class="product_badge new">New</span>
-                @if($product->getDiscount())
-                <span class="product_badge sale">–{{ $product->getDiscount() }}%</span>
-                @endif
+                    <span class="product_badge new">New</span>
+                    @if($product->getDiscount())
+                    <span class="product_badge sale">–{{ $product->getDiscount() }}%</span>
+                    @endif
                 </a>
             </div>
             <div class="product_info">
