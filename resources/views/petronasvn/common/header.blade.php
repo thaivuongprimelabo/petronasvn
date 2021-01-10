@@ -21,7 +21,7 @@
         <!-- LOGO -->
         <div id="logo" class="logo_main">
             <a href="index.html">
-                <img src="{{ $config['web_logo'] }}" style="max-width: 270px" alt="{{ $config['web_name'] }}" />
+                <img src="{{ $config['web_logo'] }}" style="max-width: 150px" alt="{{ $config['web_name'] }}" />
             </a>
         </div>
         <!-- HEADER CART -->

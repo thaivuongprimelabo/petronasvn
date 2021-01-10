@@ -63,7 +63,7 @@
             <li><a href="{{ $config['facebook_fanpage'] }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
             <li><a href="{{ $config['shopee_page'] }}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
             </ul>
-            <p role="contentinfo">© {{ date('Y') }} Petronas Vietnam. All rights reserved.</p>
+            <p role="contentinfo">© {{ date('Y') }} Gulf Vietnam. All rights reserved.</p>
         </section>
     </div>
 </footer>
