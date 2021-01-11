@@ -22,7 +22,15 @@
       'categories' => ['name' => 'Loại Sản phẩm', 'icon' => 'fa fa-list'],
       'vendors' => ['name' => 'Nhà cung cấp', 'icon' => 'fa fa-list'],
       'orders' => ['name' => 'Đơn hàng', 'icon' => 'fa fa-cart-plus'],
-      'banners' => ['name' => 'Banner', 'icon' => 'fa fa-file-image-o'],
+      'banners' => [
+        'name' => 'Banner', 'icon' => 'fa fa-file-image-o',
+        'sub_menu' => [
+          'bannerscenter' => ['name' => 'Banner giữa', 'icon' => 'fa fa-file-image-o'],
+          'bannersleft' => ['name' => 'Banner trái', 'icon' => 'fa fa-file-image-o'],
+          'bannersrightup' => ['name' => 'Banner phải (trên)', 'icon' => 'fa fa-file-image-o'],
+          'bannersrightdown' => ['name' => 'Banner phải (dưới)', 'icon' => 'fa fa-file-image-o']
+        ]
+      ],
       'posts' => ['name' => 'Bài viết', 'icon' => 'fa fa-book'],
       'pages' => ['name' => 'Trang nội dung', 'icon' => 'fa fa-book'],
       'contacts' => ['name' => 'Liên hệ', 'icon' => 'fa fa-envelope-o'],
@@ -36,15 +44,44 @@
   @endphp
   <ul class="sidebar-menu tree" data-widget="tree">
     @foreach($sidebar as $route=>$value)
-    <li class="@if($name == $route) active @endif">
-      @if($route == 'preview')
-      <a href="/" target="_blank">
+      @if(!isset($value['sub_menu']))
+      <li class="@if($name == $route) active @endif">
+        @if($route == 'preview')
+        <a href="/" target="_blank">
+        @else
+        <a href="{{ route('auth_' . $route) }}">
+        @endif
+          <i class="{{ $value['icon'] }}"></i><span>{{ $value['name'] }}</span>
+        </a>
+      </li>
       @else
-      <a href="{{ route('auth_' . $route) }}">
+      @php
+        $open = "";
+        $display = "";
+        if(Request()->route()->getPrefix() == 'auth/' . $route) {
+          $open = "menu-open";
+          $display = "style='display: block'";
+        }
+
+      @endphp
+      <li class="treeview {{ $open }}">
+        <a href="javascript:void(0)">
+          <i class="{{ $value['icon'] }}"></i><span>{{ $value['name'] }}</span>
+          <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+          <ul class="treeview-menu" {!! $display !!}>
+            @foreach($value['sub_menu'] as $sub_route => $sub_value)
+            @php
+              $active = "";
+              if(Route::currentRouteName() == 'auth_' . $sub_route) {
+                $active = "active";
+              }
+            @endphp
+            <li class="{{ $active }}"><a href="{{ route('auth_' . $sub_route) }}"><i class="{{ $sub_value['icon'] }}"></i><span>{{ $sub_value['name'] }}</span></a></li>
+            @endforeach
+          </ul>
+        </a>
+      </li>
       @endif
-        <i class="{{ $value['icon'] }}"></i><span>{{ $value['name'] }}</span>
-      </a>
-    </li>
     @endforeach
     @if(Auth::user()->role_id == Common::SUPER_ADMIN)
     @foreach($sidebarSuperAdmin as $route=>$value)

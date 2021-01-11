@@ -45,7 +45,7 @@ class LoginController extends AppController
     }
     
     public function redirectTo() {
-        return route('dashboard');
+        return route('auth_dashboard');
     }
     
     public function login(Request $request) {
@@ -87,6 +87,6 @@ class LoginController extends AppController
         
         $request->session()->invalidate();
         
-        return redirect(route('login'));
+        return redirect(route('auth_login'));
     }
 }

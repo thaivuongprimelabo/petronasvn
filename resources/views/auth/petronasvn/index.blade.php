@@ -7,7 +7,7 @@
     {{ trans('auth.' . $name . '.list_title') }}
   </h1>
   <ol class="breadcrumb">
-    <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+    <li><a href="{{ route('auth_dashboard') }}"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
     <li class="active">{{ trans('auth.' . $name . '.list_title') }}</li>
   </ol>
 </section>

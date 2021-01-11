@@ -9,7 +9,7 @@
     {{ $title }}
   </h1>
   <ol class="breadcrumb">
-    <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+    <li><a href="{{ route('auth_dashboard') }}"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
     <li><a href="{{ route('auth_' . $name) }}">{{ trans('auth.' . $name . '.list_title') }}</a></li>
     <li class="active">{{ $title }}</li>
   </ol>

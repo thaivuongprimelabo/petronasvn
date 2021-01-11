@@ -42,18 +42,6 @@
                             <span class="help-block"></span>
                         </div>
                         <div class="form-group">
-                            <label>Vị trí</label>
-                            <div>
-                                <select class="form-control" name="pos" id="pos">
-                                    <option value="center" @if($data['pos'] == 'center') selected @endif>Ở giữa</option>
-                                    <option value="left" @if($data['pos'] == 'left') selected @endif>Bên trái</option>
-                                    <option value="right_up" @if($data['pos'] == 'right_up') selected @endif>Bên phải (trên)</option>
-                                    <option value="right_down" @if($data['pos'] == 'right_down') selected @endif>Bên phải (dưới)</option>
-                                </select>
-                            </div>
-                            <span class="help-block"></span>
-                        </div>
-                        <div class="form-group">
                             <div class="checkbox">
                                 <label>
                                     @if(!isset($data['status']) || (isset($data['status']) && $data['status'] == Status::ACTIVE))

@@ -89,7 +89,7 @@
 <div class="wrapper">
 	<header class="main-header">
         <!-- Logo -->
-        <a href="{{ route('dashboard') }}" class="logo">
+        <a href="{{ route('auth_dashboard') }}" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini">
           	<b>C</b>P
@@ -130,7 +130,7 @@
                       <a href="{{ route('auth_profile') }}" class="btn btn-default btn-flat">{{ trans('auth.button.profile') }}</a>
                     </div>
                     <div class="pull-right">
-                      <a href="{{ route('logout') }}" class="btn btn-default btn-flat">{{ trans('auth.button.logout') }}</a>
+                      <a href="{{ route('auth_logout') }}" class="btn btn-default btn-flat">{{ trans('auth.button.logout') }}</a>
                     </div>
                   </li>
                 </ul>

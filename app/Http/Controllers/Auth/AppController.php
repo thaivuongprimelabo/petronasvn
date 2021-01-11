@@ -102,12 +102,12 @@ class AppController extends Controller
         return view('auth.petronasvn.index', $this->search($request));
     }
     
-    public function doSearch($request, $model = null, $type = '', $view = '') {
+    public function doSearch($request, $model = null, $type = '', $view = '', $otherWheres = []) {
         
         $wheres = [];
         $route = Route::currentRouteName();
         $name = str_replace('auth_', '', str_replace('_search', '', Route::currentRouteName()));
-        $view = 'auth.petronasvn.' . $name . '.index';
+        $view = $view ? $view : 'auth.petronasvn.' . $name . '.index';
         
         if(is_null($model)) {
             return compact('name', 'view');
@@ -150,13 +150,16 @@ class AppController extends Controller
                 $wheres[] = ['role_id', '=', UserRole::MEMBERS];
             }
         }
+
+        if(count($otherWheres)) {
+            $wheres = array_merge($wheres, $otherWheres);
+        }
         
         $data_obj = $model::where($wheres)->orderBy('created_at', 'DESC');
         $data_count = $data_obj->get()->count();
         $data_list = $data_obj->paginate(Common::ROW_PER_PAGE);
         
         $paging = $data_list->toArray();
-        
         if($request->ajax()) {
             $this->result['data'] = view($view, compact('data_list', 'data_count', 'paging', 'name'))->render();
             return response()->json($this->result);

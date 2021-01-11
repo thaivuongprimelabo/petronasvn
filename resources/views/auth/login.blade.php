@@ -11,7 +11,7 @@
     	{{ trans('auth.login_page_top_text') }}
     </p>
 
-    <form action="{{ route('login') }}" method="post">
+    <form action="{{ route('auth_login') }}" method="post">
       {{ csrf_field() }}
       <div class="form-group has-feedback @if ($errors->has('email')){{'has-error'}} @endif">
         <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="{{ trans('auth.email_placeholder') }}" />

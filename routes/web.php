@@ -14,123 +14,121 @@
 use Illuminate\Support\Facades\Auth;
 use App\Config;
 
-Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
+Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth_'], function () {
     
     // Authentication Routes...
     Route::get('/', function () {
-        return redirect()->route('auth_products');
+        return redirect()->route('products');
     });
     
-    $this->get('/login', 'LoginController@showLoginForm')->name('login');
-    $this->post('/login', 'LoginController@login');
-    $this->get('/logout', 'LoginController@logout')->name('logout');
-    $this->get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('/login', 'LoginController@showLoginForm')->name('login');
+    Route::post('/login', 'LoginController@login');
+    Route::get('/logout', 'LoginController@logout')->name('logout');
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     
     // Products
-    $this->get('/products', 'ProductsController@index')->name('auth_products');
-    Route::match(['get', 'post'], '/products/create', 'ProductsController@create')->name('auth_products_create');
-    Route::match(['get', 'post'], '/products/edit/{id}', 'ProductsController@edit')->name('auth_products_edit');
-    Route::match(['get', 'post'], '/products/search', 'ProductsController@search')->name('auth_products_search');
-    Route::post('/products/remove', 'ProductsController@remove')->name('auth_products_remove');
+    Route::group(['prefix' => 'products'], function () {
+        Route::get('/', 'ProductsController@index')->name('products');
+        Route::match(['get', 'post'], '/create', 'ProductsController@create')->name('products_create');
+        Route::match(['get', 'post'], '/edit/{id}', 'ProductsController@edit')->name('products_edit');
+        Route::match(['get', 'post'], '/search', 'ProductsController@search')->name('products_search');
+        Route::post('/remove', 'ProductsController@remove')->name('products_remove');
+    });
     
     // Vendors
-    $this->get('/vendors', 'VendorsController@index')->name('auth_vendors');
-    Route::match(['get', 'post'], '/vendors/create', 'VendorsController@create')->name('auth_vendors_create');
-    Route::match(['get', 'post'], '/vendors/edit/{id}', 'VendorsController@edit')->name('auth_vendors_edit');
-    Route::match(['get', 'post'], '/vendors/search', 'VendorsController@search')->name('auth_vendors_search');
-    Route::post('/vendors/remove', 'VendorsController@remove')->name('auth_vendors_remove');
+    Route::group(['prefix' => 'vendors'], function () {
+        Route::get('/', 'VendorsController@index')->name('vendors');
+        Route::match(['get', 'post'], '/create', 'VendorsController@create')->name('vendors_create');
+        Route::match(['get', 'post'], '/edit/{id}', 'VendorsController@edit')->name('vendors_edit');
+        Route::match(['get', 'post'], '/search', 'VendorsController@search')->name('vendors_search');
+        Route::post('/remove', 'VendorsController@remove')->name('vendors_remove');
+    });
     
     // Categories
-    $this->get('/categories', 'CategoriesController@index')->name('auth_categories');
-    Route::match(['get', 'post'], '/categories/create', 'CategoriesController@create')->name('auth_categories_create');
-    Route::match(['get', 'post'], '/categories/edit/{id}', 'CategoriesController@edit')->name('auth_categories_edit');
-    Route::match(['get', 'post'], '/categories/search', 'CategoriesController@search')->name('auth_categories_search');
-    Route::post('/categories/remove', 'CategoriesController@remove')->name('auth_categories_remove');
+    Route::group(['prefix' => 'categories'], function () {
+        Route::get('/', 'CategoriesController@index')->name('categories');
+        Route::match(['get', 'post'], '/create', 'CategoriesController@create')->name('categories_create');
+        Route::match(['get', 'post'], '/edit/{id}', 'CategoriesController@edit')->name('categories_edit');
+        Route::match(['get', 'post'], '/search', 'CategoriesController@search')->name('categories_search');
+        Route::post('/remove', 'CategoriesController@remove')->name('categories_remove');
+    });
     
     // Banners
-    $this->get('/banners', 'BannersController@index')->name('auth_banners');
-    Route::match(['get', 'post'], '/banners/create', 'BannersController@create')->name('auth_banners_create');
-    Route::match(['get', 'post'], '/banners/edit/{id}', 'BannersController@edit')->name('auth_banners_edit');
-    Route::match(['get', 'post'], '/banners/search', 'BannersController@search')->name('auth_banners_search');
-    Route::post('/banners/remove', 'BannersController@remove')->name('auth_banners_remove');
+    Route::group(['prefix' => 'banners'], function () {
+        Route::get('/center', 'BannersController@index')->name('bannerscenter');
+        Route::get('/left', 'BannersController@index')->name('bannersleft');
+        Route::get('/right_up', 'BannersController@index')->name('bannersrightup');
+        Route::get('/right_down', 'BannersController@index')->name('bannersrightdown');
+
+        Route::match(['get', 'post'], '/center/search', 'BannersController@search')->name('bannerscenter_search');
+        Route::match(['get', 'post'], '/left/search', 'BannersController@search')->name('bannersleft_search');
+        Route::match(['get', 'post'], '/right_up/search', 'BannersController@search')->name('bannersrightup_search');
+        Route::match(['get', 'post'], '/right_down/search', 'BannersController@search')->name('bannersrightdown_search');
+
+        Route::match(['get', 'post'], '/center/remove', 'BannersController@remove')->name('bannerscenter_remove');
+        Route::match(['get', 'post'], '/left/remove', 'BannersController@remove')->name('bannersleft_remove');
+        Route::match(['get', 'post'], '/right_up/remove', 'BannersController@remove')->name('bannersrightup_remove');
+        Route::match(['get', 'post'], '/right_down/remove', 'BannersController@remove')->name('bannersrightdown_remove');
+
+        Route::match(['get', 'post'], '/center/create', 'BannersController@create')->name('bannerscenter_create');
+        Route::match(['get', 'post'], '/left/create', 'BannersController@create')->name('bannersleft_create');
+        Route::match(['get', 'post'], '/right_up/create', 'BannersController@create')->name('bannersrightup_create');
+        Route::match(['get', 'post'], '/right_down/create', 'BannersController@create')->name('bannersrightdown_create');
+
+        Route::match(['get', 'post'], '/center/edit/{id}', 'BannersController@edit')->name('bannerscenter_edit');
+        Route::match(['get', 'post'], '/left/edit/{id}', 'BannersController@edit')->name('bannersleft_edit');
+        Route::match(['get', 'post'], '/right_up/edit/{id}', 'BannersController@edit')->name('bannersrightup_edit');
+        Route::match(['get', 'post'], '/right_down/edit/{id}', 'BannersController@edit')->name('bannersrightdown_edit');
+    });
     
     // Contacts
-    $this->get('/contacts', 'ContactsController@index')->name('auth_contacts');
-    Route::match(['get', 'post'], '/contacts/edit/{id}', 'ContactsController@edit')->name('auth_contacts_edit');
-    Route::match(['get', 'post'], '/contacts/search', 'ContactsController@search')->name('auth_contacts_search');
-    Route::post('/contacts/remove', 'ContactsController@remove')->name('auth_contacts_remove');
+    Route::group(['prefix' => 'contacts'], function () {
+        Route::get('/', 'ContactsController@index')->name('contacts');
+        Route::match(['get', 'post'], '/edit/{id}', 'ContactsController@edit')->name('contacts_edit');
+        Route::match(['get', 'post'], '/search', 'ContactsController@search')->name('contacts_search');
+        Route::post('/remove', 'ContactsController@remove')->name('contacts_remove');
+    });
     
     // Posts
-    $this->get('/posts', 'PostsController@index')->name('auth_posts');
-    Route::match(['get', 'post'], '/posts/create', 'PostsController@create')->name('auth_posts_create');
-    Route::match(['get', 'post'], '/posts/edit/{id}', 'PostsController@edit')->name('auth_posts_edit');
-    Route::match(['get', 'post'], '/posts/search', 'PostsController@search')->name('auth_posts_search');
-    Route::post('/posts/remove', 'PostsController@remove')->name('auth_posts_remove');
-    
-    // Post groups
-    $this->get('/post_groups', 'PostGroupsController@index')->name('auth_postgroups');
-    Route::match(['get', 'post'], '/post_groups/create', 'PostGroupsController@create')->name('auth_postgroups_create');
-    Route::match(['get', 'post'], '/post_groups/edit/{id}', 'PostGroupsController@edit')->name('auth_postgroups_edit');
-    Route::match(['get', 'post'], '/post_groups/search', 'PostGroupsController@search')->name('auth_postgroups_search');
-    Route::post('/post_groups/remove', 'PostGroupsController@remove')->name('auth_postgroups_remove');
+    Route::group(['prefix' => 'posts'], function () {
+        Route::get('/', 'PostsController@index')->name('posts');
+        Route::match(['get', 'post'], '/create', 'PostsController@create')->name('posts_create');
+        Route::match(['get', 'post'], '/edit/{id}', 'PostsController@edit')->name('posts_edit');
+        Route::match(['get', 'post'], '/search', 'PostsController@search')->name('posts_search');
+        Route::post('/remove', 'PostsController@remove')->name('posts_remove');
+    });
     
     // Orders
-    $this->get('/orders', 'OrdersController@index')->name('auth_orders');
-    Route::match(['get', 'post'], '/orders/edit/{id}', 'OrdersController@edit')->name('auth_orders_edit');
-    Route::match(['get', 'post'], '/orders/search', 'OrdersController@search')->name('auth_orders_search');
-    Route::post('/orders/remove', 'OrdersController@remove')->name('auth_orders_remove');
-    
-    $this->get('/shipfee', 'OrdersController@shipFee')->name('auth_shipfee');
+    Route::group(['prefix' => 'orders'], function () {
+        Route::get('/', 'OrdersController@index')->name('orders');
+        Route::match(['get', 'post'], '/edit/{id}', 'OrdersController@edit')->name('orders_edit');
+        Route::match(['get', 'post'], '/search', 'OrdersController@search')->name('orders_search');
+        Route::post('/remove', 'OrdersController@remove')->name('orders_remove');
+    });
     
     // Users
-    $this->get('/users', 'UsersController@index')->name('auth_users');
-    Route::match(['get', 'post'], '/users/create', 'UsersController@create')->name('auth_users_create');
-    Route::match(['get', 'post'], '/users/edit/{id}', 'UsersController@edit')->name('auth_users_edit');
-    Route::match(['get', 'post'], '/users/search', 'UsersController@search')->name('auth_users_search');
-    Route::post('/users/remove', 'UsersController@remove')->name('auth_users_remove');
+    Route::group(['prefix' => 'users'], function () {
+        Route::get('/', 'UsersController@index')->name('users');
+        Route::match(['get', 'post'], '/create', 'UsersController@create')->name('users_create');
+        Route::match(['get', 'post'], '/edit/{id}', 'UsersController@edit')->name('users_edit');
+        Route::match(['get', 'post'], '/search', 'UsersController@search')->name('users_search');
+        Route::post('s/remove', 'UsersController@remove')->name('users_remove');
+    });
     
     // Config
-    Route::match(['get', 'post'], '/config', 'ConfigController@index')->name('auth_config');
+    Route::match(['get', 'post'], '/config', 'ConfigController@index')->name('config');
 
-    // Setting
-    Route::match(['get', 'post'], '/setting', 'SettingController@index')->name('auth_setting');
-    
     // Profile
-    Route::match(['get', 'post'], '/profile', 'UsersController@profile')->name('auth_profile');
+    Route::match(['get', 'post'], '/profile', 'UsersController@profile')->name('profile');
     
     // Pages
-    $this->get('/pages', 'PagesController@index')->name('auth_pages');
-    Route::match(['get', 'post'], '/pages/edit/{id}', 'PagesController@edit')->name('auth_pages_edit');
-    
-    // IP
-    $this->get('/ip_address', 'ConfigController@ipAddress')->name('auth_ip');
-    Route::match(['get', 'post'], '/ip_address/search', 'ConfigController@ipSearch')->name('auth_ip_search');
-    Route::post('/ip_address/remove', 'ConfigController@ipRemove')->name('auth_ip_remove');
-    
-    // Backup source + database
-    $this->get('/backup', 'BackupController@index')->name('auth_backup');
-    Route::match(['get', 'post'], '/backup/search', 'BackupController@search')->name('auth_backup_search');
-    Route::match(['post'], '/backup/create', 'BackupController@create')->name('auth_backup_create');
-    Route::post('/backup/remove', 'BackupController@remove')->name('auth_backup_remove');
-    $this->get('/backup/download/{file_download}', 'BackupController@download')->name('auth_backup_download');
-    
-    // Jobs
-    Route::get('/jobs', 'JobsController@index')->name('auth_jobs');
-    Route::post('/jobs/run', 'JobsController@doRun')->name('auth_jobs_run');
-    Route::post('/jobs/dispatch', 'JobsController@doDispatch')->name('auth_jobs_dispatch');
+    Route::group(['prefix' => 'pages'], function () {
+        Route::get('/', 'PagesController@index')->name('pages');
+        Route::match(['get', 'post'], '/edit/{id}', 'PagesController@edit')->name('pages_edit');
+    });
     
     // Source editor
-    Route::get('/editor', 'EditorController@index')->name('auth_editor');
-    
-    // Registration Routes...
-//     $this->get('/register', 'RegisterController@showRegistrationForm')->name('register');
-//     $this->post('/register', 'RegisterController@register');
-    
-    // Password Reset Routes...
-//     $this->get('/password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.request');
-//     $this->post('/password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-//     $this->get('/password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
-//     $this->post('/password/reset', 'ResetPasswordController@reset');
+    Route::get('/editor', 'EditorController@index')->name('editor');
     
 });
 

@@ -317,6 +317,50 @@ $auth = [
         ]
     ],
     /*------------ Banner page ------------------- */
+    'bannerscenter' => [
+        'list_title' => 'Banner giữa',
+        'create_title' => 'Đăng ký banner',
+        'edit_title' => 'Chỉnh sửa banner',
+        'search_form' => [
+            'status' => [
+                'type' => 'status_select',
+                'empty_text' => 'Lọc theo trạng thái'
+            ]
+        ],
+    ],
+    'bannersleft' => [
+        'list_title' => 'Banner trái',
+        'create_title' => 'Đăng ký banner',
+        'edit_title' => 'Chỉnh sửa banner',
+        'search_form' => [
+            'status' => [
+                'type' => 'status_select',
+                'empty_text' => 'Lọc theo trạng thái'
+            ]
+        ],
+    ],
+    'bannersrightup' => [
+        'list_title' => 'Banner phải (dưới)',
+        'create_title' => 'Đăng ký banner',
+        'edit_title' => 'Chỉnh sửa banner',
+        'search_form' => [
+            'status' => [
+                'type' => 'status_select',
+                'empty_text' => 'Lọc theo trạng thái'
+            ]
+        ],
+    ],
+    'bannersrightdown' => [
+        'list_title' => 'Banner phải (dưới)',
+        'create_title' => 'Đăng ký banner',
+        'edit_title' => 'Chỉnh sửa banner',
+        'search_form' => [
+            'status' => [
+                'type' => 'status_select',
+                'empty_text' => 'Lọc theo trạng thái'
+            ]
+        ],
+    ],
     'banners' => [
         'list_title' => 'Danh mục banner',
         'create_title' => 'Đăng ký banner',

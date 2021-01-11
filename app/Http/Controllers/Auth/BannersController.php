@@ -36,7 +36,17 @@ class BannersController extends AppController
      * @param Request $request
      */
     public function search(Request $request) {
-        return $this->doSearch($request, new Banner());
+        $uri = explode("/", $request->getRequestUri());
+        $wheres[] = ['pos', '=', $uri[3]];
+
+        return $this->doSearch($request, new Banner(), '', 'auth.petronasvn.banners.index', $wheres);
+    }
+
+    /**
+     * center
+     */
+    public function index(Request $request) {
+        return view('auth.petronasvn.index', $this->search($request));
     }
     
     /**
@@ -68,7 +78,7 @@ class BannersController extends AppController
             $validator = Validator::make($request->all(), $this->rules);
             
             if (!$validator->fails()) {
-                
+                $uri = explode("/", $request->getRequestUri());
                 $data = new Banner();
                 // if($select_type == 'use_image') {
                 //     $filename = '';
@@ -89,15 +99,15 @@ class BannersController extends AppController
                 $data->description    = Utils::cnvNull($request->description, '');
                 $data->status         = Utils::cnvNull($request->status, 0);
                 $data->select_type    = Utils::cnvNull($request->select_type, 'use_image');
-                $data->pos            = Utils::cnvNull($request->pos, 'center');
+                $data->pos            = $uri[3];
                 $data->created_at     = date('Y-m-d H:i:s');
                 $data->updated_at     = date('Y-m-d H:i:s');
                 
                 if($data->save()) {
-                    return redirect(route('auth_banners_create'))->with('success', trans('messages.CREATE_SUCCESS'));
+                    return redirect(route('auth_' . $this->name . '_create'))->with('success', trans('messages.CREATE_SUCCESS'));
                 }
             } else {
-                return redirect(route('auth_banners_create'))->with('error', trans('messages.ERROR'));
+                return redirect(route('auth_' . $this->name . '_create'))->with('error', trans('messages.ERROR'));
             }
         }
         
@@ -170,10 +180,10 @@ class BannersController extends AppController
                 $data->updated_at     = date('Y-m-d H:i:s');
                 
                 if($data->save()) {
-                    return redirect(route('auth_banners_edit', ['id' => $request->id]))->with('success', trans('messages.UPDATE_SUCCESS'));
+                    return redirect(route('auth_' . $this->name . '_edit', ['id' => $request->id]))->with('success', trans('messages.UPDATE_SUCCESS'));
                 }
             } else {
-                return redirect(route('auth_banners_edit', ['id' => $request->id]))->with('error', trans('messages.ERROR'));
+                return redirect(route('auth_' . $this->name . '_edit', ['id' => $request->id]))->with('error', trans('messages.ERROR'));
             }
         }
         $this->output['data'] = $data;
