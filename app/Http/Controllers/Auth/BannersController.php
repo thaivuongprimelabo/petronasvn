@@ -78,7 +78,6 @@ class BannersController extends AppController
             $validator = Validator::make($request->all(), $this->rules);
             
             if (!$validator->fails()) {
-                $uri = explode("/", $request->getRequestUri());
                 $data = new Banner();
                 // if($select_type == 'use_image') {
                 //     $filename = '';
@@ -91,7 +90,8 @@ class BannersController extends AppController
                 //     $data->youtube_id    = Utils::cnvNull($request->youtube_embed_url, '');
                 // }
                 $filename = '';
-                $pos = Utils::cnvNull($request->pos, 'center');
+                $uri = explode("/", $request->getRequestUri());
+                $pos = $uri[3];
                 $demension = $this->bannerDemensions[$pos];
                 Utils::doUploadAndResize($request, 'upload_banner', $filename, $demension);
                 $data->link           = Utils::cnvNull($request->link, '');
@@ -168,12 +168,14 @@ class BannersController extends AppController
                 //     $data->banner         = '';
                 // }
                 $filename = $data->banner;
-                $pos = Utils::cnvNull($request->pos, 'center');
+                
+                $uri = explode("/", $request->getRequestUri());
+                $pos = $uri[3];
                 $demension = $this->bannerDemensions[$pos];
                 Utils::doUploadAndResize($request, 'upload_banner', $filename, $demension);
                 $data->link           = Utils::cnvNull($request->link, '');
                 $data->banner         = $filename;
-                $data->pos            = Utils::cnvNull($request->pos, 'center');
+                $data->pos            = $pos;
                 $data->description    = Utils::cnvNull($request->description, '');
                 $data->status         = Utils::cnvNull($request->status, 0);
                 $data->select_type    = Utils::cnvNull($request->select_type, 'use_image');
