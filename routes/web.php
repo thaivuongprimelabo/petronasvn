@@ -18,7 +18,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth_'], funct
     
     // Authentication Routes...
     Route::get('/', function () {
-        return redirect()->route('products');
+        return redirect()->route('auth_products');
     });
     
     Route::get('/login', 'LoginController@showLoginForm')->name('login');
