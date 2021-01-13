@@ -995,7 +995,9 @@ $auth = [
                 'off' => [
                     'type' => 'checkbox',
                     'text' => 'Tắt hệ thống'
-                ]
+                ],
+                'web_contact' => 'Thông tin liên hệ',
+                'web_bank_info' => 'Tài khoản ngân hàng'
             ],
             'upload_setting' => [
                 'title' => 'Kích thước / dung lượng tập tin',
@@ -1616,14 +1618,14 @@ $auth = [
         ]
     ],
     'product_type' => $productType,
-    'text_image_small' => ' (Tập tin *.jpg, *.jpeg, *.gif, *.png.Tối đa :limit_upload. Kích thước :size)',
+    'text_image_small' => ' (Tập tin: :type. Tối đa: :limit_upload. Kích thước: :size)',
     'select_empty_text' => 'Vui lòng chọn',
     'price_empty_text' => 'Liên hệ',
     'preview_image' => 'Hình đang sử dụng:',
     'no_data_found' => '(Chưa có dữ liệu)',
     'create_box_title' => 'Thông tin đăng ký',
     'edit_box_title' => 'Thông tin cập nhật',
-    'length_text' => ' (Tối đã {0} ký tự)',
+    'length_text' => ' (Tối đa :length ký tự)',
     'product_info' => 'Thông tin sản phẩm',
     'upload_check_txt' => 'Uploading...',
     'status' => [
@@ -1678,7 +1680,8 @@ $auth = [
         'copy_service' => 'Sử dụng dịch vụ của sản phẩm khác',
         'refresh' => 'Tải lại'
     ],
-    'subject_mail' => '【:web_name】 :title'
+    'subject_mail' => '【:web_name】 :title',
+    'file_image_type' => '*.jpg, *.jpeg, *.gif, *.png'
 ];
 
 return $auth;

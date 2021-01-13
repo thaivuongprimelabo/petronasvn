@@ -22,7 +22,7 @@
                             <span class="help-block"></span>
                         </div>
                         <div class="form-group">
-                            <label>Logo(Tập tin *.jpg, *.jpeg, *.gif, *.png. Tối đa {{ Utils::formatMemory($config['upload_logo_maximum_upload']) }})</label>
+                            <label>Logo <small>{{ trans("auth.text_image_small", ["type" => trans("auth.file_image_type"), "limit_upload" => Utils::formatMemory($config['upload_logo_maximum_upload']), "size" => $config['upload_logo_image_size']]) }}</small></label>
                             <div>
                                 @php
                                     $logo = Utils::getImageLink(Common::NO_IMAGE_FOUND);

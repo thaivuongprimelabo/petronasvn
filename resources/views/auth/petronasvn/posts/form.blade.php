@@ -23,7 +23,7 @@
 								<span class="help-block"></span>
 							</div>
 							<div class="form-group">
-								<label>Hình ảnh (Tập tin *.jpg, *.jpeg, *.gif, *.png.Tối đa {{ Utils::formatMemory($config['upload_photo_maximum_upload']) }})</label>
+								<label>Hình ảnh <small>{{ trans("auth.text_image_small", ["type" => trans("auth.file_image_type"), "limit_upload" => Utils::formatMemory($config['upload_photo_maximum_upload']), "size" => $config['upload_photo_image_size']]) }}</small></label>
 								<div>
                                     @php
                                         $image = Utils::getImageLink(Common::NO_IMAGE_FOUND);

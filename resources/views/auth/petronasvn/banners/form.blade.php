@@ -13,7 +13,9 @@
                     </div>
                     <div class="box-body">
                         <div class="form-group">
-                            <label>Banner (Tập tin *.jpg, *.jpeg, *.gif, *.png. Tối đa {{ Utils::formatMemory($config['upload_banner_maximum_upload']) }})</label>
+                            <label>
+                                Banner <small>{{ trans("auth.text_image_small", ["type" => trans("auth.file_image_type"), "limit_upload" => Utils::formatMemory($config['upload_banner_maximum_upload']), "size" => $bannerDemensions]) }}</small>
+                            </label>
                             <div>
                                 @php
                                     $banner = Utils::getImageLink(Common::NO_IMAGE_FOUND);

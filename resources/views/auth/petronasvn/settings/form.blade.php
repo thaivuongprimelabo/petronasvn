@@ -18,7 +18,7 @@
                <div class="tab-content">
                   <div class="tab-pane active" id="web_info">
                      <div class="form-group">
-                        <label>Web name<small> (Tối đã 200 ký tự)</small></label>
+                        <label>Web name<small> {{ trans("auth.length_text", ["length" => 200]) }}</small></label>
                         <div class="input-group">
                            <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
                            <input type="text" class="form-control" name="web_title" id="web_title" value="{{ $data['web_title'] }}" placeholder="Web name" maxlength="200">
@@ -40,7 +40,7 @@
                         <span class="help-block"></span>
                      </div>
                      <div class="form-group">
-                        <label>Web logo (Tập tin *.jpg, *.jpeg, *.gif, *.png.Tối đa {{ Utils::formatMemory($data['upload_web_logo_maximum_upload']) }})</label>
+                        <label>Web logo <small>{{ trans("auth.text_image_small", ["type" => trans("auth.file_image_type"), "limit_upload" => Utils::formatMemory($data['upload_web_logo_maximum_upload']), "size" => $data['upload_web_logo_image_size']]) }}</small></label>
                         <div>
                            @php
                               $web_logo = Utils::getImageLink(Common::NO_IMAGE_FOUND);
@@ -57,7 +57,7 @@
                         <span class="help-block"></span>
                      </div>
                      <div class="form-group">
-                        <label>Web ico (Tập tin *.jpg, *.jpeg, *.gif, *.png. Tối đa {{ Utils::formatMemory($data['upload_web_ico_maximum_upload']) }})</label>
+                        <label>Web ico <small>{{ trans("auth.text_image_small", ["type" => trans("auth.file_image_type"), "limit_upload" => Utils::formatMemory($data['upload_web_ico_maximum_upload']), "size" => $data['upload_web_ico_image_size']]) }}</small></label>
                         <div>
                            @php
                               $web_ico = Utils::getImageLink(Common::NO_IMAGE_FOUND);
@@ -74,7 +74,7 @@
                         <span class="help-block"></span>
                      </div>
                      <div class="form-group">
-                        <label>Web banner (Tập tin *.jpg, *.jpeg, *.gif, *.png. Tối đa {{ Utils::formatMemory($data['upload_web_banner_maximum_upload']) }})</label>
+                        <label>Web banner <small>{{ trans("auth.text_image_small", ["type" => trans("auth.file_image_type"), "limit_upload" => Utils::formatMemory($data['upload_web_banner_maximum_upload']), "size" => $data['upload_web_banner_image_size']]) }}</small></label>
                         <div>
                            @php
                               $web_banner = Utils::getImageLink(Common::NO_IMAGE_FOUND);

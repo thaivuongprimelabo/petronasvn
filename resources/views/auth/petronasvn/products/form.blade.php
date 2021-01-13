@@ -64,7 +64,7 @@
 								<span class="help-block"></span>
 							</div>
 							<div class="form-group">
-								<label>Hình sản phẩm (Tập tin *.jpg, *.jpeg, *.gif, *.png. Tối đa {{ Utils::formatMemory($config['upload_image_maximum_upload']) }})</label>
+								<label>Hình sản phẩm <small>{{ trans("auth.text_image_small", ["type" => trans("auth.file_image_type"), "limit_upload" => Utils::formatMemory($config['upload_image_maximum_upload']), "size" => "---"]) }}</small></label>
 								<div>
 									<button type="button" id="upload_button" data-name="upload_image[]" data-preview-control="preview_list" data-limit-upload="{{ $config['upload_image_maximum_upload'] }}" class="btn btn-primary">
 									<i class="fa fa-image"></i> Tải hình sản phẩm

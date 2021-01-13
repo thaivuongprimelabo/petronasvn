@@ -58,6 +58,9 @@ class BannersController extends AppController
         $request->flash();
         
         $validator = [];
+
+        $uri = explode("/", $request->getRequestUri());
+        $pos = $uri[3];
         
         if($request->isMethod('post')) {
             
@@ -90,8 +93,6 @@ class BannersController extends AppController
                 //     $data->youtube_id    = Utils::cnvNull($request->youtube_embed_url, '');
                 // }
                 $filename = '';
-                $uri = explode("/", $request->getRequestUri());
-                $pos = $uri[3];
                 $demension = $this->bannerDemensions[$pos];
                 Utils::doUploadAndResize($request, 'upload_banner', $filename, $demension);
                 $data->link           = Utils::cnvNull($request->link, '');
@@ -110,6 +111,8 @@ class BannersController extends AppController
                 return redirect(route('auth_' . $this->name . '_create'))->with('error', trans('messages.ERROR'));
             }
         }
+
+        $this->output['bannerDemensions'] = $this->bannerDemensions[$uri[3]];
         
         return view('auth.petronasvn.banners.form', $this->output);
     }

@@ -291,6 +291,7 @@ var checkUploadFile = function(url, input, selected_msg) {
 	    	uploadfile.parent().find('.remove-img-simple').show
 	    },
 	    error: function(jqXHR, textStatus, errorThrown ) {
+			uploadfile.val("");
 	    	errorAlert(jqXHR.responseJSON.error);
 	    	uploadfile.parent().find('.spinner_preview').hide();
 	    	uploadfile.parent().find('img').show();
