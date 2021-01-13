@@ -308,7 +308,7 @@ var readURL = function readURL(input, selected_msg) {
 		  var reader = new FileReader();
 		  reader.onload = function(e) {
 			  var preview_id = input.attr('data-preview-control');
-			  $('#' + preview_id).parent().prepend('<a href="javascript:void(0)" class="remove-img-simple" style="position:absolute; top:15px; right:10px"><i class="fa fa-trash" style="font-size:18px;"></i></a>');
+			  //$('#' + preview_id).parent().prepend('<a href="javascript:void(0)" class="remove-img-simple" style="position:absolute; top:15px; right:10px"><i class="fa fa-trash" style="font-size:18px;"></i></a>');
 			  $('#' + preview_id).attr('src', e.target.result).show();
 		  }
 		  reader.readAsDataURL(input[0].files[0]);

@@ -25,18 +25,7 @@
 							<div class="form-group">
 								<label>Hình ảnh <small>{{ trans("auth.text_image_small", ["type" => trans("auth.file_image_type"), "limit_upload" => Utils::formatMemory($config['upload_photo_maximum_upload']), "size" => $config['upload_photo_image_size']]) }}</small></label>
 								<div>
-                                    @php
-                                        $image = Utils::getImageLink(Common::NO_IMAGE_FOUND);
-                                        if($data !== null) {
-                                            $image = $data->photo;
-                                        }
-                                    @endphp
-									<input type="file" class="form-control upload-simple" name="upload_photo" data-preview-control="preview_upload_photo" data-limit-upload="{{ $config['upload_photo_maximum_upload'] }}">
-									<div class="preview_area" style="width:358px;position:relative">
-										<span class="spinner_preview" style="display:none"><i class="fa fa-circle-o-notch fa-spin"></i>Uploading...</span>
-										<img id="preview_upload_photo" src="{{ $image }}" class="img-thumbnail" style="margin-top:10px;width:358px;height:201px">
-										<input type="hidden" class="filename_hidden" name="photo_hidden" value="">
-									</div>
+									@include("auth.petronasvn.common.single_upload", ["key" => "upload_photo"])
 								</div>
 								<span class="help-block"></span>
 							</div>

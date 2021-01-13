@@ -24,18 +24,7 @@
                         <div class="form-group">
                             <label>Logo <small>{{ trans("auth.text_image_small", ["type" => trans("auth.file_image_type"), "limit_upload" => Utils::formatMemory($config['upload_logo_maximum_upload']), "size" => $config['upload_logo_image_size']]) }}</small></label>
                             <div>
-                                @php
-                                    $logo = Utils::getImageLink(Common::NO_IMAGE_FOUND);
-                                    if($data !== null) {
-                                        $logo = $data->getLogo();
-                                    }
-                                @endphp
-                                <input type="file" class="form-control upload-simple" name="upload_logo" data-preview-control="preview_upload_logo" data-limit-upload="{{ $config['upload_logo_maximum_upload'] }}">
-                                <div class="preview_area" style="max-width:200px;position:relative">
-                                    <span class="spinner_preview" style="display:none"><i class="fa fa-circle-o-notch fa-spin"></i>Uploading...</span>
-                                    <img id="preview_upload_logo" src="{{ $logo }}" class="img-thumbnail" style="margin-top:10px; max-width: 200px">
-                                    <input type="hidden" class="filename_hidden" name="logo_hidden" value="">
-                                </div>
+                                @include("auth.petronasvn.common.single_upload", ["key" => "upload_logo"])
                             </div>
                             <span class="help-block"></span>
                         </div>

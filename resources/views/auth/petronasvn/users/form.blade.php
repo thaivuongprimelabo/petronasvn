@@ -23,17 +23,7 @@
 						<div class="form-group">
 							<label>Ảnh đại diện <small>{{ trans("auth.text_image_small", ["type" => trans("auth.file_image_type"), "limit_upload" => Utils::formatMemory($config['upload_avatar_maximum_upload']), "size" => $config['upload_avatar_image_size']]) }}</small></label>
 							<div>
-                                @php
-                                    $avatar = Utils::getImageLink(Common::NO_IMAGE_FOUND);
-                                    if($data !== null) {
-                                        $avatar = $data->avatar;
-                                    }
-                                @endphp
-								<input type="file" class="form-control upload-simple" name="upload_avatar" data-preview-control="preview_upload_avatar" data-limit-upload="{{ $config['upload_avatar_maximum_upload'] }}">
-								<div class="preview_area" style="width:80px;position:relative">
-									<span class="spinner_preview" style="display:none"><i class="fa fa-circle-o-notch fa-spin"></i>Uploading...</span>
-									<img id="preview_upload_avatar" src="{{ $avatar }}" class="img-thumbnail" style="margin-top:10px;min-width: 120px; ">
-								</div>
+								@include("auth.petronasvn.common.single_upload", ["key" => "upload_avatar"])
 							</div>
 							<span class="help-block"></span>
 						</div>

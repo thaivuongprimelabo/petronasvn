@@ -23,12 +23,7 @@
                                         $banner = $data->banner;
                                     }
                                 @endphp
-                                <input type="file" class="form-control upload-simple" name="upload_banner" data-preview-control="preview_upload_banner" data-limit-upload="{{ $config['upload_banner_maximum_upload'] }}">
-                                <div class="preview_area" style="width:450px;position:relative">
-                                    <span class="spinner_preview" style="display:none"><i class="fa fa-circle-o-notch fa-spin"></i>Uploading...</span>
-                                    <img id="preview_upload_banner" src="{{ $banner }}" class="img-thumbnail" style="margin-top:10px;max-width:450px;">
-                                    <input type="hidden" class="filename_hidden" name="banner_hidden" value="">
-                                </div>
+                                @include("auth.petronasvn.common.single_upload", ["key" => "upload_banner"])
                             </div>
                             <span class="help-block"></span>
                         </div>
