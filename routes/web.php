@@ -195,6 +195,9 @@ Route::group(['prefix' => ''], function () {
     Route::get('/offline', function() {
         exit;
     })->name('offline');
+
+    Route::get('/change_lang', function() {
+    })->name('change_lang');
 });
 
 
