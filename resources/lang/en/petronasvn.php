@@ -49,11 +49,12 @@ return [
     'comment_txt' => 'Bình luận',
     'all_txt' => 'Tất cả',
     'main_nav' => [
-        'home' => ['text' => 'Trang chủ'],
-        'about' => ['text' => 'Giới thiệu'],
-        'products' => ['text' => 'Sản phẩm'],
-        'posts.list' => ['text' => 'Tin tức'],
-        'contact' => ['text' => 'Liên hệ']
+        'home' => 'Trang chủ',
+        'about' => 'Giới thiệu',
+        'products' => 'Sản phẩm',
+        'posts' => 'Tin tức',
+        'discount' => 'Khuyến mãi',
+        'contact' => 'Liên hệ'
     ],
     'policy' => [
         'title' => 'Chính sách',

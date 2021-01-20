@@ -23,13 +23,13 @@
         <div class="row">
             <ul class="{{ $menuCss }}">
                 <li class="megamenu_item_1">
-                    <a href="{{ route('home') }}">Trang chủ</a>
+                    <a href="{{ route('home') }}">{{ trans("petronasvn.main_nav.home") }}</a>
                 </li>
                 <li class="megamenu_item_2">
-                    <a href="{{ route('about') }}">Giới thiệu</a>
+                    <a href="{{ route('about') }}">{{ trans("petronasvn.main_nav.about") }}</a>
                 </li>
                 <li class="megamenu_item_3">
-                    <a href="{{ route('posts.list') }}" class="sf-with-ui">Blog</a>
+                    <a href="{{ route('posts.list') }}" class="sf-with-ui">{{ trans("petronasvn.main_nav.posts") }}</a>
                     <ul>
                         <li>
                             <div class="submenu submenu_3">
@@ -54,10 +54,10 @@
                     </ul>
                 </li>
                 <li class="megamenu_item_4">
-                    <a href="{{ route('products') }}">Sản phẩm <span class="menu_badge">hot deals</span></a>
+                    <a href="{{ route('products') }}">{{ trans("petronasvn.main_nav.products") }} <span class="menu_badge">hot deals</span></a>
                 </li>
                 <li class="megamenu_item_5">
-                    <a href="{{ route('discountProducts') }}" class="sf-with-ui">Khuyến mãi <span class="menu_badge">hot deals</span></a>
+                    <a href="{{ route('discountProducts') }}" class="sf-with-ui">{{ trans("petronasvn.main_nav.discount") }} <span class="menu_badge">hot deals</span></a>
                     <ul>
                         <li>
                             <div class="submenu submenu_5">
@@ -115,17 +115,30 @@
                     </ul>
                 </li>
                 <li class="megamenu_item_6">
-                    <a href="{{ route('contact') }}">Liên hệ</a>
+                    <a href="{{ route('contact') }}">{{ trans("petronasvn.main_nav.contact") }}</a>
                 </li>
             </ul>
             <div class="megamenu_mobile visible-xs visible-sm  col-sm-9 col-sm-push-3  sidebar_left">
                 <h2>{{ $config['web_name'] }}<i></i></h2>
                 <ul class="level_1">
-                    @foreach($mainNav as $link=>$nav)
-                        <li>
-                            <a href="{{ route($link) }}">{{ $nav['text'] }}</a>
-                        </li>
-                    @endforeach
+                    <li>
+                        <a href="{{ route('home') }}">{{ trans("petronasvn.main_nav.home") }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('about') }}">{{ trans("petronasvn.main_nav.about") }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('posts.list') }}">{{ trans("petronasvn.main_nav.posts") }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('products') }}">{{ trans("petronasvn.main_nav.products") }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('discountProducts') }}">{{ trans("petronasvn.main_nav.discount") }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('contact') }}">{{ trans("petronasvn.main_nav.contact") }}</a>
+                    </li>
                     <!-- <li>
                         <a href="index.html">Home</a>
                     </li>
