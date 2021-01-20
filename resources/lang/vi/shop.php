@@ -12,21 +12,21 @@ return [
     'email_txt' => 'E-mail',
     'cart_txt' => 'Giỏ hàng',
     'search_txt' => 'Tìm sản phẩm',
-    'category_txt' => 'Category',
+    'category_txt' => 'Danh mục',
     'products_txt' => 'Tất cả sản phẩm',
     'vendor_txt' => 'Các đối tác tin cậy',
-    'status_txt' => 'Status',
-    'new_product_txt' => 'New Products',
-    'best_selling_txt' => 'Best Selling',
-    'popular_txt' => 'Feature Products',
+    'status_txt' => 'Trạng thái',
+    'new_product_txt' => 'Sản phẩm mới',
+    'best_selling_txt' => 'Bán chạy nhất',
+    'popular_txt' => 'Sản phẩm nổi bật',
     'discount_txt' => 'Đang giảm giá',
     'news_txt' => 'Tin cập nhật',
     'news_short_txt' => 'Các tin tức liên tục được cập nhật dành cho bạn',
-    'contact_txt' => 'Contact',
+    'contact_txt' => 'Liên hệ',
     'support_customer_txt' => 'Hỗ trợ khách hàng',
     'connect_social' => 'Kết nối với {0}',
     'social_txt' => 'Mạng xã hội',
-    'share_url' => 'Share this product',
+    'share_url' => 'Chia sẻ',
     'price_search' => 'Giá sản phẩm',
     'postgroups_txt' => 'Danh mục tin',
     'search_suggestion' => 'Sản phẩm gợi ý',
@@ -48,21 +48,14 @@ return [
     'info_txt' => 'Thông tin',
     'comment_txt' => 'Bình luận',
     'all_txt' => 'Tất cả',
-    'cart_txt' => 'Cart',
-    'items_txt' => 'item(s)',
-    'shopping_guide_txt' => 'Shopping Guide',
-    'delivery_policy_txt' => 'Delivery Policy',
-    'warranty_policy_txt' => 'Warranty Policy',
-    'checkout_txt' => 'Checkout',
-    'search_store_txt' => 'Search store',
-    'customer_txt' => 'Customer',
     'main_nav' => [
-        'home' => 'Home',
-        'about' => 'About',
-        'products' => 'Products',
-        'posts' => 'News',
-        'discount' => 'Discount',
-        'contact' => 'Contact'
+        'home' => ['text' => 'Trang chủ'],
+        'about' => ['text' => 'Giới thiệu'],
+        'products' => ['text' => 'Sản phẩm'],
+        'order_introduction' => ['text' => 'Hướng dẫn mua hàng'],
+        'order_checking' => ['text' => 'Kiểm tra đơn hàng'],
+        'posts' => ['text' => 'Tin tức'],
+        'contact' => ['text' => 'Liên hệ']
     ],
     'policy' => [
         'title' => 'Chính sách',
@@ -71,12 +64,12 @@ return [
     ],
     'cart' => [
         'txt' => 'Giỏ hàng',
-        'qty_txt' => 'Qty',
+        'qty_txt' => 'Số lượng',
         'subtotal' => 'Tổng cộng',
         'total' => 'Thành tiền',
         'checkout_txt' => 'Thanh toán',
         'checkout' => 'Tiến hành thanh toán',
-        'add_to_cart_txt' => 'Add to cart',
+        'add_to_cart_txt' => 'Sản phẩm này vừa được thêm vào giỏ hàng',
         'price' => 'Giá',
         'cart_qty_txt' => 'Giỏ hàng của bạn<i>(<b class="cart-popup-count">:count</b>)</i> sản phẩm',
         'order' => 'Đặt hàng',
@@ -162,9 +155,7 @@ return [
         'clear' => 'Hủy',
         'order_checking' => 'Kiểm tra',
         'remove' => 'Xóa',
-        'search' => 'Tìm kiếm',
-        'clear_cart' => 'Hủy giỏ hàng',
-        'update_cart' => 'Cập nhật'
+        'search' => 'Tìm kiếm'
     ],
     'mail' => [
         'from_name' => 'Hệ thống'
@@ -174,9 +165,5 @@ return [
         'reset_password' => 'Mật khẩu mới',
         'order_success' => 'Xác nhận đơn hàng #:order_id',
         'contact' => 'Có liên hệ mới từ :email'
-    ],
-    'product_status' => [
-        'available' => 'Available',
-        'out_of_stock' => 'Out of stock'
     ]
 ];

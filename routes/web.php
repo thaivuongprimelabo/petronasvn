@@ -138,7 +138,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth_'], funct
 //     });
 // });
 
-Route::group(['prefix' => ''], function () {
+Route::group(['prefix' => '', 'middleware' => 'locale'], function () {
     
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/gioi-thieu', 'HomeController@about')->name('about');
@@ -196,7 +196,15 @@ Route::group(['prefix' => ''], function () {
         exit;
     })->name('offline');
 
-    Route::get('/change_lang', function() {
+    Route::get('/lang/{locale}', function($locale) {
+        if (!in_array($locale, ['en', 'vi'])) {
+            abort(400);
+        }
+
+        \Session::put('website_language', $locale);
+
+        return redirect()->back();
+
     })->name('change_lang');
 });
 

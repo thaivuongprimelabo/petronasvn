@@ -5,21 +5,21 @@
             <div class="col-md-2 col-sm-3 footer_block footer_block__1">
             <h6>Navigation</h6>
             <ul class="footer_links">
-                <li class="active"><a href="/" title="">Trang chủ</a></li>
-                <li ><a href="{{ route('about') }}" title="">Giới thiệu</a></li>
-                <li ><a href="{{ route('products') }}" title="">Sản phẩm</a></li>
-                <li ><a href="{{ route('posts.list') }}" title="">Tin tức</a></li>
+                <li class="active"><a href="/" title="">{{ trans('petronasvn.main_nav.home') }}</a></li>
+                <li ><a href="{{ route('about') }}" title="">{{ trans('petronasvn.main_nav.about') }}</a></li>
+                <li ><a href="{{ route('products') }}" title="">{{ trans('petronasvn.main_nav.products') }}</a></li>
+                <li ><a href="{{ route('posts.list') }}" title="">{{ trans('petronasvn.main_nav.posts') }}</a></li>
             </ul>
             </div>
             <div class="col-md-2 col-sm-3 footer_block footer_block__2">
-            <h6>Khách hàng</h6>
+            <h6>{{ trans('petronasvn.customer_txt') }}</h6>
             <ul class="footer_links">
-                <li ><a href="{{ route('contact') }}" title="">Liên hệ</a></li>
-                <li ><a href="{{ route('cart.checkout') }}" title="">Thanh toán</a></li>
+                <li ><a href="{{ route('contact') }}" title="">{{ trans('petronasvn.contact_txt') }}</a></li>
+                <li ><a href="{{ route('cart.checkout') }}" title="">{{ trans('petronasvn.checkout_txt') }}</a></li>
             </ul>
             </div>
             <div class="col-md-2 col-sm-3 footer_block footer_block__3">
-                <h6>Danh mục</h6>
+                <h6>{{ trans('petronasvn.category_txt') }}</h6>
                 <ul class="footer_links">
                     @php
                         $count = 1;
@@ -36,12 +36,12 @@
                 </ul>
             </div>
             <div class="col-md-2 col-sm-3 footer_block footer_block__4">
-                <h6>Thông tin</h6>
+                <h6>{{ trans('petronasvn.category_txt') }}</h6>
                 <ul class="footer_links">
-                    @foreach($config['footer_pages'] as $page)
-                    <li ><a href="{{ $page->getLink() }}" title="">{{ $page->name }}</a></li>
-                    @endforeach
-                    <li ><a href="{{ route('cart.list') }}" title="">Giỏ hàng</a></li>
+                    <li ><a href="{{ route('order_introduction') }}" title="">{{ trans('petronasvn.shopping_guide_txt') }}</a></li>
+                    <li ><a href="{{ route('guarantee_policy') }}" title="">{{ trans('petronasvn.warranty_policy_txt') }}</a></li>
+                    <li ><a href="{{ route('shipment_policy') }}" title="">{{ trans('petronasvn.delivery_policy_txt') }}</a></li>
+                    <li ><a href="{{ route('cart.list') }}" title="">{{ trans('petronasvn.cart_txt') }}</a></li>
                 </ul>
             </div>
             <div class="col-md-4 col-sm-12 footer_block footer_block__5">

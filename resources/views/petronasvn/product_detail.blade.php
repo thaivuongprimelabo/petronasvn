@@ -9,7 +9,7 @@
             <!-- BREADCRUMBS -->
             <div class="breadcrumb_wrap">
                <ul class="breadcrumb">
-                  <li><a href="/" class="homepage-link" title="Back to the frontpage">Trang chủ</a></li>
+                  <li><a href="/" class="homepage-link" title="Back to the frontpage">{{ trans('petronasvn.main_nav.home') }}</a></li>
                   <li><a href="{{ $data->category->getLink() }}" title="Accessories">{{ $data->category->getName() }}</a> </li>
                   <li><span class="page-title">{{ $data->getName() }}</span></li>
                </ul>
@@ -94,23 +94,23 @@
                                     @endif
                                  </div>
                                  @if($data->avail_flg == ProductStatus::AVAILABLE) 
-                                 <p class="product_details__item" id="product_quantity"><b class="aval_label">Trạng thái:</b> <span class="notify_success">{{ trans('petronasvn.product_status.available') }}</p>
+                                 <p class="product_details__item" id="product_quantity"><b class="aval_label">{{ trans('petronasvn.status_txt') }}:</b> <span class="notify_success">{{ trans('petronasvn.product_status.available') }}</p>
                                  @else
-                                 <p class="product_details__item" id="product_quantity"><b class="aval_label">Trạng thái:</b> <span class="notify_danger">{{ trans('petronasvn.product_status.out_of_stock') }}</p>
+                                 <p class="product_details__item" id="product_quantity"><b class="aval_label">{{ trans('petronasvn.status_txt') }}:</b> <span class="notify_danger">{{ trans('petronasvn.product_status.out_of_stock') }}</p>
                                  @endif
                                  
                                  <div id="purchase">
-                                    <label for="quantity_form">Chọn số lượng:</label>
+                                    <label for="quantity_form">{{ trans('petronasvn.cart.qty_txt') }}:</label>
                                     <div class="quantity_box">
                                        <input id="quantity_form" type="text" name="quantity" value="1" class="quantity_input">
                                        <span class="quantity_modifier quantity_down"><i class="fa fa-minus"></i></span>
                                        <span class="quantity_modifier quantity_up"><i class="fa fa-plus"></i></span>
                                     </div>
-                                    <button class="btn btn-cart add_to_cart" type="button" data-pid="{{ $data->id }}" data-image="{{ $data->getFirstImage() }}" data-qty="1">Thêm vào giỏ hàng</button>
+                                    <button class="btn btn-cart add_to_cart" type="button" data-pid="{{ $data->id }}" data-image="{{ $data->getFirstImage() }}" data-qty="1">{{ trans('petronasvn.cart.add_to_cart_txt') }}</button>
                                  </div>
                                  <div class="addthis_sharing_toolbox" data-url="https://theme247-computers.myshopify.com/products/arctic-freezer-7-pro-rev-2-150-watt-multicompatible-low-noise-cpu-cooler-for-amd-and-intel-sockets" data-title="ARCTIC Freezer 7 Pro Rev 2 - 150 Watt Multicompatible Low Noise CPU Co | Computers" style="clear: both;">
                                     <div id="atstbx" class="at-share-tbx-element addthis-smartlayers addthis-animated at4-show" aria-labelledby="at-0f453c64-3d96-4ff4-9a56-87053f6cc7fa" role="region">
-                                       <span class="at4-visually-hidden">Chia sẻ sản phẩm này:</span>
+                                       <span class="at4-visually-hidden">{{ trans('petronasvn.share_url') }}:</span>
                                        <div class="at-share-btn-elements">
                                           <a target="_blank" href="//www.facebook.com/sharer.php?u={{ $data->getLink() }}">
                                              <img src="{{ url('petronasvn/facebook_icon.png') }}" alt="Share to Facebook" style="width:32px; height:32px;"/>
@@ -125,7 +125,7 @@
                   </div>
                   <!-- /.row -->
                   <div class="product_description">
-                     <h3 class="product_description__title">Thông tin sản phẩm</h3>
+                     <h3 class="product_description__title">{{ trans('petronasvn.info_txt') }}</h3>
                      <div class="rte" itemprop="description">
                         {!! $data->description !!}
                         {!! $data->summary !!}

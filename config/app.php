@@ -156,7 +156,7 @@ return [
 
 
 
-    'locale' => 'en',
+    'locale' => 'vi',
 
 
 
