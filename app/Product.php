@@ -127,8 +127,8 @@ class Product extends Model
     }
 
     public function getShortName() {
-        if(strlen($this->name) > 20) {
-            return substr($this->name, 0, 20) . '...';
+        if(strlen($this->name) > 12) {
+            return substr($this->name, 0, 12) . '...';
         }
         return $this->name;
     }
