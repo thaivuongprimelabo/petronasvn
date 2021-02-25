@@ -19,11 +19,11 @@
     <div class="product col-xs-6 col-sm-6 col-md-4 product_collection item3_{{ $count }} item2_1">
     @endif
         <div class="product_wrapper">
-            <div class="product_img"  >
+            <div class="product_img" style="height:252px">
                 <a class="img_change" href="{{ $product->getLink() }}">
-                    <span class="product_img_wr" style="min-height: {{ $minHeight }}px">
+                    <span class="product_img_wr">
                         @if($product->imageProducts->first())
-                        <img src="{{ $product->imageProducts->first()->getImageLink('medium') }}" alt="{{ $product->getName() }}" title="{{ $product->getName() }}" style="max-width: 100%; height:auto" />
+                        <img src="{{ $product->imageProducts->first()->getImageLink('medium') }}" alt="{{ $product->getName() }}" title="{{ $product->getName() }}" style="max-width: 100%;" />
                         @endif
                     </span>
                     <span class="product_badge new">New</span>
