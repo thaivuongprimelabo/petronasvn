@@ -43,7 +43,7 @@
                                             {{ $post->getShortSummary(100) }}						
                                         </div>
                                         <div class="blog_info clearfix">
-                                            <span class="blog_author"><span class="icon material-icons-person"></span>Administrator</span>
+                                            <span class="blog_author"><span class="icon material-icons-person"></span>{{ $post->author_name }}</span>
                                             <span class="blog_date"><span class="icon material-icons-access_time"></span>{{ Utils::formatDate($post->created_at) }}</span>
                                         </div>
                                     </div>
