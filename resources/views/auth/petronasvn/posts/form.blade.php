@@ -43,6 +43,14 @@
 								</div>
 								<span class="help-block"></span>
 							</div>
+							<div class="form-group">
+								<label>Tác giả<small> (Tối đã 50 ký tự)</small></label>
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
+									<input type="text" class="form-control" name="author_name" id="author_name" value="{{ $data['author_name'] }}" placeholder="Tác giả" maxlength="50">
+								</div>
+								<span class="help-block"></span>
+							</div>
 							<!-- <div class="form-group">
 								<label>Nhóm</label>
 								<div>
@@ -73,8 +81,7 @@
 						</div>
 					</div>
 					<div class="box-footer">
-						<button type="button" class="btn btn-default" onclick="window.location='http://petronas.local/auth/posts'"><i class="fa fa-arrow-left" aria-hidden="true"></i> Quay về</button>
-						<button type="button" id="save" class="btn btn-primary" data-id="" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Lưu"><i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu</button>
+						@include('auth.petronasvn.common.group_button')
 					</div>
 				</div>
 			</form>

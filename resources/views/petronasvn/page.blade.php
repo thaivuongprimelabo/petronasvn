@@ -9,9 +9,7 @@
 				<h2 class="page_heading">{{ $page->name }}</h2>
 				<div class="blog_article">
 					<div class="article_info">
-						<time class="article_date" datetime="2016-05-04">04 May 2016</time>
-						<span class="article_author">David Braun</span>
-						<span class="article_comments">1 Comments</span>
+						<span class="article_author">Administrator</span>
 					</div>
 					<div class="article_content">
                         {!! $page->content !!}

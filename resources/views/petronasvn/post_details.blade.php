@@ -13,7 +13,7 @@
 				<div class="blog_article">
                     <div class="article_info">
                         <time class="article_date" datetime="2016-05-04">{{ Utils::formatDate($data->created_at) }}</time>
-                        <span class="article_author">David Braun</span>
+                        <span class="article_author">{{ $data->author_name }}</span>
                     </div>
                     <div class="article_content">
                         <div class="article_img small_width"><img src="{{ $data->getPhoto() }}" alt="{{ $data->getTitle() }}"></div>

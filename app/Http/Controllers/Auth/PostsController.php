@@ -63,6 +63,7 @@ class PostsController extends AppController
                 $data->status            = Utils::cnvNull($request->status, 0);
                 $data->seo_keywords      = Utils::cnvNull($request->seo_keywords, '');
                 $data->seo_description   = Utils::cnvNull($request->seo_description, $request->description);
+                $data->author_name       = Utils::cnvNull($request->author_name, 'Administrator');
                 $data->created_at        = date('Y-m-d H:i:s');
                 $data->updated_at        = date('Y-m-d H:i:s');
                 
@@ -118,6 +119,7 @@ class PostsController extends AppController
                 $data->post_group_id        = Utils::cnvNull($request->post_group_id, 0);
                 $data->seo_keywords         = Utils::cnvNull($request->seo_keywords, '');
                 $data->seo_description      = Utils::cnvNull($request->seo_description, $request->description);
+                $data->author_name          = Utils::cnvNull($request->author_name, 'Administrator');
                 $data->updated_at           = date('Y-m-d H:i:s');
                 
                 if($data->save()) {
