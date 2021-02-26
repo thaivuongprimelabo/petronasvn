@@ -23,7 +23,7 @@ use App\ProductDetailGroups;
 use App\ProductDetails;
 use App\Constants\ProductStatus;
 
-class productsController extends AppController
+class ProductsController extends AppController
 {
     
     /**
