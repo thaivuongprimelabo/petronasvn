@@ -6,13 +6,13 @@
             <li><a href="/huong-dan-mua-hang"><span class="icon material-icons-account_balance_wallet"></span>{{ trans('petronasvn.shopping_guide_txt') }}</a></li>
             <li><a href="/chinh-sach-van-chuyen"><span class="icon material-icons-local_shipping"></span>{{ trans('petronasvn.delivery_policy_txt') }}</a></li>
             <li class="checkout"><a href="{{ route('cart.checkout') }}"><span class="icon material-icons-account_balance_wallet"></span>{{ trans('petronasvn.checkout_txt') }}</a></li>
-            <li class="checkout">
+            <!-- <li class="checkout">
                 @if(Config::get("app.locale") == 'vi')
                 <a href="{{ route('change_lang', ['lang' => 'en'])  }}"><img src="{{ url('lang_icons/GB.png') }}" /></a>
                 @else
                 <a href="{{ route('change_lang', ['lang' => 'vi'])  }}"><img src="{{ url('lang_icons/VN.png') }}" /></a>
                 @endif
-            </li>
+            </li> -->
         </ul>
 
         <!-- CUSTOM HEADER -->
