@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="article_footer">
-        <a class="btn" href="{{ $post->getLink() }}">Xem thêm</a>
+        <a class="btn" href="{{ $post->getLink() }}">Chi tiết</a>
     </div>
 </div>
 @endforeach

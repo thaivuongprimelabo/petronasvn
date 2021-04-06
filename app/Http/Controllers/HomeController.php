@@ -508,9 +508,12 @@ class HomeController extends AppController
             }
 
             $total = $query->count();
-
             if($lastId > 0) {
-                $query = $query->where('id', '>', $lastId);
+                if($page == 'posts') {
+                    $query = $query->where('id', '<', $lastId);
+                } else {
+                    $query = $query->where('id', '>', $lastId);
+                }
             }
 
             $data = $query->limit($limit)->get();

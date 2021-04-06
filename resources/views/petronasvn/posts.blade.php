@@ -11,6 +11,8 @@
                     <div class="global_loader"></div>
                 </div>
 				<div id="post_list"></div>
+                <br/>
+                <p align="center"><a id="load_more" class="btn" href="javascript:void(0)">Xem thêm</a></p>
 			</section>
 			<aside class="sidebar col-sm-4 sidebar_left col-sm-pull-8">
 				<div class="sidebar_widget sidebar_blog sidebar_widget__search" style="display:none">
@@ -53,16 +55,22 @@
                 },
                 success: function (res) {
                     _this.append(res.html);
+                    if(pageName === 'posts') {
+                        $('#last_id').val(res.last_id);
+                    }
+                    if($('.blog_listing__article').length == res.total) {
+                        $('#load_more').hide();
+                    }
                     $('#product_listing_preloader').addClass('loader_off');
                 }
             })
         };
 
-        $('#post_list').loadData(3, 'posts');
+        $('#post_list').loadData(2, 'posts');
         $('#list_articles').loadData(3, 'recent_articles');
 
         $('#load_more').click(function(e) {
-            $('.post_list').loadData();
+            $('#post_list').loadData(2, 'posts');
         })
     });
 </script>
