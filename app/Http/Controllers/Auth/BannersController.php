@@ -113,6 +113,7 @@ class BannersController extends AppController
         }
 
         $this->output['bannerDemensions'] = $this->bannerDemensions[$uri[3]];
+        $this->output['data'] = new Banner();
         
         return view('auth.petronasvn.banners.form', $this->output);
     }

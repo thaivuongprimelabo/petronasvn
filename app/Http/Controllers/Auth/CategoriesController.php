@@ -71,6 +71,8 @@ class CategoriesController extends AppController
         }
 
         $this->getRootCategory();
+
+        $this->output['data'] = new Category();
         
         return view('auth.petronasvn.categories.form', $this->output);
     }

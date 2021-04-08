@@ -14,3 +14,6 @@ yarn-error.log
 /.settings
 /public/dist
 /react/node_modules
+xdebug.log
+supervisord.pid
+/.db

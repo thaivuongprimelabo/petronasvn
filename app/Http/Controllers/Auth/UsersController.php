@@ -76,6 +76,8 @@ class UsersController extends AppController
                 return redirect(route('auth_users_create'))->with('error', trans('messages.ERROR'));
             }
         }
+
+        $this->output['data'] = new User();
         
         return view('auth.petronasvn.users.form', $this->output)->withErrors($validator);
     }

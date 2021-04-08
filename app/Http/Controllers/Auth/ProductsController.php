@@ -115,6 +115,8 @@ class ProductsController extends AppController
             $this->getVendors();
         }
 
+        $this->output['data'] = new Product();
+
         return view('auth.petronasvn.products.form', $this->output);
     }
     

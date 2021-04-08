@@ -69,6 +69,8 @@ class VendorsController extends AppController
                 return redirect(route('auth_vendors_create'))->with('error', trans('messages.ERROR'));
             }
         }
+
+        $this->output['data'] = new Vendor();
         
         return view('auth.petronasvn.vendors.form', $this->output);
     }

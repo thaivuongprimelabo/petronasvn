@@ -75,6 +75,8 @@ class PostsController extends AppController
                 return redirect(route('auth_posts_create'))->with('error', trans('messages.ERROR'));
             }
         }
+
+        $this->output['data'] = new Post();
         
         return view('auth.petronasvn.posts.form', $this->output);
     }
