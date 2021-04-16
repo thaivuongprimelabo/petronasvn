@@ -1,4 +1,5 @@
 <aside class="sidebar col-sm-3 sidebar_left col-sm-pull-9">
+    @if($categories->count())
     <div class="sidebar_widget sidebar_widget__collections">
         <h3 class="widget_header">{{ trans('petronasvn.category_txt') }}</h3>
         <div class="widget_content">
@@ -11,6 +12,8 @@
             </ul>
         </div>
     </div>
+    @endif
+    @if($newProducts->count())
     <section class="sidebar_widget sidebar_widget__products">
         <h3 class="widget_header">{{ trans('petronasvn.new_product_txt') }}</h3>
         <div class="widget_content">
@@ -45,6 +48,8 @@
             </ul>
         </div>
     </section>
+    @endif
+    @if($bestSellerProducts->count())
     <section class="sidebar_widget sidebar_widget__products">
         <h3 class="widget_header">{{ trans('petronasvn.best_selling_txt') }}</h3>
         <div class="widget_content">
@@ -69,4 +74,5 @@
             </ul>
         </div>
     </section>
+    @endif
 </aside>
