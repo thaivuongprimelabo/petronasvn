@@ -145,6 +145,7 @@ class HomeController extends AppController
                         'products.name',
                         'products.name_url',
                         'products.price',
+                        'products.price_unit',
                         'products.id',
                         'products.description',
                         'products.summary',
@@ -174,7 +175,8 @@ class HomeController extends AppController
             'type' => 'product',
             'image' => $product->imageProducts->first()->getImageLink('medium')
         ]);
-
+        
+        $product->price_unit_list = json_decode(($product->price_unit), true);
         $this->output['data'] = $product;
         return view('petronasvn.product_detail', $this->output);
         

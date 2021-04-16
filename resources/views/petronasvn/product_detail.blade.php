@@ -46,32 +46,20 @@
                            <div class="product_info__wrapper">
                               <div class="product_info__left">
                                  <h1 class="product_name">{{ $data->getName() }}</h1>
-                                 <!-- <div class="options clearfix">
+                                 @if(!is_null($data->price_unit))
+                                 <div class="options clearfix">
                                     <div class="variants-wrapper ">
-                                       <div class="selector-wrapper">
-                                          <label for="product-select-option-0">Màu sắc</label>
-                                          <select class="single-option-selector" data-option="option1" id="product-select-option-0">
-                                             <option value="Black">Black</option>
-                                             <option value="Blue">Blue</option>
-                                             <option value="Red">Red</option>
-                                             <option value="Green">Green</option>
-                                          </select>
-                                       </div>
                                        <div class="selector-wrapper">
                                           <label for="product-select-option-1">Dung tích</label>
                                           <select class="single-option-selector" data-option="option2" id="product-select-option-1">
-                                             <option value="XL">1 lít</option>
-                                             <option value="XXL">2 lít</option>
+                                             @foreach($data->price_unit_list as $price_item)
+                                             <option value="{{ $price_item['price'] }}">{{ $price_item['name'] }}</option>
+                                             @endforeach
                                           </select>
                                        </div>
-                                       <select id="product-select" name="id" style="display: none;">
-                                          <option value="19414839107">Black / XL / Plastic - $140.00</option>
-                                          <option value="19414839171">Blue / XXL / Wood - $139.00</option>
-                                          <option value="19414839235">Red / XL / Plastic - $144.00</option>
-                                          <option value="19414839299">Green / XXL / Rubber - $140.00</option>
-                                       </select>
                                     </div>
-                                 </div> -->
+                                 </div>
+                                 @endif
                                  <div class="product_details">
                                     @if($data->category !== null)
                                     <p class="product_details__item product_collections"><b>Danh mục:</b> <a href="{{ $data->category->getLink() }}">{{ $data->category->getName() }}</a></p>

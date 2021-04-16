@@ -10,7 +10,7 @@
 				<div class="nav-tabs-custom">
 					<ul class="nav nav-tabs">
 						<li class="active" data-tab="tab_form_1"><a href="#tab_form_1" data-toggle="tab" aria-expanded="true"> Thông tin sản phẩm</a></li>
-						<!-- <li class="" data-tab="tab_form_2"><a href="#tab_form_2" data-toggle="tab" aria-expanded="true"> Các phụ kiện đi kèm</a></li> -->
+						<li class="" data-tab="tab_form_2"><a href="#tab_form_2" data-toggle="tab" aria-expanded="true"> Giá bán</a></li>
 						<li class="" data-tab="tab_form_3"><a href="#tab_form_3" data-toggle="tab" aria-expanded="true"> SEO</a></li>
 					</ul>
 					<div class="tab-content">
@@ -175,13 +175,37 @@
 								<span class="help-block"></span>
 							</div>
 						</div>
-						<!-- <div class="tab-pane " id="tab_form_2">
-							<div class="btn-group mb-1">
-								<button id="add_new_service" type="button" class="btn btn-sm btn-success" title="Add new services"><i class="fa fa-plus"></i> Đăng ký thông tin</button>
-							</div>
-							<div id="services" class="form-group">
-							</div>
-						</div> -->
+						<div class="tab-pane " id="tab_form_2">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Dung tích</th>
+										<th>Đơn giá</th>
+									</tr>
+								</thead>
+								<tbody>
+									@for($i = 0; $i < env('MAX_PRICE_UNIT', 10); $i++)
+
+									@php
+										if($data->exists && !is_null($data->price_unit)) {
+											$p_name = isset($data->price_unit[$i]) ? $data->price_unit[$i]->name : '';
+											$p_price = isset($data->price_unit[$i]) ? $data->price_unit[$i]->price : '';
+										} else {
+											$p_name = '';
+											$p_price = '';
+										}
+										
+									@endphp
+
+									<tr>
+										<td><input type="text" name="price_unit[{{ $i }}][name]" value="{{ $p_name }}" /></td>
+										<td><input type="number" name="price_unit[{{ $i }}][price]" value="{{ $p_price }}" /></td>
+									</tr>
+									@endfor
+										
+								</tbody>
+							</table>
+						</div>
 						<div class="tab-pane " id="tab_form_3">
 							@include('auth.petronasvn.common.seo')
 						</div>

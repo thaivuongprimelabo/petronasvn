@@ -133,7 +133,7 @@ class ProductsController extends AppController
         $data = Product::find($request->id);
         
         if($request->isMethod('post')) {
-            
+
             $request->description = str_replace('\r\n', '', $request->description);
             $validator = Validator::make($request->all(), $this->rules);
             
@@ -154,6 +154,13 @@ class ProductsController extends AppController
                 $data->seo_keywords      = Utils::cnvNull($request->seo_keywords, '');
                 $data->seo_description   = Utils::cnvNull($request->seo_description, '');
                 $data->updated_at    = date('Y-m-d H:i:s');
+                
+                $price_filter = array_filter($request->price_unit, function($item) {
+                    return !empty($item['name']) && !empty($item['price']) && is_numeric($item['price']);
+                });
+
+                $price_unit = json_encode($price_filter);
+                $data->price_unit = $price_unit;
                 
                 if($data->save()) {
                     $is_main = $request->is_main;
@@ -188,6 +195,7 @@ class ProductsController extends AppController
             $this->getVendors();
         }
         
+        $data->price_unit = json_decode($data->price_unit);
         $this->output['data'] = $data;
         return view('auth.petronasvn.products.form', $this->output);
     }
