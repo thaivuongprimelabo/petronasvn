@@ -45,11 +45,14 @@ class Utils {
         
         if(!self::blank($image)) {
             
-            if(!file_exists(public_path($uploadFolder . $image))) {
+            $imagePath = $uploadFolder . $image;
+            $imagePublicPath = public_path($imagePath);
+
+            if(!file_exists($imagePublicPath)) {
                 return url($uploadFolder . Common::NO_IMAGE_FOUND);
             }
             
-            return url($uploadFolder . $image);
+            return url($imagePath);
         } else {
             return '';
         }

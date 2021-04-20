@@ -8,11 +8,13 @@ use App\Helpers\Utils;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Constants\UploadPath;
 use App\IpAddress;
+use App\ImageProduct;
 class ConfigController extends AppController
 {
     //
@@ -153,5 +155,56 @@ class ConfigController extends AppController
             $result['code'] = 200;
             return response()->json($result);
         }
+    }
+
+    public function removeUnusedFiles(Request $request) {
+
+        if($request->isMethod('post')) {
+            $unused_files = session()->get('unused_files');
+
+            foreach($unused_files as $file) {
+                Storage::disk('public')->delete($file);
+            }
+
+            session()->forget('unused_files');
+            return redirect()->back();
+        }
+
+
+        $data = [];
+
+        $directories = [
+            // 'banner',
+            'image',
+            // 'avatar',
+            // 'post',
+        ];
+
+        foreach($directories as $directory) {
+            $imageProducts = ImageProduct::all();
+
+            $imageList = $imageProducts->pluck('image', 'image')->toArray();
+            $mediumList = $imageProducts->pluck('medium', 'medium')->toArray();
+            $smallList = $imageProducts->pluck('small', 'small')->toArray();
+
+            $files = Storage::disk('public')->allFiles('upload/' . $directory);
+            foreach($files as $file) {
+                $filesize = filesize($file);
+                $filepath = str_replace('upload/', '', $file);
+                if(!isset($imageList[$filepath]) && !isset($mediumList[$filepath]) && !isset($smallList[$filepath]) ) {
+                    array_push($data, [
+                        'filename' => $file,
+                        'filepath' => $file,
+                        'filesize' => Utils::formatMemory($filesize)
+                    ]);
+                }
+            }
+        }
+
+        if(count($data)) {
+            session()->put('unused_files', $data);
+        }
+
+        return view('auth.petronasvn.settings.remove_unused_files', compact('data'));
     }
 }

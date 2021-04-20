@@ -3,7 +3,8 @@
     $split = explode('x', $demension);
     $image = Utils::getImageLink(Common::NO_IMAGE_FOUND);
     if($data !== null) {
-        $image = $data->avatar;
+        $column = str_replace('upload_', '', $key);
+        $image = $data->$column;
     }
 @endphp
 <input type="file" class="form-control upload-simple" name="{{ $key }}" data-preview-control="preview_{{ $key }}" data-limit-upload="{{ $config[$key . '_maximum_upload'] }}">

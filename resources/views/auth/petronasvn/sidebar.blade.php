@@ -35,11 +35,12 @@
       'pages' => ['name' => 'Trang nội dung', 'icon' => 'fa fa-book'],
       'contacts' => ['name' => 'Liên hệ', 'icon' => 'fa fa-envelope-o'],
       'users' => ['name' => 'Tài khoản', 'icon' => 'fa fa-user-o'],
-      'config' => ['name' => 'Cài đặt', 'icon' => 'fa fa-wrench']
+      'config' => ['name' => 'Cài đặt', 'icon' => 'fa fa-wrench'],
     ];
 
     $sidebarSuperAdmin = [
-      'editor' => ['name' => 'Chỉnh sửa code', 'icon' => 'fa fa-wrench']
+      'editor' => ['name' => 'Chỉnh sửa code', 'icon' => 'fa fa-wrench'],
+      'remove_unused_file' => ['name' => 'Xóa file dư thừa', 'icon' => 'fa fa-wrench'],
     ];
   @endphp
   <ul class="sidebar-menu tree" data-widget="tree">

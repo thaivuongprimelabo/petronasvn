@@ -117,6 +117,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth_'], funct
     
     // Config
     Route::match(['get', 'post'], '/config', 'ConfigController@index')->name('config');
+    Route::match(['get', 'post'], '/remove_unused_file', 'ConfigController@removeUnusedFiles')->name('remove_unused_file');
 
     // Profile
     Route::match(['get', 'post'], '/profile', 'UsersController@profile')->name('profile');
