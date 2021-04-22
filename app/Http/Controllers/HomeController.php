@@ -188,7 +188,7 @@ class HomeController extends AppController
 
         $bestSellerProducts = Product::active()->isBestSelling()->orderBy('updated_at', 'DESC')->limit(3)->get();
         
-        $this->setSEO(['title' => trans('petronasvn.main_nav.products.text'), 'link' => route('products')]);
+        $this->setSEO(['title' => trans('petronasvn.main_nav.products'), 'link' => route('products')]);
 
         $this->output['categories'] = $categories;
         $this->output['newProducts'] = $newProducts;
@@ -205,7 +205,7 @@ class HomeController extends AppController
 
         $bestSellerProducts = Product::active()->isBestSelling()->orderBy('updated_at', 'DESC')->limit(3)->get();
         
-        $this->setSEO(['title' => trans('petronasvn.main_nav.products.text'), 'link' => route('products')]);
+        $this->setSEO(['title' => trans('petronasvn.main_nav.products'), 'link' => route('products')]);
 
         $this->output['categories'] = $categories;
         $this->output['newProducts'] = $newProducts;
@@ -220,7 +220,7 @@ class HomeController extends AppController
 
         $this->output['page'] = $about;
         
-        $this->setSEO(['title' => trans('petronasvn.main_nav.about.text'), 'link' => route('about')]);
+        $this->setSEO(['title' => trans('petronasvn.main_nav.about'), 'link' => route('about')]);
         
         return view('petronasvn.page', $this->output);
     }
@@ -231,7 +231,7 @@ class HomeController extends AppController
 
         $this->output['page'] = $about;
         
-        $this->setSEO(['title' => trans('petronasvn.main_nav.order_introduction.text'), 'link' => route('order_introduction')]);
+        $this->setSEO(['title' => trans('petronasvn.main_nav.order_introduction'), 'link' => route('order_introduction')]);
         
         return view('petronasvn.page', $this->output);
     }
@@ -358,7 +358,7 @@ class HomeController extends AppController
             $this->output['bestSellerProducts'] = $bestSellerProducts;
         }
         
-        $this->setSEO(['title' => trans('petronasvn.main_nav.contact.text'), 'link' => route('contact')]);
+        $this->setSEO(['title' => trans('petronasvn.main_nav.contact'), 'link' => route('contact')]);
         
         return view('petronasvn.contact', $this->output);
     }
@@ -392,7 +392,7 @@ class HomeController extends AppController
 
         $posts = Post::active()->orderBy('created_at', 'desc');
         
-        $this->setSEO(['title' => trans('petronasvn.main_nav.posts.text'), 'link' => route('posts.list')]);
+        $this->setSEO(['title' => trans('petronasvn.main_nav.posts'), 'link' => route('posts.list')]);
         
         return view('petronasvn.posts', $this->output);
     }
