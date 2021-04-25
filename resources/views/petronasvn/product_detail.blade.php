@@ -86,6 +86,7 @@
                                  </div>
                               </div>
                               <div class="product_info__right">
+                                 @if($data->getPrice())
                                  <div id="product_price">
                                     @if($data->discount > 0)
                                     <p class="price product-price"><span class="money">{{ $data->getPriceDiscount() }}</span><span class="money compare-at-price money_sale">{{ $data->getPrice() }}</span><span class="money_sale_percent">– {{ $data->discount }}%</span></p>
@@ -93,6 +94,7 @@
                                     <p class="price product-price"><span class="money">{{ $data->getPrice() }}</span></p>
                                     @endif
                                  </div>
+                                 @endif
                                  @if($data->avail_flg == ProductStatus::AVAILABLE) 
                                  <p class="product_details__item" id="product_quantity"><b class="aval_label">{{ trans('petronasvn.status_txt') }}:</b> <span class="notify_success">{{ trans('petronasvn.product_status.available') }}</p>
                                  @else
@@ -107,6 +109,10 @@
                                        <span class="quantity_modifier quantity_up"><i class="fa fa-plus"></i></span>
                                     </div>
                                     <button class="btn btn-cart add_to_cart" type="button" data-pid="{{ $data->id }}" data-image="{{ $data->getFirstImage() }}" data-qty="1">{{ trans('petronasvn.cart.add_to_cart_txt') }}</button>
+                                 </div>
+                                 @else
+                                 <div id="purchase">
+                                    <button class="btn btn-cart" type="button" data-pid="{{ $data->id }}" data-image="{{ $data->getFirstImage() }}" data-qty="1">Liên hệ</button>
                                  </div>
                                  @endif
                                  <div class="addthis_sharing_toolbox" data-url="https://theme247-computers.myshopify.com/products/arctic-freezer-7-pro-rev-2-150-watt-multicompatible-low-noise-cpu-cooler-for-amd-and-intel-sockets" data-title="ARCTIC Freezer 7 Pro Rev 2 - 150 Watt Multicompatible Low Noise CPU Co | Computers" style="clear: both;">
