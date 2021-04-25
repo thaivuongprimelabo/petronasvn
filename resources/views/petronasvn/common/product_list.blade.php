@@ -38,17 +38,25 @@
                 </div>
                 @if($product->getDiscount())
                 <div class="product_price product_price_compare">
+                    @if($product->getPrice())
                     <span class="money">{{ $product->getPriceDiscount() }}</span>
                     <span class="money money_sale">{{ $product->getPrice() }}</span>
+                    @endif
                 </div>
                 @else
                 <div class="product_price">
+                    @if($product->getPrice())
                     <span class="money">{{ $product->getPrice() }}</span>
+                    @endif
                 </div>
                 @endif
                 <div class="product_links">
                     <form method="post" action="#">
+                        @if($product->getPrice())
                         <a class="btn btn_options add_to_cart" data-image="{{ $product->getFirstImage() }}" data-pid="{{ $product->id }}" href="javascript:void(0)" title="Add to cart">{{ trans('petronasvn.cart.add_to_cart_txt') }}</a>
+                        @else
+                        <a class="btn btn_options" data-image="{{ $product->getFirstImage() }}" href="javascript:void(0)" title="Add to cart">Liên hệ</a>
+                        @endif
                     </form>
                     <a class="btn_icon btn_icon material-icons-info_outline" href="{{ $product->getLink() }}"></a>
                     <a class="btn_icon quick_view_btn material-icons-remove_red_eye" href="{{ $product->getLink() }}"></a>
