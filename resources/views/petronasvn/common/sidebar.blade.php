@@ -66,7 +66,7 @@
                             <a href="{{ $product->getLink() }}">{{ $product->getName() }}</a>
                         </div>
                         <div class="product_price">
-                            <span class="money">{{ $product->getPrice() }}</span>
+                            <span class="money">{{ $product->getPrice() ? $product->getPrice() : "Liên hệ" }}</span>
                         </div>
                     </div>
                 </li>
