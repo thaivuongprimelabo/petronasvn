@@ -39,7 +39,7 @@
                         </div>
                         @else if
                         <div class="product_price">
-                            <span class="money">{{ $product->getPrice() }}</span>
+                            <span class="money">{{ $product->getPrice() ? $product->getPrice() : '' }}</span>
                         </div>
                         @endif
                     </div>
