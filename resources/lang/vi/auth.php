@@ -1117,6 +1117,7 @@ $auth = [
         'list_title' => 'Danh mục sản phẩm',
         'create_title' => 'Đăng ký sản phẩm',
         'edit_title' => 'Chỉnh sửa sản phẩm',
+        'copy_title' => 'Sao chép sản phẩm',
         'table_header' => [
             'id' => [
                 'text' => 'ID',

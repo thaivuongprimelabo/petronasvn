@@ -1,10 +1,19 @@
 <section class="content-header">
   <h1>
   	@php
-  		$title = trans('auth.' . $name . '.create_title');
-  		if($data !==  null) {
+      $route = Route::currentRouteName();
+      if($route == 'auth_' . $name . '_create') {
+        $title = trans('auth.' . $name . '.create_title');
+      }
+  		
+  		if($route == 'auth_' . $name . '_edit') {
   			$title =  trans('auth.' . $name . '.edit_title');
   		}
+
+      if($route == 'auth_' . $name . '_copy') {
+  			$title =  trans('auth.' . $name . '.copy_title');
+  		}
+
   	@endphp
     {{ $title }}
   </h1>
