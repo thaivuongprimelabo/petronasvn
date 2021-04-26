@@ -56,6 +56,7 @@ return [
     'checkout_txt' => 'Thanh toán',
     'search_store_txt' => 'Tìm kiếm',
     'customer_txt' => 'Khách hàng',
+    'order_introduction' => 'Hướng dẫn mua hàng',
     'main_nav' => [
         'home' => 'Trang chủ',
         'about' => 'Giới thiệu',

@@ -231,7 +231,7 @@ class HomeController extends AppController
 
         $this->output['page'] = $about;
         
-        $this->setSEO(['title' => trans('petronasvn.main_nav.order_introduction'), 'link' => route('order_introduction')]);
+        $this->setSEO(['title' => trans('petronasvn.order_introduction'), 'link' => route('order_introduction')]);
         
         return view('petronasvn.page', $this->output);
     }
