@@ -91,7 +91,6 @@ class ProductsController extends AppController
                         $arrFilenames = [];
                         Utils::doUploadMultiple($request, 'upload_image', $data->id, $arrFilenames, $is_main);
                         if(count($arrFilenames)) {
-                            $product_images = [];
                             DB::table(Common::IMAGES_PRODUCT)->insert($arrFilenames);
                         }
                         
@@ -124,62 +123,106 @@ class ProductsController extends AppController
      * create
      * @param Request $request
      */
-    public function edit(Request $request) {
+    public function edit(Request $request, $id = null, $isCopy = null) {
         
         $request->flash();
         
         $validator = [];
         
         $data = Product::find($request->id);
-        
+
         if($request->isMethod('post')) {
             
             $request->description = str_replace('\r\n', '', $request->description);
             $validator = Validator::make($request->all(), $this->rules);
             
             if (!$validator->fails()) {
-                $data->name          = Utils::cnvNull($request->name, '');
-                $data->name_url      = Utils::createNameUrl(Utils::cnvNull($request->name, ''));
-                $data->price         = Utils::cnvNull($request->price, trans('auth.price_empty_text'));
-                $data->category_id   = Utils::cnvNull($request->category_id, '0');
-                $data->vendor_id     = Utils::cnvNull($request->vendor_id, '0');
-                $data->discount      = Utils::cnvNull($request->discount, '');
-                $data->description   = Utils::cnvNull($request->description, '');
-                $data->summary       = Utils::cnvNull($request->summary, '');
-                $data->status        = Utils::cnvNull($request->status, Status::UNACTIVE);
-                $data->avail_flg     = Utils::cnvNull($request->avail_flg, ProductStatus::OUT_OF_STOCK);
-                $data->is_new        = Utils::cnvNull($request->is_new, 0);
-                $data->is_popular        = Utils::cnvNull($request->is_popular, 0);
-                $data->is_best_selling   = Utils::cnvNull($request->is_best_selling, 0);
-                $data->seo_keywords      = Utils::cnvNull($request->seo_keywords, '');
-                $data->seo_description   = Utils::cnvNull($request->seo_description, '');
-                $data->updated_at    = date('Y-m-d H:i:s');
+
+                DB::beginTransaction();
                 
-                if($data->save()) {
-                    $is_main = $request->is_main;
-                    if(!Utils::blank($is_main)) {
-                        DB::table(Common::IMAGES_PRODUCT)->update(['is_main' => 0]);
+                try {
+
+                    if($isCopy) {
+                        $copyData = $data->replicate();
+                        $copyData->push();
+                        $data->load('imageProducts');
+                        foreach($data->getRelations() as $relation => $items){
+                            foreach($items as $item){
+                                unset($item->id);
+                                $copyData->{$relation}()->create($item->toArray());
+                            }
+                        }
+
+                        $data = $copyData;
+                    }
+    
+                    $data->name          = Utils::cnvNull($request->name, '');
+                    $data->name_url      = Utils::createNameUrl(Utils::cnvNull($request->name, ''));
+                    $data->price         = Utils::cnvNull($request->price, trans('auth.price_empty_text'));
+                    $data->category_id   = Utils::cnvNull($request->category_id, '0');
+                    $data->vendor_id     = Utils::cnvNull($request->vendor_id, '0');
+                    $data->discount      = Utils::cnvNull($request->discount, '');
+                    $data->description   = Utils::cnvNull($request->description, '');
+                    $data->summary       = Utils::cnvNull($request->summary, '');
+                    $data->status        = Utils::cnvNull($request->status, Status::UNACTIVE);
+                    $data->avail_flg     = Utils::cnvNull($request->avail_flg, ProductStatus::OUT_OF_STOCK);
+                    $data->is_new        = Utils::cnvNull($request->is_new, 0);
+                    $data->is_popular        = Utils::cnvNull($request->is_popular, 0);
+                    $data->is_best_selling   = Utils::cnvNull($request->is_best_selling, 0);
+                    $data->seo_keywords      = Utils::cnvNull($request->seo_keywords, '');
+                    $data->seo_description   = Utils::cnvNull($request->seo_description, '');
+                    $data->updated_at    = date('Y-m-d H:i:s');
+                    if($isCopy) {
+                        $data->created_at = date('Y-m-d H:i:s');
                     }
                     
-                    if(is_numeric($is_main)) {
-                        DB::table(Common::IMAGES_PRODUCT)->where('id', $is_main)->update(['is_main' => 1]);
+                    if($data->save()) {
+                        $is_main = $request->is_main;
+    
+                        $imageProducts = $data->imageProducts()->get();
+    
+                        $images_del = $request->images_del;
+                        $is_main = $request->is_main;
+    
+                        foreach($imageProducts as $indx=>&$imageProduct) {
+                            $imageProduct->is_main = $is_main ? 0 : $imageProduct->is_main;
+                            $id = $imageProduct->id;
+                            if(!is_null($images_del) && in_array($id, $images_del)) {
+                                $imageProduct->delete();
+                                unset($imageProducts[$indx]);
+                            }
+    
+                            if($is_main && $imageProduct->id == $is_main) {
+                                $imageProduct->is_main = 1;
+                            }
+                        }
+    
+                        // Add new image
+                        $arrFilenames = [];
+                        Utils::doUploadMultiple($request, 'upload_image', $data->id, $arrFilenames, $is_main);
+                        if(count($arrFilenames)) {
+                            foreach($arrFilenames as $file) {
+                                $imageProduct = new ImageProduct();
+                                $imageProduct->fill($file);
+                                $imageProducts->push($imageProduct);
+                            }
+                        }
+
+                        $data->imageProducts()->saveMany($imageProducts);
+
+                        DB::commit();
+
+                        $id = $isCopy ? $data->id : $request->id;
+                        $message = $isCopy ? 'messages.COPY_SUCCESS' : 'messages.UPDATE_SUCCESS';
+                        
+                        return redirect(route('auth_products_edit', ['id' => $id]))->with('success', trans($message));
                     }
-                    
-                    $arrFilenames = [];
-                    Utils::doUploadMultiple($request, 'upload_image', $data->id, $arrFilenames, $is_main);
-                    if(count($arrFilenames)) {
-                        DB::table(Common::IMAGES_PRODUCT)->insert($arrFilenames);
-                    }
-                    
-                    $images_del = $request->images_del;
-                    if(!is_null($images_del) && count($images_del)) {
-                        DB::table(Common::IMAGES_PRODUCT)->whereIn('id', $images_del)->delete();
-                    }
-                    
-                    $this->addService($data->id, $request);
-                    
-                    return redirect(route('auth_products_edit', ['id' => $request->id]))->with('success', trans('messages.UPDATE_SUCCESS'));
+
+                } catch(\Exception $e) {
+                    DB::rollBack();
                 }
+
+                
             } else {
                 return redirect(route('auth_products_edit', ['id' => $request->id]))->with('error', trans('messages.ERROR'));
             }
@@ -207,6 +250,16 @@ class ProductsController extends AppController
             $result['code'] = 200;
             return response()->json($result);
         }
+    }
+
+    public function copy(Request $request) {
+        // if($request->isMethod('post')) {
+        //     // return $this->create($request);
+        //     $product = Product::find($request->id);
+        //     $copyProduct = $product->replicate();
+        //     $copyProduct->save();
+        // }
+        return $this->edit($request, null, true);
     }
 
     public function getRootCategory() {

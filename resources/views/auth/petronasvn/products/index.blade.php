@@ -52,7 +52,7 @@
                     @endif
                 </td>
 				@include('auth.petronasvn.common.row_date', ['created_at' => $item->created_at])
-                @include('auth.petronasvn.common.row_button', ['id' => $item->id ])
+                @include('auth.petronasvn.common.row_button', ['id' => $item->id, 'copy' => true ])
 			</tr>
 			@endforeach
 		</tbody>

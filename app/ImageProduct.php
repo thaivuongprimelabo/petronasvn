@@ -10,7 +10,7 @@ class ImageProduct extends Model
 {
     //
     public $timestamps = false;
-    protected $fillable = [];
+    protected $fillable = ['product_id', 'image', 'medium', 'small', 'is_main'];
     /**
      * The attributes that should be hidden for arrays.
      *

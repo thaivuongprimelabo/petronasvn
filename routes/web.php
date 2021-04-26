@@ -31,6 +31,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth', 'as' => 'auth_'], funct
         Route::get('/', 'ProductsController@index')->name('products');
         Route::match(['get', 'post'], '/create', 'ProductsController@create')->name('products_create');
         Route::match(['get', 'post'], '/edit/{id}', 'ProductsController@edit')->name('products_edit');
+        Route::match(['get', 'post'], '/copy/{id}', 'ProductsController@copy')->name('products_copy');
         Route::match(['get', 'post'], '/search', 'ProductsController@search')->name('products_search');
         Route::post('/remove', 'ProductsController@remove')->name('products_remove');
     });
