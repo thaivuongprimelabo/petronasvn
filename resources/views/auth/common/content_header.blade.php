@@ -2,6 +2,7 @@
   <h1>
   	@php
       $route = Route::currentRouteName();
+      $title = '';
       if($route == 'auth_' . $name . '_create') {
         $title = trans('auth.' . $name . '.create_title');
       }
@@ -13,6 +14,10 @@
       if($route == 'auth_' . $name . '_copy') {
   			$title =  trans('auth.' . $name . '.copy_title');
   		}
+
+      if($route == 'auth_config') {
+        $title =  trans('auth.' . $name . '.edit_title');
+      }
 
   	@endphp
     {{ $title }}
