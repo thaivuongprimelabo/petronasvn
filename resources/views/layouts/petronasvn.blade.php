@@ -42,7 +42,7 @@
         <div class="ctrlq fb-overlay"></div>
         <div class="fb-widget">
             <div class="ctrlq fb-close"></div>
-            <div class="fb-page" data-href="https://www.facebook.com/VnsupplementsHCM"
+            <div class="fb-page" data-href="{{ $config['facebook_fanpage'] }}"
                 data-tabs="messages" data-width="360" data-height="400"
                 data-small-header="true" data-hide-cover="true"
                 data-show-facepile="false"></div>
@@ -51,7 +51,7 @@
             </div>
             <div id="fb-root"></div>
         </div>
-        <a href="https://www.facebook.com/VnsupplementsHCM"
+        <a href="{{ $config['facebook_fanpage'] }}"
             title="Gửi tin nhắn cho chúng tôi qua Facebook"
             class="ctrlq fb-button">
             <div class="bubble">1</div>
