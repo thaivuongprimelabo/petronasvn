@@ -67,7 +67,7 @@
     var map = new mapboxgl.Map({
         container: 'google_map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: [12.550343, 55.665957],
+        center: [10.746004406195185, 106.63090253902928],
         zoom: 8
     });
 
