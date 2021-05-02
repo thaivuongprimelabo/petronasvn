@@ -72,7 +72,7 @@
     });
 
     var marker = new mapboxgl.Marker()
-    .setLngLat([12.550343, 55.665957])
+    .setLngLat([10.746004406195185, 106.63090253902928])
     .setPopup(
         new mapboxgl.Popup({ offset: 25 }) // add popups
         .setHTML('<strong>{{ $config['web_name'] }}</strong><br />Địa chỉ: {{ $config['web_address'] }}<br />Hotline: {{ $config['web_hotline'] }}')
