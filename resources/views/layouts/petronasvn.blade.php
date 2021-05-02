@@ -12,7 +12,7 @@
         @endif
 
         <!-- GOOGLE FONTS -->
-        <link href="http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,600,700,900" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,600,700,900" rel="stylesheet" type="text/css">
         <!-- CSS -->
         <link href="{{ Utils::assets('petronasvn/s/files/1/1265/3751/t/2/assets/assets7452.css') }}" rel="stylesheet" type="text/css" media="all" />
         <link href="{{ Utils::assets('petronasvn/s/files/1/1265/3751/t/2/assets/style.scss27ad.css') }}" rel="stylesheet" type="text/css" media="all" />
