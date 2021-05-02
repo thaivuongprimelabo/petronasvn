@@ -67,12 +67,12 @@
     var map = new mapboxgl.Map({
         container: 'google_map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: [10.745962, 106.630870],
+        center: [12.550343, 55.665957],
         zoom: 8
     });
 
     var marker = new mapboxgl.Marker()
-    .setLngLat([10.745962, 106.630870])
+    .setLngLat([12.550343, 55.665957])
     .setPopup(
         new mapboxgl.Popup({ offset: 25 }) // add popups
         .setHTML('<strong>{{ $config['web_name'] }}</strong><br />Địa chỉ: {{ $config['web_address'] }}<br />Hotline: {{ $config['web_hotline'] }}')
