@@ -149,7 +149,7 @@ class BannersController extends AppController
             }
             
             $validator = Validator::make($request->all(), $this->rules);
-            
+            $uri = explode("/", $request->getRequestUri());
             if (!$validator->fails()) {
                 
                 // $select_type = Utils::cnvNull($request->select_type, 'use_image');
@@ -173,7 +173,7 @@ class BannersController extends AppController
                 // }
                 $filename = $data->banner;
                 
-                $uri = explode("/", $request->getRequestUri());
+                
                 $pos = $uri[3];
                 $demension = $this->bannerDemensions[$pos];
                 Utils::doUploadAndResize($request, 'upload_banner', $filename, $demension);
