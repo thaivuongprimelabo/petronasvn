@@ -129,7 +129,7 @@ class BannersController extends AppController
         $validator = [];
         
         $data = Banner::find($request->id);
-        
+        $uri = explode("/", $request->getRequestUri());
         if($request->isMethod('post')) {
             
             $select_type = Utils::cnvNull($request->select_type, 'use_image');
@@ -149,7 +149,7 @@ class BannersController extends AppController
             }
             
             $validator = Validator::make($request->all(), $this->rules);
-            $uri = explode("/", $request->getRequestUri());
+            
             if (!$validator->fails()) {
                 
                 // $select_type = Utils::cnvNull($request->select_type, 'use_image');
