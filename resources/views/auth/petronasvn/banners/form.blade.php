@@ -20,7 +20,7 @@
                                 @php
                                     $banner = Utils::getImageLink(Common::NO_IMAGE_FOUND);
                                     if($data !== null) {
-                                        $banner = $data->banner;
+                                        $banner = $data->getBanner();
                                     }
                                 @endphp
                                 @include("auth.petronasvn.common.single_upload", ["key" => "upload_banner"])
