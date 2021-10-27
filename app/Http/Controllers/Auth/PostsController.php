@@ -99,10 +99,10 @@ class PostsController extends AppController
             
             if (!$validator->fails()) {
                 $filename = $data->photo;
-                $filename_hidden = $request->photo_hidden;
-                if(Utils::blank($filename_hidden)) {
-                    $filename = null;
-                }
+                // $filename_hidden = $request->photo_hidden;
+                // if(Utils::blank($filename_hidden)) {
+                //     $filename = null;
+                // }
                 
                 $key = 'upload_photo';
                 Utils::doUploadSimple($request, $key, $filename);
