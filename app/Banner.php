@@ -60,17 +60,13 @@ class Banner extends Model
     }
     
     // Attribute
-    // public function getBannerAttribute($value) {
-    //     if($this->select_type === 'use_image') {
-    //         if(!Utils::blank($value)) {
-    //             return Utils::getImageLink($value);
-    //         }
-    //     } else {
-    //         return 'http://img.youtube.com/vi/' . $this->youtube_id . '/0.jpg';
-    //     }
+    public function getBannerAttribute($value) {
+        if(!Utils::blank($value)) {
+            return Utils::getImageLink($value);
+        }
         
-    //     return Utils::getImageLink(Common::NO_IMAGE_FOUND);
-    // }
+        return Utils::getImageLink(Common::NO_IMAGE_FOUND);
+    }
 
     // public function getLinkBannerAttribute($value) {
     //     return $this->banner;
