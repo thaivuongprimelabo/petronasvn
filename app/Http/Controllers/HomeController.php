@@ -172,7 +172,7 @@ class HomeController extends AppController
             'keywords' => [$product->getSEOKeywords(), $product->category->getName(), $this->output['config']['web_name']],
             'link' => $product->getLink(),
             'type' => 'product',
-            'image' => $product->imageProducts->first()->getImageLink('medium')
+            'image' => $product->imageProducts->first() ? $product->imageProducts->first()->getImageLink('medium') : ""
         ]);
 
         $this->output['data'] = $product;
