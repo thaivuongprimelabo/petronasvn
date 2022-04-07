@@ -6,7 +6,7 @@
         {!! SEO::generate() !!}
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        
+
         @if(!Utils::blank($config['web_ico']))
         <link rel="shortcut icon" href="{{ $config['web_ico'] . '?t=' . time() }}">
         @endif
@@ -26,6 +26,15 @@
         <script src="{{ Utils::assets('petronasvn/s/files/1/1265/3751/t/2/assets/jquery.fancybox.min4773.js') }}" type="text/javascript"></script>
         <script src="{{ Utils::assets('petronasvn/s/files/1/1265/3751/t/2/assets/shop440a.js') }}" type="text/javascript"></script>
         <script src="{{ Utils::assets('petronasvn/custom.petronasvn.js') }}" type="text/javascript"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-225192560-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-225192560-1');
+        </script>
     </head>
     <body  id="computers" class="template-index scheme_1">
         <div id="page_preloader" class="off fancybox-overlay fancybox-overlay-fixed" style="display:none"><div class="global_loader"></div></div>
@@ -59,7 +68,7 @@
         </a>
     </div>
     </body>
-    
+
     <script>
         let addCart = '{{ route('api.cart.addToCart') }}';
         let removeCart = '{{ route('api.cart.removeCart') }}';
